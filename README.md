@@ -1,6 +1,12 @@
+这里是 https://github.com/esp-rs/book 的简体中文翻译
+
+目前进度：正在施工。跟踪到 ec65d05
+
+---
+
 # The Rust on ESP Book
 
-This repository contains the source of "The Rust on ESP" book.
+本仓库包含了《The Rust on ESP》一书的源代码。
 
 ## Quickstart
 

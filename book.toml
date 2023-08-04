@@ -1,14 +1,14 @@
 [book]
-title        = "The Rust on ESP Book"
+title        = "The Rust on ESP Book 简体中文版"
 description  = "A comprehensive guide on using the Rust programming language with Espressif SoCs and modules"
 multilingual = false
-language     = "en"
+language     = "zh-CN"
 
 [rust]
 edition = "2018"
 
 [output.html]
-git-repository-url = "https://github.com/esp-rs/book"
+git-repository-url = "https://github.com/Narukara/rust-on-esp-book-zh-cn"
 additional-js      = ["assets/mermaid.min.js", "assets/mermaid-init.js"]
 
 [output.html.redirect]
