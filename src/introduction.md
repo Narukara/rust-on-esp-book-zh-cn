@@ -1,12 +1,12 @@
 <p style="text-align:center;"><img src="./assets/esp-logo-black.svg" width="50%"></p>
 
-# Introduction
+# 介绍
 
-The goal of this book is to provide a comprehensive guide on using the [Rust Programming Language][rust] with [Espressif][espressif] devices.
+这本书的目的是提供一个关于将[Rust编程语言][rust]与[Espressif][espressif]设备一起使用的全面指南。
 
-Rust support for these devices is still a work in progress, and progress is being made rapidly. Because of this, parts of this documentation may be out of date or change dramatically between readings.
+Rust对这些设备的支持仍在不断改进中，并且进展迅速。因此，本文档的某些部分可能已经过时，或者在多次阅读之间发生了重大变化。
 
-For tools and libraries relating to Rust on ESP, please see the [esp-rs organization][esp-rs] on GitHub. This organization is managed by employees of Espressif as well as members of the community.
+有关ESP上与Rust相关的工具和库，请查看GitHub上的[esp-rs组织][esp-rs]。该组织由Espressif的员工以及社区成员共同管理。
 
 [rust]: https://www.rust-lang.org/
 [espressif]: https://espressif.com/
