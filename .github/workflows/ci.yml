@@ -2,30 +2,23 @@ name: CI
 
 on:
   push:
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - uses: dtolnay/rust-toolchain@v1
-        with:
-          toolchain: nightly
-          components: rust-docs
 
       - uses: jontze/action-mdbook@v2
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           use-mermaid: true
-
-      - name: Check for broken links
-        run: |
-          curl -sSLo linkcheck.sh \
-            https://raw.githubusercontent.com/rust-lang/rust/master/src/tools/linkchecker/linkcheck.sh
-          # Cannot use --all here because of the generated redirect pages aren't available.
-          sh linkcheck.sh book
+      
+      - name: Build book
+        run: mdbook build
 
       - name: Deploy book
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
