@@ -1,6 +1,6 @@
 <p style="text-align:center;"><img src="./assets/esp-logo-black.svg" width="50%"></p>
 
-# 介绍
+# 引言
 
 这本书的目的是提供一个关于将[Rust编程语言][rust]与[Espressif][espressif]设备一起使用的全面指南。
 
@@ -12,35 +12,34 @@ Rust对这些设备的支持仍在不断改进中，并且进展迅速。因此�
 [espressif]: https://espressif.com/
 [esp-rs]: https://github.com/esp-rs/
 
-## Who This Book Is For
+## 谁需要这本书
 
-This book is intended for people with some experience in Rust and also assumes rudimentary knowledge of embedded development and electronics. For those without prior experience, we recommend first reading the [Assumptions and Prerequisites][prerequisites] and [Resources][resources] sections to get up to speed.
+本书适用于具有一定Rust经验并且对嵌入式开发和电子知识有基础了解的人群。对于没有相关经验的读者，我们建议先阅读[前提条件][prerequisites]和[资源][resources]部分，以快速掌握相关知识。
 
 [prerequisites]: #assumptions-and-prerequisites
 [resources]: #resources
 
-### Assumptions and Prerequisites
+### 前提和先决条件
 
-- You are comfortable using the Rust programming language and have written and run applications in a desktop environment.
-- You should be familiar with the idioms of the [2021 edition][rust-2021], as this book targets Rust 2021.
-- You are comfortable developing embedded systems in another language such as C or C++, and are familiar with concepts such as:
-  - Cross-compilation
-  - Common digital interfaces like `UART`, `SPI`, `I2C`, etc.
-  - Memory-mapped peripherals
-  - Interrupts
-
+- 您对Rust编程语言感到熟悉，并且已经在桌面环境下编写和运行过应用程序。
+- 你应该熟悉[Rust 2021版][rust-2021]的惯用法，因为本书面向的是Rust 2021版。
+- 你熟悉在其他语言（如C或C++）开发嵌入式系统，并熟悉以下概念：
+  - 交叉编译
+  - 常见数字接口，如UART，SPI，I2C等
+  - 内存映射外设
+  - 中断
 [rust-2021]: https://doc.rust-lang.org/edition-guide/rust-2021/index.html
 
-### Resources
+### 资源
 
-If you are unfamiliar or less experienced with anything mentioned above, or if you would just like more information about a particular topic mentioned in this book. You may find these resources helpful.
+如果你对上述提到的任何内容不熟悉或经验有限，或者如果你想要关于本书中提到的特定主题的更多信息，你可能会发现以下资源很有帮助：
 
-| Resource                                     | Description                                                                          |
-| -------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [The Rust Programming Language][rust-book]   | If you are not familiar with Rust we recommend reading this book first.              |
-| [The Embedded Rust Book][embedded-rust-book] | Here you can find several other resources provided by Rust's Embedded Working Group. |
-| [The Embedonomicon][embedonomicon]           | The nitty-gritty details when doing embedded programming in Rust.                    |
-| [Embedded Rust on Espressif][std-training]   | Training material created in cooperation with [Ferrous Systems][ferrous-systems].    |
+| 资源                                         | 描述                                                       |
+| -------------------------------------------- | ---------------------------------------------------------- |
+| [Rust程序设计语言][rust-book]                | 如果你不熟悉Rust，我们建议你先读这本书。                   |
+| [嵌入式Rust编程][embedded-rust-book]         | 在这里，您可以找到由Rust的嵌入式工作组提供的其他几个资源。 |
+| [嵌入式宝典][embedonomicon]                  | 在使用Rust进行嵌入式编程时的细节。                         |
+| [Embedded Rust on Espressif][std-training]   | 与[Ferrous Systems][ferrous-systems]合作创建的培训材料。   |
 
 [rust-book]: https://doc.rust-lang.org/book/
 [embedded-rust-book]: https://docs.rust-embedded.org/book/index.html
@@ -48,21 +47,21 @@ If you are unfamiliar or less experienced with anything mentioned above, or if y
 [std-training]: https://esp-rs.github.io/std-training/
 [ferrous-systems]: https://ferrous-systems.com/
 
-## Translations
+## 翻译
 
-This book is currently available in English only. Once the contents of the book stabilize somewhat, we plan on translating the book into additional languages. As translations become available, this section will be updated to include them.
+该书目前仅提供英文版本。一旦书籍内容相对稳定，我们计划将其翻译成其他语言。随着翻译工作的完成，本节将更新以包括相应的翻译版本。
 
-## How to Use This Book
+## 怎么使用这本书
 
-This book assumes that you are reading it front-to-back. Content covered in later chapters may not make much sense without the context from previous chapters.
+本书假设您按顺序从头到尾阅读。后面章节涵盖的内容可能没有上一章节的背景知识会显得不太容易理解。
 
-## Contributing to This Book
+## 为本书做出贡献
 
-The work on this book is coordinated in [this repository][book-repository].
+这本书的工作是在[这个代码仓库][book-repository]中进行协调的。
 
-If you have trouble following the instructions in this book or find that some section of the book is not clear enough, then that's a bug. Please report it in [the issue tracker][book-issues] of this book.
+如果您在按照本书中的说明遇到问题，或者发现本书的某些部分不够清晰，那么这是一个错误。请在本书的[问题追踪器][book-issues]中报告该问题。
 
-Pull requests fixing typos and adding new content are welcome!
+欢迎提交修复拼写错误和添加新内容的PR。
 
 [book-issues]: https://github.com/esp-rs/book/issues/
 [book-repository]: https://github.com/esp-rs/book
