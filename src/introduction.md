@@ -54,7 +54,7 @@ Rust 对这些设备的支持仍在不断改进中，并且进展迅速。因此
 
 ## 如何使用这本书
 
-本书假设你按顺序从头到尾阅读。后面章节涵盖的内容，在没有前面章节的背景知识时，可能会不太容易理解。
+本书假设你按顺序从头到尾阅读。在没有前面章节的背景知识时，后面章节涵盖的内容可能会不太容易理解。
 
 ## 为本书做出贡献
 
@@ -67,20 +67,20 @@ Rust 对这些设备的支持仍在不断改进中，并且进展迅速。因此
 [book-issues]: https://github.com/esp-rs/book/issues/
 [book-repository]: https://github.com/esp-rs/book
 
-## Re-Using This Material
+## 重用本材料
 
-This book is distributed under the following licenses:
+本书根据以下许可分发：
 
-- The code samples and freestanding Cargo projects contained within this book are licensed under the terms of both the [MIT License][mit-license] and the [Apache License v2.0][apache-license].
-- The written prose, pictures, and diagrams contained within this book are licensed under the terms of the Creative Commons [CC-BY-SA v4.0][cc-license] license.
+- 本书中包含的示例代码和独立的 Cargo 项目均根据 [MIT 许可证][mit-license]和 [Apache 许可证 v2.0][apache-license] 的条款获得许可。
+- 本书中包含的文字、图片和图表均根据 Creative Commons [CC-BY-SA v4.0][cc-license] 许可条款获得许可。
 
-In summary, to use our text or images in your work, you need to:
+总而言之，如果要在你的作品中使用本书的文本或图像，你需要：
 
-- Give the appropriate credit (i.e. mention this book on your slide, and provide a link to the relevant page)
-- Provide a link to the [CC-BY-SA v4.0][cc-license] license
-- Indicate if you have changed the material in any way, and make any changes to our material available under the same license
+- 给予适当的认可（例如，在幻灯片上提及这本书，并提供相关页面的链接）
+- 提供指向 [CC-BY-SA v4.0][cc-license] 许可证的链接
+- 指出你是否以任何方式更改了材料，并使这些更改在相同的许可证下可用
 
-Please do let us know if you find this book useful!
+如果你觉得这本书有用，请告诉我们！
 
 [mit-license]: https://opensource.org/licenses/MIT
 [apache-license]: http://www.apache.org/licenses/LICENSE-2.0
