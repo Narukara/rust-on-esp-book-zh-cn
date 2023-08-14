@@ -1,30 +1,30 @@
-# Using the Standard Library (`std`)
+# 使用标准库（`std`）
 
-Espressif provides a C-based development framework called [ESP-IDF][esp-idf-github]. It has, or will have, support for all Espressif chips starting with the ESP32, note that this framework does _not_ support the ESP8266.
+乐鑫提供了一个基于 C 的开发框架，称为 [ESP-IDF][esp-idf-github]。它支持（或将会支持）所有名称以 ESP32 开头的乐鑫芯片。注意，该框架 _不_ 支持 ESP8266。
 
-ESP-IDF, in turn, provides a [newlib][newlib-env] environment with enough functionality to build the Rust standard library (`std`) on top of it. This is the approach that is being taken to enable `std` support on Epressif devices.
+ESP-IDF 提供了一个功能强大的 [newlib][newlib-env] 环境，足以在其上构建 Rust 标准库（`std`）。这就是在乐鑫设备上启用 `std` 支持的方法。
 
 [esp-idf-github]: https://github.com/espressif/esp-idf
 [newlib-env]: https://sourceware.org/newlib/
 
-## Current Support
+## 当前支持情况
 
-The Espressif products supported for Rust `std` development are the ones supported by the ESP-IDF framework. For details on different versions of ESP-IDF and support of Espressif chips, see [this table][esp-idf-release-compatibility].
+只要是 ESP-IDF 框架支持的乐鑫产品，就支持 Rust `std` 开发。有关 ESP-IDF 的不同版本，以及乐鑫芯片支持的详细信息，请参阅[此表格][esp-idf-release-compatibility]。
 
 [esp-idf-release-compatibility]: https://github.com/espressif/esp-idf#esp-idf-release-and-soc-compatibility/
 
-When using `std`, you have access to a lot of features that exist in [ESP-IDF][esp-idf-github], including threads, mutexes and other synchronization primitives, collections, random number generation, sockets, etc.
+使用 `std` 时，可以访问 [ESP-IDF][esp-idf-github] 中存在的许多功能，包括线程、互斥锁和其他同步原语、集合、随机数生成、套接字等。
 
-### Relevant `esp-rs` Crates
+### `esp-rs` 相关的 Crate
 
-| Repository                     | Description                                                                                                   |
+| 存储库                     | 描述                                                                                                   |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| [`embedded-svc`][embedded-svc] | Abstraction traits for embedded services (`WiFi`, `Network`, `Httpd`, `Logging`, etc.)                        |
-| [`esp-idf-svc`][esp-idf-svc]   | An implementation of [embedded-svc] using `esp-idf` drivers.                                                  |
-| [`esp-idf-hal`][esp-idf-sys]   | An implementation of the `embedded-hal` and other traits using the `esp-idf` framework.                       |
-| [`esp-idf-sys`][esp-idf-hal]   | Rust bindings to the `esp-idf` development framework. Gives raw (`unsafe`) access to drivers, Wi-Fi and more. |
+| [`embedded-svc`][embedded-svc] | 嵌入式服务的抽象 trait（`WiFi`、`Network`、`Httpd`、`Logging`）。                        |
+| [`esp-idf-svc`][esp-idf-svc]   | 用 `esp-idf` 驱动实现的 [embedded-svc]。                                                  |
+| [`esp-idf-hal`][esp-idf-sys]   | 用 `esp-idf` 框架实现的 `embedded-hal` 和其他 trait。                       |
+| [`esp-idf-sys`][esp-idf-hal]   | `esp-idf` 开发框架的 Rust 绑定（binding）。提供了对驱动、Wi-Fi 和其他功能的原始（`unsafe`）访问。 |
 
-The aforementioned crates have interdependencies, and this relationship can be seen below.
+上述 crate 的相互依赖关系如下图所示。
 
 ```mermaid
 graph TD;
@@ -37,11 +37,11 @@ graph TD;
 [esp-idf-sys]: https://github.com/esp-rs/esp-idf-sys
 [esp-idf-hal]: https://github.com/esp-rs/esp-idf-hal
 
-### When You Might Want to Use the Standard Library (`std`)
+### 何时适合使用标准库（`std`）
 
-- Rich functionality: If your embedded system requires lots of functionality like support for networking protocols, file I/O, or complex data structures, you will likely want to use hosted-environment approach because `std` libraries provide a wide range of functionality that can be used to build complex applications.
-- Portability: The `std` crate provides a standardized set of APIs that can be used across different platforms and architectures, making it easier to write code that is portable and reusable.
-- Rapid development: The `std` crate provides a rich set of functionality that can be used to build applications quickly and efficiently, without worrying, too much, about low-level details.
+- 丰富的功能：如果你的嵌入式系统需要大量功能，例如支持网络协议、文件 I/O 或复杂的数据结构，使用宿主环境（hosted-environment）会是一个较好的方法。因为 `std` 库提供了丰富的功能，便于构建复杂的应用程序。
+- 可移植性：`std` crate 提供了一组标准化的 API，可以跨不同平台和架构使用，使你能够更轻松地编写可移植和可重用的代码。
+- 快速开发：`std` crate 提供了一组丰富的功能，可用于快速高效地构建应用程序，而无需过多担心底层细节。
 
 
 
