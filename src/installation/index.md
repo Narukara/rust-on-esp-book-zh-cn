@@ -1,17 +1,17 @@
-# Setting Up a Development Environment
+# 配置开发环境
 
-At the moment, Espressif SoCs are based on two different architectures: `RISC-V` and `Xtensa`. Both architectures support `std` and `no_std` approaches.
+目前，乐鑫的 SoC 基于两种不同的架构：`RISC-V` 和 `Xtensa`。两种架构都支持 `std` 和 `no_std` 开发方式。
 
-To set up the development environment, do the following:
+为了配置开发环境，需要执行以下步骤：
 
-1. [Install Rust][install-rust]
-2. Install requirements based on your target(s)
-    - [`RISC-V` targets only][risc-v-targets]
-    - [`RISC-V` and `Xtensa` targets][rics-v-xtensa-targets]
+1. [安装 Rust][install-rust]
+2. 根据目标架构，安装相应的依赖项
+    - [仅针对 `RISC-V` 目标][risc-v-targets]
+    - [针对 `RISC-V` 和 `Xtensa` 目标][rics-v-xtensa-targets]
 
-Regardless of the target architecture, for `std` development also don't forget to install [`std` Development Requirements][rust-esp-book-std-requirements].
+不论是哪种目标架构，对于 `std` 开发，还需要安装 [`std` 开发依赖项][rust-esp-book-std-requirements]。
 
-Please note that you can host the development environment in a [container][use-containers].
+另外，还可以选择在[容器][use-containers]中托管开发环境。
 
 [install-rust]: ./rust.md
 [risc-v-targets]: ./riscv.md
