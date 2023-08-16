@@ -21,8 +21,8 @@ ESP-IDF 提供了一个功能强大的 [newlib][newlib-env] 环境，足以在�
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
 | [`embedded-svc`][embedded-svc] | 嵌入式服务的抽象 trait（`WiFi`、`Network`、`Httpd`、`Logging`）。                        |
 | [`esp-idf-svc`][esp-idf-svc]   | 用 `esp-idf` 驱动实现的 [embedded-svc]。                                                  |
-| [`esp-idf-hal`][esp-idf-sys]   | 用 `esp-idf` 框架实现的 `embedded-hal` 和其他 trait。                       |
-| [`esp-idf-sys`][esp-idf-hal]   | `esp-idf` 开发框架的 Rust 绑定（binding）。提供了对驱动、Wi-Fi 和其他功能的原始（`unsafe`）访问。 |
+| [`esp-idf-hal`][esp-idf-hal]   | 用 `esp-idf` 框架实现的 `embedded-hal` 和其他 trait。                       |
+| [`esp-idf-sys`][esp-idf-sys]   | `esp-idf` 开发框架的 Rust 绑定（binding）。提供了对驱动、Wi-Fi 和其他功能的原始（`unsafe`）访问。 |
 
 上述 crate 的相互依赖关系如下图所示。
 
