@@ -1,69 +1,69 @@
-# `RISC-V` and `Xtensa` Targets
+# 针对 `RISC-V` 和 `Xtensa` 目标
 
-[`espup`][espup-github] is a tool that simplifies installing and maintaining the components required to develop Rust applications for the `Xtensa` and `RISC-V` architectures.
+为 `Xtensa` 和 `RISC-V` 架构开发 Rust 应用程序，需要安装和维护一些组件。[`espup`][espup-github] 是一款能够简化这一过程的工具。
 
-### 1. Install `espup`
+### 1. 安装 `espup`
 
-To install `espup`, run:
+要安装 `espup`，执行：
 ```shell
 cargo install espup
 ```
 
-You can also directly download pre-compiled [release binaries][release-binaries] or use [`cargo-binstall`][cargo-binstall].
+也可以直接下载预编译好的[发行二进制文件][release-binaries]或使用[`cargo-binstall`][cargo-binstall]。
 
 [espup-github]: https://github.com/esp-rs/espup
 [release-binaries]: https://github.com/esp-rs/espup/releases
 [cargo-binstall]: https://github.com/cargo-bins/cargo-binstall
 
-### 2. Install Necessary Toolchains
+### 2. 安装必要的工具链
 
-Install all the necessary tools to develop Rust applications for all supported Espressif targets by running:
+要为所有支持 Rust 开发的乐鑫目标，安装所有必要的工具，执行：
 ```shell
 espup install
 ```
 
-> ⚠️ **Note**: `std` applications require installing additional software covered in [`std` Development Requirements][rust-esp-book-std-requirements]
+> ⚠️ **注意**：`std` 应用需要安装一些额外的软件，参见 [`std` 开发依赖项][rust-esp-book-std-requirements]
 
 [rust-esp-book-std-requirements]: ./std-requirements.md
 
-### 3. Set Up the Environment Variables
-`espup` will create an export file that contains some environment variables required to build projects.
+### 3. 配置环境变量
+`espup` 会创建一个 export 文件，其中包含构建项目所需的一些环境变量。
 
-On Windows (`%USERPROFILE%\export-esp.ps1`)
-  - There is **no need** to execute the file for Windows users. It is only created to show the modified environment variables.
+在 Windows 系统上（`%USERPROFILE%\export-esp.ps1`）
+  - 对于 Windows 用户，**不需要** 执行这个文件。这个文件只是用来展示哪些环境变量被修改了的。
 
-On Unix-based systems (`$HOME/export-esp.sh`). There are different ways of sourcing the file:
-- Source this file in every terminal:
-   1. Source the export file: `. $HOME/export-esp.sh`
+在基于 Unix 的系统上（`$HOME/export-esp.sh`），有几种不同的方法来 source 这个文件：
+- 在每个终端里 source 这个文件：
+   1. source 这个 export 文件： `. $HOME/export-esp.sh`
 
-   This approach requires running the command in every new shell.
-- Create an alias for executing the `export-esp.sh`:
-   1. Copy and paste the following command to your shell’s profile (`.profile`, `.bashrc`, `.zprofile`, etc.): `alias get_esprs='. $HOME/export-esp.sh'`
-   2. Refresh the configuration by restarting the terminal session or by running `source [path to profile]`, for example, `source ~/.bashrc`.
+   这种方法需要在每个新的 shell 里运行这个命令。
+- 创建用于执行 `export-esp.sh` 的别名（alias）：
+   1. 将以下命令复制粘贴到 shell 的配置文件中（`.profile`、`.bashrc`、`.zprofile` 等）：`alias get_esprs='. $HOME/export-esp.sh'`
+   2. 通过重启终端，或执行 `source [配置文件的路径]`，例如 `source ~/.bashrc`，来刷新配置。
 
-   This approach requires running the alias in every new shell.
-- Add the environment variables to your shell profile directly:
-   1. Add the content of `$HOME/export-esp.sh` to your shell’s profile: `cat $HOME/export-esp.sh >> [path to profile]`, for example, `cat $HOME/export-esp.sh >> ~/.bashrc`.
-   2. Refresh the configuration by restarting the terminal session or by running `source [path to profile]`, for example, `source ~/.bashrc`.
+   这种方法需要在每个新的 shell 里运行别名（alias）。
+- 直接将环境变量添加到 shell 配置文件中：
+   1. 把 `$HOME/export-esp.sh` 的内容添加到 shell 的配置文件中：`cat $HOME/export-esp.sh >> [配置文件的路径]`，例如 `cat $HOME/export-esp.sh >> ~/.bashrc`。
+   2. 通过重启终端，或执行 `source [配置文件的路径]`，例如 `source ~/.bashrc`，来刷新配置。
 
-   This approach **doesn't** require any sourcing. The `export-esp.sh` script will be sourced automatically in every shell.
+   这种方法 **不需要** 任何 source。`export-esp.sh` 脚本会在每个 shell 里自动 source。
 
-### What `espup` Installs
+### `espup` 安装了什么
 
-To enable support for Espressif targets, `espup` installs the following tools:
+为了启用对乐鑫目标的支持，`espup` 安装了以下工具：
 
-- Espressif Rust fork with support for Espressif targets
-- `nightly` toolchain with support for `RISC-V` targets
-- `LLVM` [fork][llvm-github-fork] with support for `Xtensa` targets
-- [GCC toolchain][gcc-toolchain-github-fork] that links the final binary
+- 乐鑫 Rust 分支，支持乐鑫目标
+- `nightly` 工具链，支持 `RISC-V` 目标
+- `LLVM` [分支][llvm-github-fork]，支持 `Xtensa` 目标
+- [GCC 工具链][gcc-toolchain-github-fork]，用于链接最终的二进制文件
 
-The forked compiler can coexist with the standard Rust compiler, allowing both to be installed on your system. The forked compiler is invoked when using any of the available [overriding methods][rustup-overrides].
+分支编译器能与标准 Rust 编译器共存，允许在一个系统上同时安装两者。可以用任意一种 [override 方法][rustup-overrides]来调用分支编译器。
 
-> ⚠️ **Note**: We are making efforts to upstream our forks
-> 1. Changes in `LLVM` fork. Already in progress, see the status in this [tracking issue][llvm-github-fork-upstream issue].
-> 2. Rust compiler forks. If `LLVM` changes are accepted, we will proceed with the Rust compiler changes.
+> ⚠️ **注意**：我们正在努力将分支的代码合并入上游仓库
+> 1. `LLVM` 分支中的修改。合并正在进行中，详见这个[跟踪 issue][llvm-github-fork-upstream issue]。
+> 2. Rust 编译器分支。如果 `LLVM` 中的修改被接受，我们将继续推进 Rust 编译器的修改。
 
-If you run into an error, please, check the [Troubleshooting][troubleshooting] chapter.
+如果你遇到了错误，请查看 [Troubleshooting][troubleshooting] 章节。
 
 [llvm-github-fork]: https://github.com/espressif/llvm-project
 [gcc-toolchain-github-fork]: https://github.com/espressif/crosstool-NG/
@@ -71,10 +71,10 @@ If you run into an error, please, check the [Troubleshooting][troubleshooting] c
 [llvm-github-fork-upstream issue]: https://github.com/espressif/llvm-project/issues/4
 [troubleshooting]: ../misc/troubleshooting.md
 
-### Other Installation Methods for `Xtensa` Targets
+### `Xtensa` 目标的其他安装方法
 
-- Using [`rust-build`][rust-build] installation scripts. This was the recommended way in the past, but now the installation scripts are feature frozen, and all new features will only be included in `espup`. See the repository README for instructions.
-- Building the Rust compiler with `Xtensa` support from source. This process is computationally expensive and can take one or more hours to complete depending on your system. It isn't recommended unless there is a major reason to go for this approach. Here is the repository to build it from source: [`esp-rs/rust` repository][esp-rs-rust].
+- 使用 [`rust-build`][rust-build] 安装脚本。这是过去推荐的方式，但现在安装脚本已”功能冻结“，所有新功能将仅包含在 `espup` 中。请参阅存储库 README 文件以获取说明。
+- 从源代码构建具有 `Xtensa` 支持的 Rust 编译器。此过程的运算成本很高，可能需要一个或多个小时才能完成，具体取决于系统配置。除非有重大理由要求采用这种方法，否则不建议这样做。这是从源代码构建它的存储库：[`esp-rs/rust` 存储库][esp-rs-rust]。
 
 [rust-build]: https://github.com/esp-rs/rust-build#download-installer-in-bash
 [esp-rs-rust]: https://github.com/esp-rs/rust
