@@ -1,15 +1,15 @@
-# Writing Your Own Application
+# 编写自己的应用
 
-With the appropriate Rust compiler and toolchain installed, you're now ready to create an application.
+安装了适当的 Rust 编译器和工具链后，就可以开始创建自己的应用了。
 
-You can write an application in the following ways:
+可以采用以下方法来编写应用：
 
-- (**Strongly recommended**) Generate from a template: Gives you a configured project, saves time, and prevents possible errors.
-- Start from scratch using Cargo: Requires more expertise since you need to configure several parts of the project.
-    > ⚠️ **Note**: Starting a project with Cargo doesn't provide any advantage, only mentioned here since it's the usual way of generating a project in Rust.
+- (**强烈推荐**) 从现成的模板生成项目：可以提供一个配置好的项目，节省时间，避免出错。
+- 借助 Cargo 从零开始构建：需要更多专业知识，因为你需要配置项目的多个部分。
+    > ⚠️ **注意**：用 Cargo 自行构建项目没有任何优势。在这里提及，只是因为这是生成 Rust 项目的常规方法。
 
-This chapter won't cover the instructions on how to create a project from scratch with `cargo`, it will only focus on generating a project from a template project.
+本章不会介绍如何使用 `cargo` 从零开始​​创建项目，只会关注如何从模板生成项目。
 
-The tools used in this chapter will be covered in more detail in the next chapter [Tooling][tooling], feel free to refer to it when required.
+本章使用到的工具将在下一章“[工具][tooling]”中详细介绍，需要时请随时参考。
 
 [tooling]: ../tooling/index.md

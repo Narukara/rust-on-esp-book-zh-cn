@@ -1,20 +1,20 @@
-# Using Containers
+# 使用容器
 
-Instead of installing directly on your local system, you can host the development environment inside a container. Espressif provides the [`idf-rust`][idf-rust] image that supports both `RISC-V` and `Xtensa` target architectures and enables both `std` and `no_std` development.
+你可以将开发环境托管在容器内，而不是直接安装在本机上。乐鑫提供了 [`idf-rust`][idf-rust] 镜像，支持 `RISC-V` 和 `Xtensa` 目标架构，并支持 `std` 和 `no_std` 开发。
 
-You can find numerous tags for `linux/arm64`, and `linux/amd64` platforms.
+有许多针对 `linux/arm64` 或 `linux/amd64` 平台的 tag。
 
-For each Rust release, we generate the tag with the following naming convention:
+对于每个 Rust 版本，我们都使用以下命名约定来生成 tag：
 
-- `<chip>_<rust-toolchain-version>`
-  - For example, `esp32_1.64.0.0` contains the ecosystem for developing `std`, and `no_std` applications for `ESP32` with the `1.64.0.0` `Xtensa` Rust toolchain.
+- `<芯片>_<rust工具链版本>`
+  - 例如，`esp32_1.64.0.0` 包含用于在 `ESP32` 上开发 `std` 和 `no_std` 应用的环境，使用的是 `1.64.0.0` `Xtensa` Rust 工具链。
 
-There are special cases:
+有几种特殊情况：
 
-- `<chip>` can be `all` which indicates compatibility with all Espressif targets
-- `<rust-toolchain-version>` can be `latest` which indicates the latest release of the `Xtensa` Rust toolchain
+- `<芯片>` 可以是 `all`，表示兼容所有乐鑫目标
+- `<rust工具链版本>` 可以是 `latest`，表示 `Xtensa` Rust 工具链的最新版本
 
-Depending on your operating system, you can choose any container runtime, such as [Docker][docker], [Podman][podman], or [Lima][lima].
+根据你使用的操作系统，你可以选择任意一种容器运行时，例如 [Docker][docker]、[Podman][podman] 或 [Lima][lima]。
 
 [docker]: https://www.docker.com/
 [podman]: https://podman.io/
