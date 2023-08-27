@@ -12,19 +12,19 @@
 
 另请参阅 [The Embedded Rust Book][embedded-rust-book-intro-std] 中对不同运行时的比较。
 
-GitHub 上的 [esp-rs 组织][esp-rs organization] 有多个存储库，与在乐鑫芯片上运行 Rust 相关。大多数所需的 crate 的源代码都托管在这里。
+GitHub 上的 [esp-rs 组织][esp-rs organization] 有多个仓库，与在乐鑫芯片上运行 Rust 相关。大多数所需的 crate 的源代码都托管在这里。
 
 [rust-esp-book-std]: ./using-the-standard-library.md
 [rust-esp-book-no-std]: ./using-the-core-library.md
 [embedded-rust-book-intro-std]: https://docs.rust-embedded.org/book/intro/no-std.html#a-no_std-rust-environment
 [esp-rs organization]: https://github.com/esp-rs/
 
-## 存储库命名约定
+## 仓库命名约定
 
 在 [esp-rs 组织][esp-rs organization]中，我们使用以下命名约定：
-- 以 `esp-` 开头的存储库关注 `no_std` 方式。例如 `esp-hal`
+- 以 `esp-` 开头的仓库关注 `no_std` 方式。例如 `esp-hal`
   - `no_std` 在裸机上运行，因此 `esp-` 代表乐鑫芯片
-- 以 `esp-idf-` 开头的存储库关注 `std` 方式。例如 `esp-idf-hal`
+- 以 `esp-idf-` 开头的仓库关注 `std` 方式。例如 `esp-idf-hal`
   - `std` 在裸机之上，还需要一个[额外的封装层][additional layer]，即 `esp-idf-`
 
 [additional layer]: https://github.com/espressif/esp-idf

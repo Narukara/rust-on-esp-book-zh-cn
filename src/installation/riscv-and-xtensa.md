@@ -73,8 +73,8 @@ espup install
 
 ### `Xtensa` 目标的其他安装方法
 
-- 使用 [`rust-build`][rust-build] 安装脚本。这是过去推荐的方式，但现在安装脚本已”功能冻结“，所有新功能将仅包含在 `espup` 中。请参阅存储库 README 文件以获取说明。
-- 从源代码构建具有 `Xtensa` 支持的 Rust 编译器。此过程的运算成本很高，可能需要一个或多个小时才能完成，具体取决于系统配置。除非有重大理由要求采用这种方法，否则不建议这样做。这是从源代码构建它的存储库：[`esp-rs/rust` 存储库][esp-rs-rust]。
+- 使用 [`rust-build`][rust-build] 安装脚本。这是过去推荐的方式，但现在安装脚本已”功能冻结“，所有新功能将仅包含在 `espup` 中。请参阅仓库 README 文件以获取说明。
+- 从源代码构建具有 `Xtensa` 支持的 Rust 编译器。此过程的运算成本很高，可能需要一个或多个小时才能完成，具体取决于系统配置。除非有重大理由要求采用这种方法，否则不建议这样做。这是从源代码构建它的仓库：[`esp-rs/rust` 仓库][esp-rs-rust]。
 
 [rust-build]: https://github.com/esp-rs/rust-build#download-installer-in-bash
 [esp-rs-rust]: https://github.com/esp-rs/rust

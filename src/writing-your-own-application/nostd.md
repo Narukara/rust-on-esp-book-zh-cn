@@ -1,19 +1,19 @@
-# Writing `no_std` Applications
-If you want to learn how to develop `no_std` application, see the following training materials:
-- The book [Embedded Rust (`no_std`) on Espressif][no-std-book]
-- The repository [`no_std-training`][no-std-repository]
+# 编写 `no_std` 应用
+如果你想要学习如何开发 `no_std` 应用，可以阅读以下材料：
+- 书：[Embedded Rust (`no_std`) on Espressif][no-std-book]
+- 仓库：[`no_std-training`][no-std-repository]
 
-The training is based on [ESP32-C3-DevKit-RUST-1][esp-rust-board]. You can use any other Espressif development board but code changes and configuration changes might be needed.
+这个教程是基于 [ESP32-C3-DevKit-RUST-1][esp-rust-board] 开发板的。也可以使用其他乐鑫开发板，但是可能需要修改代码和项目配置。
 
-The training contains:
-* Introductory level examples:
-   * [A basic hello-world][hello-world]
-   * [A panic example][panic]
-   * [A blinky example][blinky]
-   * [A button example][button]
-   * [A button with an interrupt example][button-interrupt]
+这个教程包含：
+* 入门示例：
+   * [基本的 hello-world][hello-world]
+   * [panic 示例][panic]
+   * [点灯示例][blinky]
+   * [按钮示例][button]
+   * [按钮+中断示例][button-interrupt]
 
-> ⚠️ **Note**: There are several examples covering the use of specific peripherals under the examples' folder of every SoC [`esp-hal`][esp-hal]. E.g. [`esp32c3-hal/examples`][esp32c3-hal-examples]
+> ⚠️ **注意**：每个 SoC [`esp-hal`][esp-hal] 的示例文件夹下都有几个示例，涵盖了特定外设的使用方法。例如 [`esp32c3-hal/examples`][esp32c3-hal-examples]。
 
 [no-std-book]: https://esp-rs.github.io/no_std-training/
 [no-std-repository]: https://github.com/esp-rs/no_std-training

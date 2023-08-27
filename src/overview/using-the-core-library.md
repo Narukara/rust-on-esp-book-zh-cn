@@ -25,7 +25,7 @@
 
 > ⚠️ **注意**:
 >
-> - Wi-Fi/BLE/ESP-NOW 一列中的 ✅ 表示此目标支持其中至少一种功能。详细情况参见 esp-wifi 存储库中的 [Current support][esp-wifi-current-support] 表格。
+> - Wi-Fi/BLE/ESP-NOW 一列中的 ✅ 表示此目标支持其中至少一种功能。详细情况参见 esp-wifi 仓库中的 [Current support][esp-wifi-current-support] 表格。
 > - [ESP8266 HAL][esp8266-hal] 处于维护状态，后续不会对此芯片做进一步开发。
 
 [esp-hal]: https://github.com/esp-rs/esp-hal "Hardware abstraction layer"
@@ -37,7 +37,7 @@
 
 ### `esp-rs` 相关的 Crate
 
-| 存储库                       | 描述                                                |
+| 仓库                       | 描述                                                |
 | -------------------------------- | ---------------------------------------------------------- |
 | [`esp-hal`][esp-hal]             | 硬件抽象层                                 |
 | [`esp-pacs`][esp-pacs]           | 外设访问 crate（PAC）                                   |
