@@ -1,19 +1,18 @@
-# Understanding `esp-template`
+# `esp-template` 简介
 
-Now that we know how to [generate a `no_std` project][generate-no-std], let's inspect what the generated
-project contains, try to understand every part of it, and run it.
+既然我们已经了解了如何[生成一个 `no_std` 项目][generate-no-std]，让我们看看生成的项目里有哪些东西，尝试理解它的各个部分，并运行它。
 
 [generate-no-std]: ./index.md
 
-## Inspecting the Generated Project
+## 检查生成的项目
 
-When creating a project from [`esp-template`][esp-template] with the following answers:
+从 [`esp-template`][esp-template] 创建项目，使用以下配置：
 -  Which MCU to target? · `esp32c3`
 - Configure advanced template options? · `false`
 
-For this explanation, we will use the default values, if you want further modifications, see the [additional prompts][prompts] when not using default values.
+在本节中，我们使用默认配置。如果需要进一步修改，请参阅 [additional prompts][prompts]。
 
-It should generate a file structure like this:
+应该会生成类似这样的文件结构：
 
 ```text
 ├── .cargo
@@ -27,25 +26,25 @@ It should generate a file structure like this:
 └── rust-toolchain.toml
 ```
 
-Before going further, let's see what these files are for.
+在进一步讨论之前，让我们看看这些文件的用途。
 
 - [`.cargo/config.toml`][config-toml]
-    - The Cargo configuration
-    - This defines a few options to correctly build the project
-    - Contains `runner = "espflash flash --monitor"` - this means you can just use `cargo run` to flash and monitor your code
+    - Cargo 的配置
+    - 定义了一些用于正确构建项目的选项
+    - 包含 `runner = "espflash flash --monitor"` - 这意味着你可以用 `cargo run` 来烧写并监视代码
 - `src/main.rs`
-    - The main source file of the newly created project
-    - For details, see the [Understanding `main.rs`][main-rs] section below
+    - 项目的主要源文件
+    - 关于它的详细信息，请参阅下面的 [`main.rs` 简介][main-rs]一节
 - [`.gitignore`][gitignore]
-    - Tells `git` which folders and files to ignore
+    - 指示 `git` 要忽略哪些目录和文件
 - [`Cargo.toml`][cargo-toml]
-    - The usual Cargo manifest declares some meta-data and dependencies of the project
+    - Cargo 清单（manifest），通常声明了一些元数据和项目的依赖项
 - `LICENSE-APACHE`, `LICENSE_MIT`
-    - Those are the most common licenses used in the Rust ecosystem
-    - If you want to use a different license, you can delete these files and change the license in `Cargo.toml`
+    - 这些是 Rust 生态中最常用的许可证
+    - 如果想使用其他许可证，可以删除这些文件，并修改 `Cargo.toml` 中的许可证
 - [`rust-toolchain.toml`][rust-toolchain-toml]
-    - Defines which Rust toolchain to use
-      - The toolchain will be `nightly` or `esp` depending on your target
+    - 定义要使用的 Rust 工具链的种类
+      - 根据目标设备，工具链可以是 `nightly` 或 `esp`
 
 [esp-template]: https://github.com/esp-rs/esp-template
 [prompts]: https://github.com/esp-rs/esp-template#esp-template
@@ -55,7 +54,7 @@ Before going further, let's see what these files are for.
 [config-toml]: https://doc.rust-lang.org/cargo/reference/config.html
 [rust-toolchain-toml]: https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file
 
-### Understanding `main.rs`
+### `main.rs` 简介
 
 ```rust,ignore
  1 #![no_std]
@@ -63,9 +62,9 @@ Before going further, let's see what these files are for.
  ```
 
 - `#![no_std]`
-  - This tells the Rust compiler that this code doesn't use `libstd`
+  - 用于告知 Rust 编译器这段代码不使用 `libstd`
 - `#![no_main]`
-  - The `no_main` attribute says that this program won't use the standard main interface, which is tailored for command-line applications that receive arguments. Instead of the standard main, we'll use the entry attribute from the `riscv-rt` crate to define a custom entry point. In this program, we have named the entry point `main`, but any other name could have been used. The entry point function must be a [diverging function][diverging-function]. I.e. it has the signature `fn foo() -> !`; this type indicates that the function never returns – which means that the program never terminates.
+  - `no_main` 属性表示该程序不使用标准的 main 接口，该接口是为会接收参数的命令行应用设计的。我们将使用 `riscv-rt` crate 中的入口（entry）属性来创建一个自定义入口点（entry point），而不是使用标准的 main。在此程序中，我们将入口点命名为 `main`，但也可以使用任何其他名称。入口点函数必须是[发散函数][diverging-function]，即具有签名 `fn foo() -> !`，这种类型表明该函数永远不会返回——这意味着程序永远不会终止。
 
 ```rust,ignore
  4 use esp_backtrace as _;
@@ -73,13 +72,13 @@ Before going further, let's see what these files are for.
  6 use hal::{clock::ClockControl, peripherals::Peripherals, prelude::*, timer::TimerGroup, Rtc};
 ```
 - `use esp_backtrace as _;`
-  - Since we are in a bare-metal environment, we need a panic handler that runs if a panic occurs in code
-  - There are a few different crates you can use (e.g `panic-halt`) but `esp-backtrace` provides an implementation that prints the address of a backtrace - together with `espflash`/`espmonitor` these addresses can get decoded into source code locations
+  - 由于我们处于裸机环境中，因此需要一个 panic 处理程序，该处理程序在代码发生 panic 时运行
+  - 有多种不同的 crate 可选（例如 `panic-halt`），但是 `esp-backtrace` 提供了一个打印回溯地址的实现——与 `espflash`/`espmonitor` 配合，这些地址可以被解析为源代码中的位置
 - `use esp_println::println;`
-  - Provides `println!` implementation
+  - 提供了 `println!` 的实现
 - `use hal:{...}`
-  - We need to bring in some types we are going to use
-  - These are from `esp-hal`
+  - 我们需要导入一些类型，以待后续使用
+  - 这些都是来自于 `esp-hal`
 
 ```rust,ignore
  8 #[entry]
@@ -88,7 +87,7 @@ Before going further, let's see what these files are for.
 11    let mut system = peripherals.SYSTEM.split();
 12    let clocks = ClockControl::boot_defaults(system.clock_control).freeze();
 13
-14    // Disable the RTC and TIMG watchdog timers
+14    // 禁用 RTC 和 TIMG 看门狗定时器
 15    let mut rtc = Rtc::new(peripherals.RTC_CNTL);
 16    let timer_group0 = TimerGroup::new(
 17        peripherals.TIMG0,
@@ -111,43 +110,43 @@ Before going further, let's see what these files are for.
 34    loop {}
 35 }
 ```
-Inside the `main` function we can find:
+`main` 函数中包含：
 - `let peripherals = Peripherals::take().unwrap();`
-  - HAL drivers usually take ownership of peripherals accessed via the PAC
-  - Here we take all the peripherals from the PAC to pass them to the HAL drivers later
+  - HAL 驱动通常会通过 PAC（Peripheral Access Crate，外设访问 crate）获取到外设的所有权
+  - 这里我们从 PAC 中取出所有外设，之后将他们传递给 HAL 驱动
 - `let mut system = peripherals.SYSTEM.split();`
-  - Sometimes a peripheral (here the System peripheral) is coarse-grained and doesn't exactly fit the HAL drivers - so here we split the System peripheral into smaller pieces which get passed to the drivers
+  - 有时，外设（此处为 System 外设）是粗粒度的，并不完全适合 HAL 驱动——因此这里我们将 System 外设分割成更小的部分，然后传递给驱动程序
 - `let clocks = ClockControl::boot_defaults(system.clock_control).freeze();`
-  - Here we configure the system clocks - in this case, we are fine with the defaults
-  - We freeze the clocks, which means we can't change them later
-  - Some drivers need a reference to the clocks to know how to calculate rates and durations
-- The next block of code instantiates some peripherals (namely RTC and the two timer groups) to disable the watchdog, which is armed after boot
-  - Without that code, the SoC would reboot after some time
-  - There is another way to prevent the reboot: [feeding][wtd-feeding] the watchdog
+  - 这里配置了系统时钟——本例中，使用默认值即可
+  - 然后我们冻结了时钟，之后就不能再次修改它了
+  - 某些驱动需要一个时钟的引用，以便知道如何计算速率和时长
+- 下一块代码实例化了一些外设（即 RTC 和两个定时器组）以禁用看门狗，看门狗是在上电时启用的
+  - 没有这段代码的话，SoC 会在一段时间后重启
+  - 还有一种防止重启的方法：[喂][wtd-feeding]看门狗
 - `println!("Hello world!");`
-  - Prints "Hello Wolrd!"
+  - 打印 “Hello World!”
 - `loop {}`
-  - Since our function is supposed to never return, we just "do nothing" in a loop
+  - 因为这个函数不应该返回，我们在一个死循环中不执行任何操作
 
 [diverging-function]: https://doc.rust-lang.org/beta/rust-by-example/fn/diverging.html
 [wtd-feeding]: https://docs.rs/esp32c3-hal/0.10.0/esp32c3_hal/prelude/trait._embedded_hal_watchdog_Watchdog.html#tymethod.feed
 
-## Running the Code
+## 运行代码
 
-Building and running the code is as easy as
+构建和运行这段代码只需：
 
 ```shell
 cargo run
 ```
 
-This builds the code according to the configuration and executes [`espflash`][espflash] to flash the code to the board.
+这会根据配置构建代码，并执行 [`espflash`][espflash] 将其烧写到板子上。
 
-Since our [`runner` configuration][runner-config] also passes the `--monitor` argument to [`espflash`][espflash], we can see what the code is printing.
+由于 [`runner` 配置][runner-config]还会将 `--monitor` 参数传递给 [`espflash`][espflash]，屏幕上将显示打印的内容。
 
-Make sure that you have [`espflash`][espflash] installed, otherwise this step will fail. To install [`espflash`][espflash]:
+确保已经安装了 [`espflash`][espflash]，否则此步骤会失败。执行此命令以安装 [`espflash`][espflash]：
 `cargo install espflash`
 
-You should see something similar to this:
+屏幕上应该会显示类似这样的内容：
 
 ```text
 [2023-04-17T14:17:08Z INFO ] Serial port: '/dev/ttyACM0'
@@ -172,13 +171,13 @@ Commands:
 Hello world!
 ```
 
-What you see here are messages from the first and second stage bootloader, and then, our "Hello World" message!
+这些是第一和第二阶段 bootloader 产生的信息，然后是我们的 “Hello World” 信息！
 
-And that is exactly what the code is doing.
+这就是这段代码做的事情。
 
-You can reboot with `CTRL+R` or exit with `CTRL+C`.
+可以按 `CTRL+R` 重启，或按 `CTRL+C` 退出。
 
-If you encounter any issues while building the project, please, see the [Troubleshooting][troubleshooting] chapter.
+如果在构建项目时遇到了什么问题，请查看 [Troubleshooting][troubleshooting] 章节。
 
 [espflash]: https://github.com/esp-rs/espflash/tree/main/espflash
 [runner-config]: https://doc.rust-lang.org/cargo/reference/config.html#targettriplerunner
