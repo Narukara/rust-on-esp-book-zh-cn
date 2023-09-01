@@ -1,6 +1,7 @@
 # `esp-template` 简介
 
-既然我们已经了解了如何[生成一个 `no_std` 项目][generate-no-std]，让我们看看生成的项目里有哪些东西，尝试理解它的各个部分，并运行它。
+既然我们已经了解了如何[生成一个 `no_std` 项目][generate-no-std]，让我们看看生成的项目里有哪些东西，
+尝试理解它的各个部分，并运行它。
 
 [generate-no-std]: ./index.md
 
@@ -59,7 +60,7 @@
 ```rust,ignore
  1 #![no_std]
  2 #![no_main]
- ```
+```
 
 - `#![no_std]`
   - 用于告知 Rust 编译器这段代码不使用 `libstd`
@@ -124,7 +125,7 @@
   - 没有这段代码的话，SoC 会在一段时间后重启
   - 还有一种防止重启的方法：[喂][wtd-feeding]看门狗
 - `println!("Hello world!");`
-  - 打印 “Hello World!”
+  - 打印 “Hello world!”
 - `loop {}`
   - 因为这个函数不应该返回，我们在一个死循环中不执行任何操作
 
@@ -171,7 +172,7 @@ Commands:
 Hello world!
 ```
 
-这些是第一和第二阶段 bootloader 产生的信息，然后是我们的 “Hello World” 信息！
+这些是第一和第二阶段 bootloader 产生的信息，然后是我们的 “Hello world” 信息！
 
 这就是这段代码做的事情。
 
