@@ -49,7 +49,7 @@
 
 [esp-template]: https://github.com/esp-rs/esp-template
 [prompts]: https://github.com/esp-rs/esp-template#esp-template
-[main-rs]: #understanding-mainrs
+[main-rs]: #mainrs-简介
 [cargo-toml]: https://doc.rust-lang.org/cargo/reference/manifest.html
 [gitignore]: https://git-scm.com/docs/gitignore
 [config-toml]: https://doc.rust-lang.org/cargo/reference/config.html
