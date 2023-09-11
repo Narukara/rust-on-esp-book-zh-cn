@@ -1,10 +1,10 @@
 # Wokwi
 
-[Wokwi][wokwi] is an online simulator that supports simulating Rust projects (both `std` and `no_std`) in Espressif Chips.
-See [wokwi.com/rust][wokwi-rust] for a list of examples and a way to start new projects.
+[Wokwi][wokwi]是一个在线模拟器，支持在 Espressif 芯片上模拟 Rust 项目（包括`std`和`no_std`）。
+请参考[wokwi.com/rust][wokwi-rust]以获取示例列表和开始新项目的方法。
 
-Wokwi offers Wi-Fi simulation, Virtual Logic Analyzer, and [GDB debugging][gdb-debugging] among many other features, see
-[Wokwi documentation][wokwi-documentation] for more details. For ESP chips, there is a table of [simulation features][wokwi-simulation-features] that are currently supported.
+Wokwi 提供了 Wi-Fi 仿真、虚拟逻辑分析仪和[GDB 调试][gdb-debugging]等许多功能，请参考[Wokwi 文档][wokwi-documentation]以获取更多详细信息。
+对于 ESP 芯片，有一个[仿真功能][wokwi-simulation-features]表格，列出了当前支持的功能。
 
 [wokwi]: https://wokwi.com/
 [wokwi-rust]: https://wokwi.com/rust
@@ -12,33 +12,34 @@ Wokwi offers Wi-Fi simulation, Virtual Logic Analyzer, and [GDB debugging][gdb-d
 [wokwi-documentation]: https://docs.wokwi.com/
 [wokwi-simulation-features]: https://docs.wokwi.com/guides/esp32#simulation-features
 
-## Using Wokwi for VS Code extension
-Wokwi offers a VS Code extension that allows you to simulate a project directly in the code editor by only adding a few files.
-For more information, see [Wokwi documentation][wokwi-vscode].
-You can also debug your code using the VS Code debugger, see [Debugging your code][wokwi-debugging].
+## 使用 Wokwi VS Code 扩展
 
-When using any of the [templates][templates] and not using the default values, there is a prompt (`Configure project to support Wokwi simulation with Wokwi VS Code extension?`) that generates the required files to use Wokwi VS Code extension.
+Wokwi 提供了一个 VS Code 扩展，允许您通过添加几个文件直接在代码编辑器中模拟项目。
+更多信息，请参考[Wokwi 文档][wokwi-vscode]。
+您还可以使用 VS Code 调试器调试代码，请参考[调试您的代码][wokwi-debugging]。
 
-![Wokwi VS Code example](../../assets/wokwi-vscode.png)
+当使用任何[模板][templates]并且不使用默认值时，会有一个提示(`Configure project to support Wokwi simulation with Wokwi VS Code extension?`)，生成所需的文件以使用 Wokwi VS Code 扩展。
+
+![Wokwi VS Code示例](../../assets/wokwi-vscode.png)
 
 [wokwi-vscode]: https://docs.wokwi.com/vscode/getting-started
 [wokwi-debugging]: https://docs.wokwi.com/vscode/debugging
 [templates]: ./../../writing-your-own-application/generate-project/index.md
 
-## Using `wokwi-server`
+## 使用`wokwi-server`
 
-[`wokwi-server`][wokwi-server] is a CLI tool for launching a Wokwi simulation of your project. I.e., it allows you
-to build a project on your machine, or in a container, and simulate the resulting binary.
+[`wokwi-server`][wokwi-server]是一个 CLI 工具，用于启动您的项目的 Wokwi 仿真。也就是说，它允许您在本地或容器中构建项目，并模拟生成的二进制文件。
 
-[`wokwi-server`][wokwi-server] also allows simulating your resulting binary on other Wokwi projects, with more hardware parts other than the chip itself. See the corresponding [section of the `wokwi-server`][wokwi-server-custom] README for detailed instructions.
+[`wokwi-server`][wokwi-server]还允许在其他 Wokwi 项目上模拟您的二进制文件，除了芯片本身外还有更多的硬件部件。请参考[`wokwi-server`][wokwi-server-custom] README 的相应部分以获取详细说明。
 
 [wokwi-server]: https://github.com/MabezDev/wokwi-server
 [wokwi-server-custom]: https://github.com/MabezDev/wokwi-server#simulating-your-binary-on-a-custom-wokwi-project
 
-## Custom Chips
-Wokwi allows generating custom chips that let you program the behavior of a component not supported in Wokwi. For more details, see the official [Wokwi documentation][wokwi-custom-chip].
+## 自定义芯片
 
-Custom chips can also be written in Rust! See [Wokwi Custom Chip API][rust-chip-api] for more information. For example, custom [inverter chip][custom-chip-example] in Rust.
+Wokwi 允许生成自定义芯片，让您编程不受 Wokwi 支持的组件的行为。更多详情，请参考官方[Wokwi 文档][wokwi-custom-chip]。
+
+自定义芯片也可以用 Rust 编写！请参考[Wokwi Custom Chip API][rust-chip-api]以获取更多信息。例如，使用 Rust 编写的自定义[反相器芯片][custom-chip-example]。
 
 [wokwi-custom-chip]: https://docs.wokwi.com/chips-api/getting-started
 [rust-chip-api]: https://github.com/wokwi/wokwi_chip_ll

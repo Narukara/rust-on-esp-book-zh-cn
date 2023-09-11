@@ -1,15 +1,15 @@
 # Visual Studio Code
 
-One of the more common development environments is Microsoft's [Visual Studio Code][vscode] text editor along with the [Rust Analyzer][rust-analyzer], also known as RA, extension.
+Microsoft 的[Visual Studio Code][vscode]文本编辑器以及[Rust Analyzer][rust-analyzer]扩展，也称为 RA，是较常见的开发环境之一。
 
-Visual Studio Code is an open-source and cross-platform graphical text editor with a rich ecosystem of extensions. The [Rust Analyzer extension][rust-analyzer-extension] provides an implementation of the [Language Server Protocol][language-server-protocol] for Rust and additionally includes features like autocompletion, go-to definition, and more.
+Visual Studio Code 是一个开源的跨平台图形化文本编辑器，具有丰富的扩展生态系统。[Rust Analyzer 扩展][rust-analyzer-extension]为 Rust 提供了[语言服务器协议][language-server-protocol]的实现，并包括自动完成、跳转到定义等功能。
 
-Visual Studio Code can be installed via the most popular package managers, and installers are available on the official website. The [Rust Analyzer extension][rust-analyzer-extension] can be installed in Visual Studio Code via the built-in extension manager.
+Visual Studio Code 可以通过最流行的软件包管理器安装，也可以在官方网站上获得安装程序。[Rust Analyzer 扩展][rust-analyzer-extension]可以通过内置的扩展管理器在 Visual Studio Code 中安装。
 
-Alongside Rust Analyzer there are other extensions that might be helpful:
+除了 Rust Analyzer 之外，其他扩展也可能有所帮助：
 
-- [Even Better TOML][even-better-toml] for editing TOML-based configuration files
-- [crates][crates] to help manage Rust dependencies
+- [Even Better TOML][even-better-toml]用于编辑基于 TOML 的配置文件
+- [crates][crates]用于帮助管理 Rust 依赖项
 
 [vscode]: https://code.visualstudio.com/
 [rust-analyzer]: https://rust-analyzer.github.io/
@@ -18,11 +18,11 @@ Alongside Rust Analyzer there are other extensions that might be helpful:
 [even-better-toml]: https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
 [crates]: https://marketplace.visualstudio.com/items?itemName=serayuzgur.crates
 
-## Tips and Tricks
+## 技巧和诀窍
 
-### Using Rust Analyzer with `no_std`
+### 在`no_std`下使用 Rust Analyzer
 
-If you are developing for a target that doesn't have `std` support, Rust Analyzer can behave strangely, often reporting various errors. This can be resolved by creating a `.vscode/settings.json` file in your project and populating it with the following:
+如果您正在为不支持`std`的目标开发，Rust Analyzer 可能会表现出奇怪的行为，通常会报告各种错误。这可以通过在项目中创建`.vscode/settings.json`文件并填充以下内容来解决：
 
 ```json
 {
@@ -30,9 +30,9 @@ If you are developing for a target that doesn't have `std` support, Rust Analyze
 }
 ```
 
-### Cargo Hints When Using Custom Toolchains
+### 在使用自定义工具链时使用 Cargo 提示
 
-If you are using a custom toolchain, as you would with `Xtensa` targets, you can provide some hints to `cargo` via the `rust-toolchain.toml` file to improve the user experience:
+如果您正在使用自定义工具链，就像在`Xtensa`目标中一样，您可以通过`rust-toolchain.toml`文件向`cargo`提供一些提示，以改善用户体验：
 
 ```toml
 [toolchain]
@@ -41,9 +41,9 @@ components = ["rustfmt", "rustc-dev"]
 targets = ["xtensa-esp32-none-elf"]
 ```
 
-## Other IDEs
+## 其他 IDE
 
-We chose to cover VS Code because it has good support for Rust and is popular among developers. There are also other IDEs available that have comparable Rust support, such as [CLion][clion] and [vim][vim], but these are outside of this book's scope.
+我们选择覆盖 VS Code，因为它对 Rust 有很好的支持，并且在开发人员中很受欢迎。还有其他可用的 IDE 具有相当的 Rust 支持，例如[CLion][clion]和[vim][vim]，但这些超出了本书的范围。
 
 [clion]: https://www.jetbrains.com/clion/
 [vim]: https://www.vim.org/

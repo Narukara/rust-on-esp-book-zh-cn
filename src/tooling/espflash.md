@@ -1,58 +1,60 @@
 # `espflash`
 
-`espflash` is a serial flasher utility, based on [esptool.py][esptool], for Espressif SoCs and modules.
+`espflash`是一个基于[esptool.py][esptool]的 Espressif SoCs 和模块的串行闪存工具。
 
-The [`espflash`][espflash] repository contains two crates, `cargo-espflash` and `espflash`. For more information on these crates, see the respective sections below.
+[`espflash`][espflash]仓库包含两个 crate，`cargo-espflash`和`espflash`。有关这些 crate 的更多信息，请参见下面的各自部分。
 
 [esptool]: https://github.com/espressif/esptool
 [espflash]: https://github.com/esp-rs/espflash
 
-> ⚠️ **Note**: The `espflash` and `cargo-espflash` commands shown below, assume that version `2.0` or greater is used.
+> ⚠️ **注意**: 下面显示的`espflash`和`cargo-espflash`命令，假定使用版本`2.0`或更高版本。
 
 ## `cargo-espflash`
 
-Provides a subcommand for `cargo` that handles cross-compilation and flashing.
+为`cargo`提供一个子命令，处理交叉编译和闪存。
 
-To install, run:
+要安装，请运行：
 
 ```shell
 cargo install cargo-espflash
 ```
 
-This command must be run within a Cargo project, ie. a directory containing a `Cargo.toml` file. For example, to build an example named 'blinky', flash the resulting binary to a device, and then subsequently start a serial monitor:
+此命令必须在 Cargo 项目中运行，即包含`Cargo.toml`文件的目录。例如，要构建名为“blinky”的示例，将生成的二进制文件闪存到设备中，然后随后启动串行监视器：
 
 ```shell
 cargo espflash flash --example=blinky --monitor
 ```
 
-For more information, please see the [`cargo-espflash`][cargo-espflash] README.
+有关更多信息，请参见[`cargo-espflash`][cargo-espflash] README。
 
 [cargo-espflash]: https://github.com/esp-rs/espflash/blob/master/cargo-espflash/README.md
 
 ## `espflash`
 
-Provides a standalone command-line application that flashes an ELF file to a device.
+提供一个独立的命令行应用程序，将 ELF 文件闪存到设备中。
 
-To install, run:
+要安装，请运行：
 
 ```shell
 cargo install espflash
 ```
 
-Assuming you have built an ELF binary by other means already, `espflash` can be used to download it to your device and monitor the serial port. For example, if you have built the `getting-started/blinky` example from [ESP-IDF][esp-idf] using `idf.py`, you might run something like:
+假设您已经通过其他方式构建了 ELF 二进制文件，`espflash`可以用于将其下载到设备并监视串行端口。例如，如果您已经使用`idf.py`从[ESP-IDF][esp-idf]构建了名为“getting-started/blinky”的示例，您可以运行类似以下的命令：
 
 ```shell
 espflash flash build/blinky --monitor
 ```
 
-For more information, please see the [`espflash` README][espflash-readme].
+有关更多信息，请参见[`espflash` README][espflash-readme]。
 
-`espflash` can be used as a Cargo runner by adding the following to your project's `.cargo/config.toml` file:
+通过将以下内容添加到项目的`.cargo/config.toml`文件中，可以将`espflash`用作 Cargo 运行程序：
+
 ```toml
 [target.'cfg(any(target_arch = "riscv32", target_arch = "xtensa"))']
 runner = "espflash flash --monitor"
 ```
-With this configuration, you can flash and monitor your application using `cargo run`.
+
+使用此配置，您可以使用`cargo run`下载和监视您的应用程序。
 
 [esp-idf]: https://github.com/espressif/esp-idf
 [espflash-readme]: https://github.com/esp-rs/espflash/blob/master/espflash/README.md

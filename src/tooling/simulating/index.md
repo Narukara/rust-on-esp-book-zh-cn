@@ -1,21 +1,21 @@
-# Simulating
+# 仿真
 
-Simulating projects can be handy. It allows users to test projects using CI, try projects without having hardware available, and many other scenarios.
+仿真项目可能很方便。它允许用户在没有可用硬件的情况下测试项目、尝试项目以及许多其他场景。
 
-At the moment, there are a few ways of simulating Rust projects on Espressif chips. Every way has some limitations, but it's quickly evolving and getting better every day.
+目前，有几种方法可以在 Espressif 芯片上仿真 Rust 项目。每种方法都有一些限制，但它们正在迅速发展，并且每天都在变得更好。
 
-In this chapter, we will discuss currently available simulation tools.
+在本章中，我们将讨论当前可用的仿真工具。
 
-Refer to the table below to see which chip is supported in every simulating method:
+请参考下表，以了解每种仿真方法支持哪种芯片：
 
 |              | **[Wokwi][wokwi]** | **QEMU** |
 | :----------: | :----------------: | :------: |
-|  **ESP32**   |         ✅          |    ✅     |
-| **ESP32-C2** |         ❌          |    ❌     |
-| **ESP32-C3** |         ✅          |    ❌     |
-| **ESP32-C6** |         ✅          |    ❌     |
-| **ESP32-H2** |         ✅          |    ❌     |
-| **ESP32-S2** |         ✅          |    ❌     |
-| **ESP32-S3** |         ✅          |    ❌     |
+|  **ESP32**   |         ✅         |    ✅    |
+| **ESP32-C2** |         ❌         |    ❌    |
+| **ESP32-C3** |         ✅         |    ❌    |
+| **ESP32-C6** |         ✅         |    ❌    |
+| **ESP32-H2** |         ✅         |    ❌    |
+| **ESP32-S2** |         ✅         |    ❌    |
+| **ESP32-S3** |         ✅         |    ❌    |
 
 [wokwi]: https://docs.wokwi.com/guides/esp32#simulation-features

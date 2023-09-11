@@ -1,15 +1,15 @@
-# Debugging
+# 调试
 
-Debugging Rust applications is also possible using different tools that will be covered in this chapter.
+在本章中，我们将介绍使用不同工具进行调试 Rust 应用程序的方法。
 
-Refer to the table below to see which chip is supported in every debugging method:
+请参考下表，了解每种调试方法支持的芯片：
 
 |              | **probe-rs** | **OpenOCD** | **VS Code** |
 | :----------: | :----------: | :---------: | :---------: |
-|  **ESP32**   |      ❌       |      ✅      |      ✅      |
-| **ESP32-C2** |      ✅       |      ✅      |      ✅      |
-| **ESP32-C3** |      ✅       |      ✅      |      ✅      |
-| **ESP32-C6** |      ✅       |      ✅      |      ✅      |
-| **ESP32-H2** |      ✅       |      ✅      |      ✅      |
-| **ESP32-S2** |      ❌       |      ✅      |      ✅      |
-| **ESP32-S3** |      ❌       |      ✅      |      ✅      |
+|  **ESP32**   |      ❌      |     ✅      |     ✅      |
+| **ESP32-C2** |      ✅      |     ✅      |     ✅      |
+| **ESP32-C3** |      ✅      |     ✅      |     ✅      |
+| **ESP32-C6** |      ✅      |     ✅      |     ✅      |
+| **ESP32-H2** |      ✅      |     ✅      |     ✅      |
+| **ESP32-S2** |      ❌      |     ✅      |     ✅      |
+| **ESP32-S3** |      ❌      |     ✅      |     ✅      |
