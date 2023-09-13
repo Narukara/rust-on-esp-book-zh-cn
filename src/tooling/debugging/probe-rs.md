@@ -35,7 +35,7 @@
 
 ## 权限 - Linux
 
-在 Linux 上，您可能会遇到与 Espressif 探针交互时的权限问题。安装以下`udev`规则并重新加载应该可以解决此问题。
+在 Linux 上，可能会遇到与 Espressif 探针交互时的权限问题。安装以下`udev`规则并重新加载应该可以解决此问题。
 
 ```text
 # Espressif dev kit FTDI

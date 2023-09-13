@@ -1,6 +1,6 @@
 # 在 Visual Studio Code 中进行调试
 
-还有一种可能性是直接在 Visual Studio Code 中进行图形输出进行调试。
+在 Visual Studio Code 中，还可以直接进行可视化的调试。
 
 ## ESP32
 
@@ -35,7 +35,7 @@
       // 更多信息请参见：https://github.com/Marus/cortex-debug/blob/master/package.json
       "name": "Attach",
       "type": "cortex-debug",
-      "request": "attach", // 附加而不是启动，因为否则会尝试写入flash，但会失败
+      "request": "attach", // 使用 attach 而不是 launch，避免因为尝试写入 flash 导致运行失败
       "cwd": "${workspaceRoot}",
       "executable": "target/xtensa-esp32-none-elf/debug/.....",
       "servertype": "openocd",
@@ -64,7 +64,7 @@
 内置 JTAG 接口的可用性取决于 ESP32-C3 版本：
 
 - 早于 3 的版本**没有**内置 JTAG 接口。
-- 版本 3（及更高版本）**具有**内置 JTAG 接口，您无需连接外部设备即可进行调试。
+- 版本 3（及更高版本）**具有**内置 JTAG 接口，无需连接外部设备即可进行调试。
 
 要查找 ESP32-C3 版本，请运行：
 
@@ -82,19 +82,17 @@ espflash board-info
 | :-----------: | :-------: |
 |  MTDO/GPIO7   |    TDO    |
 |  MTDI/GPIO5   |    TDI    |
+|  MTCK/GPIO6   |    TCK    |
+|  MTMS/GPIO4   |    TMS    |
+|      3V3      |   VJTAG   |
+|      GND      |    GND    |
 
-| MTCK/GPIO6 | TCK |
-| MTMS/GPIO4 | TMS |
-| 3V3 | VJTAG |
-| GND | GND |
-
-> ⚠️ **注意**：在 Windows 上，`USB串行转换器A 0403 6010 00`驱动程序应为 WinUSB。
+> ⚠️ **注意**：在 Windows 上，`USB Serial Converter A 0403 6010 00`驱动程序应为 WinUSB。
 
 2. 设置 VSCode
    1. 安装 VS Code 的[Cortex-Debug][cortex-debug]扩展。
    2. 在要调试的项目树中创建`.vscode/launch.json`文件。
    3. 更新`executable`、`svdFile`、`serverpath`路径和`toolchainPrefix`字段。
-
 ```json
 {
   // 使用IntelliSense了解可能的属性。
@@ -106,7 +104,7 @@ espflash board-info
       // 更多信息请参见：https://github.com/Marus/cortex-debug/blob/master/package.json
       "name": "Attach",
       "type": "cortex-debug",
-      "request": "attach", // 附加而不是启动，因为否则会尝试写入flash，但会失败
+      "request": "attach", // 使用 attach 而不是 launch，避免因为尝试写入 flash 导致运行失败
       "cwd": "${workspaceRoot}",
       "executable": "target/riscv32imc-unknown-none-elf/debug/examples/usb_serial_jtag", //
       "servertype": "openocd",
