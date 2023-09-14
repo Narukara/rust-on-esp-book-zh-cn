@@ -1,31 +1,31 @@
 # QEMU
 
-Espressif maintains a fork of QEMU in [espressif/QEMU][espressif-qemu] with the necessary patches to make it work on Espressif chips.
-See the [QEMU wiki][qemu-wiki] for instructions on how to build QEMU and emulate projects with it.
+Espressif 维护了一个 QEMU 的分支，位于[espressif/QEMU][espressif-qemu]，其中包含了必要的补丁，使其能够在 Espressif 芯片上运行。
+请参考[QEMU wiki][qemu-wiki]以了解如何构建 QEMU 并使用它来仿真项目。
 
-Once you have built QEMU, you should have the `qemu-system-xtensa` file.
+构建完成 QEMU 后，应该有`qemu-system-xtensa`文件。
 
 [espressif-qemu]: https://github.com/espressif/qemu
 [qemu-wiki]: https://github.com/espressif/qemu/wiki
 
-## Running Your Project Using QEMU
+## 使用 QEMU 运行项目
 
-> ⚠️ **Note**: Only ESP32 is currently supported, so make sure you are compiling for `xtensa-esp32-espidf` target.
+> ⚠️ **注意**: 目前只支持 ESP32，因此请确保正在编译`xtensa-esp32-espidf`目标。
 
-For running our project in QEMU, we need a firmware/image with bootloader and partition table merged in it.
-We can use [`cargo-espflash`][cargo-espflash] to generate it:
+要在 QEMU 中运行我们的项目，我们需要一个固件（firmware）/镜像（image），其中包含引导加载程序（bootloader）和分区表的合并。
+我们可以使用[`cargo-espflash`][cargo-espflash]来生成它：
 
 ```shell
 cargo espflash save-image --chip esp32 --merge <OUTFILE> --release
 ```
 
-If you prefer to use [`espflash`][espflash], you can achieve the same result by building the project first and then generating image:
+如果想使用[`espflash`][espflash]，可以先构建项目，然后生成镜像来实现相同的结果：
 ```shell
 cargo build --release
 espflash save-image --merge ESP32 target/xtensa-esp32-espidf/release/<NAME> <OUTFILE>
 ```
 
-Now, run the image in QEMU:
+现在，在 QEMU 中运行镜像：
 ```shell
 /path/to/qemu-system-xtensa -nographic -machine esp32 -drive file=<OUTFILE>,if=mtd,format=raw
 ```

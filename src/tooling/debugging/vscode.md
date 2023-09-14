@@ -1,41 +1,41 @@
-# Debugging in Visual Studio Code
+# 在 Visual Studio Code 中进行调试
 
-There is also a possibility to debug with graphical output directly in Visual Studio Code.
+在 Visual Studio Code 中，还可以直接进行可视化的调试。
 
 ## ESP32
 
-### Configuration
+### 配置
 
-1. Connect an external JTAG adapter: [ESP-Prog][esp-prog] can be used.
+1. 连接外部 JTAG 适配器：可以使用[ESP-Prog][esp-prog]。
 
-|  ESP32 Pin  | JTAG Signal |
-| :---------: | :---------: |
-| MTDO/GPIO15 |     TDO     |
-| MTDI/GPIO12 |     TDI     |
-| MTCK/GPIO13 |     TCK     |
-| MTMS/GPIO14 |     TMS     |
-|     3V3     |    VJTAG    |
-|     GND     |     GND     |
+| ESP32 引脚  | JTAG 信号 |
+| :---------: | :-------: |
+| MTDO/GPIO15 |    TDO    |
+| MTDI/GPIO12 |    TDI    |
+| MTCK/GPIO13 |    TCK    |
+| MTMS/GPIO14 |    TMS    |
+|     3V3     |   VJTAG   |
+|     GND     |    GND    |
 
-> ⚠️ **Note**: On Windows `USB Serial Converter A 0403 6010 00` driver should be WinUSB.
+> ⚠️ **注意**：在 Windows 上，`USB Serial Converter A 0403 6010 00`驱动程序应为 WinUSB。
 
-2. Set up VSCode
-   1. Install [Cortex-Debug][cortex-debug] extension for VS Code.
-   2. Create the `.vscode/launch.json` file in the project tree you want to debug.
-   3. Update `executable`, `svdFile`, `serverpath` paths, and `toolchainPrefix` fields.
+2. 设置 VSCode
+   1. 安装 VS Code 的[Cortex-Debug][cortex-debug]扩展。
+   2. 在要调试的项目树中创建`.vscode/launch.json`文件。
+   3. 更新`executable`、`svdFile`、`serverpath`路径和`toolchainPrefix`字段。
 
 ```json
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  // 使用IntelliSense了解可能的属性。
+  // 悬停以查看现有属性的描述。
+  // 有关更多信息，请访问：https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
-      // more info at: https://github.com/Marus/cortex-debug/blob/master/package.json
+      // 更多信息请参见：https://github.com/Marus/cortex-debug/blob/master/package.json
       "name": "Attach",
       "type": "cortex-debug",
-      "request": "attach", // attach instead of launch, because otherwise flash write is attempted, but fails
+      "request": "attach", // 使用 attach 而不是 launch，避免因为尝试写入 flash 导致运行失败
       "cwd": "${workspaceRoot}",
       "executable": "target/xtensa-esp32-none-elf/debug/.....",
       "servertype": "openocd",
@@ -61,50 +61,50 @@ There is also a possibility to debug with graphical output directly in Visual St
 
 ## ESP32-C3
 
-The availability of built-in JTAG interface depends on the ESP32-C3 revision:
+内置 JTAG 接口的可用性取决于 ESP32-C3 版本：
 
-- Revisions older than 3 **don't** a have built-in JTAG interface.
-- Revisions 3 (and newer) **do** have a built-in JTAG interface, and you don't have to connect an external device to be able to debug.
+- 早于 3 的版本**没有**内置 JTAG 接口。
+- 版本 3（及更高版本）**具有**内置 JTAG 接口，无需连接外部设备即可进行调试。
 
-To find your ESP32-C3 revision, run:
+要查找 ESP32-C3 版本，请运行：
 
 ```shell
 cargo espflash board-info
-# or
+# 或者
 espflash board-info
 ```
 
-### Configuration
+### 配置
 
-1. (**Only for revisions older than 3**) Connect an external JTAG adapter, [ESP-Prog][esp-prog] can be used.
+1.（**仅适用于早于 3 的版本**）连接外部 JTAG 适配器，可以使用[ESP-Prog][esp-prog]。
 
-| ESP32-C3 Pin | JTAG Signal |
-| :----------: | :---------: |
-|  MTDO/GPIO7  |     TDO     |
-|  MTDI/GPIO5  |     TDI     |
-|  MTCK/GPIO6  |     TCK     |
-|  MTMS/GPIO4  |     TMS     |
-|     3V3      |    VJTAG    |
-|     GND      |     GND     |
+| ESP32-C3 引脚 | JTAG 信号 |
+| :-----------: | :-------: |
+|  MTDO/GPIO7   |    TDO    |
+|  MTDI/GPIO5   |    TDI    |
+|  MTCK/GPIO6   |    TCK    |
+|  MTMS/GPIO4   |    TMS    |
+|      3V3      |   VJTAG   |
+|      GND      |    GND    |
 
-> ⚠️**Note**: On Windows `USB Serial Converter A 0403 6010 00` driver should be WinUSB.
+> ⚠️ **注意**：在 Windows 上，`USB Serial Converter A 0403 6010 00`驱动程序应为 WinUSB。
 
-2. Set up VSCode
-   1. Install [Cortex-Debug][cortex-debug] extension for VS Code.
-   2. Create the `.vscode/launch.json` file in the project tree you want to debug.
-   3. Update `executable`, `svdFile`, `serverpath` paths, and `toolchainPrefix` fields.
+2. 设置 VSCode
+   1. 安装 VS Code 的[Cortex-Debug][cortex-debug]扩展。
+   2. 在要调试的项目树中创建`.vscode/launch.json`文件。
+   3. 更新`executable`、`svdFile`、`serverpath`路径和`toolchainPrefix`字段。
 ```json
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  // 使用IntelliSense了解可能的属性。
+  // 悬停以查看现有属性的描述。
+  // 有关更多信息，请访问：https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
-      // more info at: https://github.com/Marus/cortex-debug/blob/master/package.json
+      // 更多信息请参见：https://github.com/Marus/cortex-debug/blob/master/package.json
       "name": "Attach",
       "type": "cortex-debug",
-      "request": "attach", // attach instead of launch, because otherwise flash write is attempted, but fails
+      "request": "attach", // 使用 attach 而不是 launch，避免因为尝试写入 flash 导致运行失败
       "cwd": "${workspaceRoot}",
       "executable": "target/riscv32imc-unknown-none-elf/debug/examples/usb_serial_jtag", //
       "servertype": "openocd",
