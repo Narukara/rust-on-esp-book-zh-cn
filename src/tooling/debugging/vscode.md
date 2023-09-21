@@ -6,7 +6,7 @@
 
 ### 配置
 
-1. 连接外部 JTAG 适配器：可以使用[ESP-Prog][esp-prog]。
+1. 连接外部 JTAG 适配器：可以使用 [ESP-Prog][esp-prog]。
 
 | ESP32 引脚  | JTAG 信号 |
 | :---------: | :-------: |
@@ -17,12 +17,12 @@
 |     3V3     |   VJTAG   |
 |     GND     |    GND    |
 
-> ⚠️ **注意**：在 Windows 上，`USB Serial Converter A 0403 6010 00`驱动程序应为 WinUSB。
+> ⚠️ **注意**：在 Windows 上，`USB Serial Converter A 0403 6010 00` 驱动程序应为 WinUSB。
 
 2. 设置 VSCode
-   1. 安装 VS Code 的[Cortex-Debug][cortex-debug]扩展。
-   2. 在要调试的项目树中创建`.vscode/launch.json`文件。
-   3. 更新`executable`、`svdFile`、`serverpath`路径和`toolchainPrefix`字段。
+   1. 安装 VS Code 的 [Cortex-Debug][cortex-debug] 扩展。
+   2. 在要调试的项目树中创建 `.vscode/launch.json` 文件。
+   3. 更新 `executable`、`svdFile`、`serverpath` 路径和 `toolchainPrefix` 字段。
 
 ```json
 {
@@ -76,7 +76,7 @@ espflash board-info
 
 ### 配置
 
-1.（**仅适用于早于 3 的版本**）连接外部 JTAG 适配器，可以使用[ESP-Prog][esp-prog]。
+1.（**仅适用于早于 3 的版本**）连接外部 JTAG 适配器，可以使用 [ESP-Prog][esp-prog]。
 
 | ESP32-C3 引脚 | JTAG 信号 |
 | :-----------: | :-------: |
@@ -87,12 +87,12 @@ espflash board-info
 |      3V3      |   VJTAG   |
 |      GND      |    GND    |
 
-> ⚠️ **注意**：在 Windows 上，`USB Serial Converter A 0403 6010 00`驱动程序应为 WinUSB。
+> ⚠️ **注意**：在 Windows 上，`USB Serial Converter A 0403 6010 00` 驱动程序应为 WinUSB。
 
 2. 设置 VSCode
-   1. 安装 VS Code 的[Cortex-Debug][cortex-debug]扩展。
-   2. 在要调试的项目树中创建`.vscode/launch.json`文件。
-   3. 更新`executable`、`svdFile`、`serverpath`路径和`toolchainPrefix`字段。
+   1. 安装 VS Code 的 [Cortex-Debug][cortex-debug] 扩展。
+   2. 在要调试的项目树中创建 `.vscode/launch.json` 文件。
+   3. 更新 `executable`、`svdFile`、`serverpath` 路径和 `toolchainPrefix` 字段。
 ```json
 {
   // 使用IntelliSense了解可能的属性。
