@@ -1,4 +1,4 @@
-这里是 https://github.com/esp-rs/book 的简体中文翻译
+这里是 https://github.com/esp-rs/book 的简体中文翻译。[直接在网页中阅读](https://narukara.github.io/rust-on-esp-book-zh-cn/)
 
 目前进度：已经翻译完成，跟踪到 139c00e
 
@@ -8,15 +8,15 @@
 
 本仓库包含了《The Rust on ESP》一书的源代码。
 
-## Quickstart
+## 快速上手
 
-This book is generated using [`mdbook`] and additionally uses the [`mdbook-mermaid`] preprocessor to add support for diagrams. To install these tools:
+本书是使用 [`mdbook`] 生成的，另外使用了 [`mdbook-mermaid`] 预处理器来添加对图表的支持。要安装这些工具，运行：
 
 ```shell
 cargo install mdbook mdbook-mermaid
 ```
 
-With `mdbook` and `mdbook-mermaid` installed, you can clone the repository and start a development server by running:
+安装了 `mdbook` 和 `mdbook-mermaid` 后，就可以运行以下命令，克隆此仓库并启动一个服务器：
 
 ```shell
 git clone https://github.com/esp-rs/book
