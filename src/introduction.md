@@ -52,7 +52,7 @@ Rust 对这些设备的支持仍在不断改进中，并且进展迅速。因此
 
 本书已由慷慨的志愿者参与翻译。如果你希望在此处列出你的译本，请（向英文原版仓库）提交 PR。
 
-- [English](https://esp-rs.github.io/book/) （[仓库](https://github.com/esp-rs/book)）
+- [English](https://esp-rs.github.io/book/)（[仓库](https://github.com/esp-rs/book)）
 
 ## 如何使用这本书
 

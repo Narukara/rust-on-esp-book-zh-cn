@@ -13,7 +13,7 @@
 
 为 `cargo` 提供一个子命令，处理交叉编译和下载。
 
-要安装，请运行：
+要安装 `cargo-espflash`，请确保你已经安装了[必需的依赖项][cargo-espflash-dependencies]，然后执行以下命令：
 
 ```shell
 cargo install cargo-espflash
@@ -28,12 +28,13 @@ cargo espflash flash --example=blinky --monitor
 有关更多信息，请参见 [`cargo-espflash`][cargo-espflash] README。
 
 [cargo-espflash]: https://github.com/esp-rs/espflash/blob/master/cargo-espflash/README.md
+[cargo-espflash-dependencies]: https://github.com/esp-rs/espflash/blob/main/cargo-espflash/README.md#installation
 
 ## `espflash`
 
 提供一个独立的命令行应用程序，将 ELF 文件下载到设备中。
 
-要安装，请运行：
+要安装 `espflash`，请确保你已经安装了[必需的依赖项][espflash-dependencies]，然后执行以下命令：
 
 ```shell
 cargo install espflash
@@ -56,3 +57,4 @@ runner = "espflash flash --monitor"
 
 [esp-idf]: https://github.com/espressif/esp-idf
 [espflash-readme]: https://github.com/esp-rs/espflash/blob/master/espflash/README.md
+[espflash-dependencies]:https://github.com/esp-rs/espflash/blob/main/espflash/README.md#installation
