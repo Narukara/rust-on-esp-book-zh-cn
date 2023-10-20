@@ -33,7 +33,7 @@ espup install
   - 对于 Windows 用户，**不需要** 执行这个文件。这个文件只是用来展示哪些环境变量被修改了的。
 
 在基于 Unix 的系统上（`$HOME/export-esp.sh`），有几种不同的方法来 source 这个文件：
-- 在每个终端里 source 这个文件：
+- 在任意终端里 source 这个文件：
    1. source 这个 export 文件： `. $HOME/export-esp.sh`
 
    这种方法需要在每个新的 shell 里运行这个命令。
