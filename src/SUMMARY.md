@@ -22,10 +22,9 @@
   - [调试](./tooling/debugging/index.md)
     - [probe-rs](./tooling/debugging/probe-rs.md)
     - [OpenOCD](./tooling/debugging/openocd.md)
-    - [在 Visual Studio Code 中调试](./tooling/debugging/vscode.md)
   - [仿真](./tooling/simulating/index.md)
     - [Wokwi](./tooling/simulating/wokwi.md)
     - [QEMU](tooling/simulating/qemu.md)
----
-
-[附录 A: Troubleshooting](./misc/troubleshooting.md)
+- [Troubleshooting](./troubleshooting/index.md)
+  - [`esp-idf-hal` based projects](./troubleshooting/std.md)
+  - [`espflash`](./troubleshooting/espflash.md)

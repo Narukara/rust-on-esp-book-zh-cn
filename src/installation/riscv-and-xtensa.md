@@ -69,7 +69,7 @@ espup install
 [gcc-toolchain-github-fork]: https://github.com/espressif/crosstool-NG/
 [rustup-overrides]: https://rust-lang.github.io/rustup/overrides.html
 [llvm-github-fork-upstream issue]: https://github.com/espressif/llvm-project/issues/4
-[troubleshooting]: ../misc/troubleshooting.md
+[troubleshooting]: ../troubleshooting/index.md
 
 ### `Xtensa` 目标的其他安装方法
 

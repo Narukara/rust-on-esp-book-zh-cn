@@ -129,4 +129,4 @@ Hello, world!
 
 [espflash]: https://github.com/esp-rs/espflash/tree/main/espflash
 [runner-config]: https://doc.rust-lang.org/cargo/reference/config.html#targettriplerunner
-[troubleshooting]: ../../misc/troubleshooting.md
+[troubleshooting]: ../../troubleshooting/index.md

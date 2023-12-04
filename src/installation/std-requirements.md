@@ -11,9 +11,12 @@
 
 `std` 运行时将 [ESP-IDF][esp-idf-github]（Espressif IoT Development Framework）作为宿主环境，不过用户不需要安装它。[esp-idf-sys][esp-idf-sys-github] 会自动下载安装 ESP-IDF，这是一个所有 `std` 项目都需要使用的 crate。
 
+对于 Linux/MacOS 用户，需要安装 [ESP-IDF 依赖项][esp-idf-install-guide]。
+
 [rust-esp-book-overview-std]: ../overview/using-the-standard-library.md
 [python-website-download]: https://www.python.org/downloads/
 [git-website-download]: https://git-scm.com/downloads
 [embuild-github-ldproxy]: https://github.com/esp-rs/embuild/tree/master/ldproxy
 [esp-idf-sys-github]: https://github.com/esp-rs/esp-idf-sys
 [esp-idf-github]: https://github.com/espressif/esp-idf
+[esp-idf-install-guide]: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html#step-1-install-prerequisites
