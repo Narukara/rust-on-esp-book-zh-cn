@@ -26,14 +26,14 @@ Espressif products containing the [`USB-JTAG-SERIAL` peripheral][usb-jtag-serial
 
 ## Flashing with `probe-rs`
 
-`probe-rs` can be used to flash applications to your target since it supports the [ESP-IDF image format][idf-image] via the `--format idf` argument.
-  - Example command for flashing an ESP32-C3: `probe-rs run --chip esp32c3 --format idf`
+`probe-rs` can be used to flash applications to your target since it supports the [ESP-IDF image format][idf-image].
+  - Example command for flashing an ESP32-C3: `probe-rs run --chip esp32c3`
 
 The flashing command can be set as a custom Cargo runner by adding the following to your project's `.cargo/config.toml` file:
 
 ```toml
 [target.'cfg(any(target_arch = "riscv32", target_arch = "xtensa"))']
-runner = "probe-rs run --chip esp32c3 --format idf"
+runner = "probe-rs run --chip esp32c3"
 ```
 
 With this configuration, you can flash and monitor your application using `cargo run`.
@@ -67,11 +67,11 @@ There is a `probe-rs` extension in VS Code, see `probe-rs` [VS Code documentatio
             "coreConfigs": [
                 {
                     "coreIndex": 0,
-                    "programBinary": "./target/riscv32imc-unknown-none-elf/debug/${workspaceFolderBasename}", //!MODIFY
+                    "programBinary": "target/riscv32imc-unknown-none-elf/debug/${workspaceFolderBasename}", //!MODIFY
                     "rttEnabled": true,
                     "rttChannelFormats": [
                         {
-                            "channelNumber": "0",
+                            "channelNumber": 0,
                             "dataFormat": "String",
                             "showTimestamp": true,
                         }
@@ -88,11 +88,11 @@ There is a `probe-rs` extension in VS Code, see `probe-rs` [VS Code documentatio
             "coreConfigs": [
                 {
                     "coreIndex": 0,
-                    "programBinary": "./target/riscv32imc-unknown-none-elf/debug/${workspaceFolderBasename}", //!MODIFY
+                    "programBinary": "target/riscv32imc-unknown-none-elf/debug/${workspaceFolderBasename}", //!MODIFY
                     "rttEnabled": true,
                     "rttChannelFormats": [
                         {
-                            "channelNumber": "0",
+                            "channelNumber": 0,
                             "dataFormat": "String",
                             "showTimestamp": true,
                         }

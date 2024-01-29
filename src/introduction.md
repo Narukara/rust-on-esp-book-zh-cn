@@ -40,13 +40,14 @@ Rust 对这些设备的支持仍在不断改进中，并且进展迅速。因此
 | [The Rust Programming Language][rust-book]                | 如果你不熟悉 Rust，我们建议你先阅读这本书。                   |
 | [The Embedded Rust Book][embedded-rust-book]         | 这里包含由 Rust 嵌入式工作组提供的其他资源。 |
 | [The Embedonomicon][embedonomicon]                  | 在使用 Rust 进行嵌入式编程时的细节。                         |
-| [Embedded Rust on Espressif][std-training]   | 与 [Ferrous Systems][ferrous-systems] 合作编写的培训材料。   |
+| [Embedded Rust (std) on Espressif][std-training]       | 在乐鑫 SoC 上使用 `std` 的入门指南                              |
+| [Embedded Rust (no_std) on Espressif][no_std-training] | 在乐鑫 SoC 上使用 `no_std` 的入门指南                           |
 
 [rust-book]: https://doc.rust-lang.org/book/
 [embedded-rust-book]: https://docs.rust-embedded.org/book/index.html
 [embedonomicon]: https://docs.rust-embedded.org/embedonomicon/
 [std-training]: https://esp-rs.github.io/std-training/
-[ferrous-systems]: https://ferrous-systems.com/
+[no_std-training]: https://esp-rs.github.io/no_std-training/
 
 ## 翻译
 

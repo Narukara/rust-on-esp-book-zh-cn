@@ -7,6 +7,14 @@
     ```shell
     rustup toolchain install nightly --component rust-src
     ```
+
+    上面的命令下载了 rust 源码。`rust-src` 包含了 std 库、core 库和构建配置文件等。
+    下载 `rust-src` 的原因在于：
+    - **确定性** - 你可以查看 core 和 std 库的内部结构。如果你正在编写需要较高确定性的软件，你可能需要检查正在使用的库。
+    - **构建自定义目标** - `rustc` 使用 `rust-src` 创建新的自定义目标的组件。如果你的目标是 rust 尚不支持的 triple-target，则必须下载 `rust-src`。
+
+   关于自定义目标的更多信息，参见 [Embedonomicon][embedonomicon-official-book] 的[此章节][embedonomicon-creating-a-custom-target]。
+
 2. 设置目标：
     - 对于 `no_std`（裸机）应用，运行：
 
@@ -40,3 +48,6 @@
 [cargo-book-unstable-features]: https://doc.rust-lang.org/cargo/reference/unstable.html
 [rust-esp-book-write-app-generate-project]: ../writing-your-own-application/generate-project/index.md
 [rust-esp-book-std-requirements]: ./std-requirements.md
+[embedonomicon-creating-a-custom-target]: https://docs.rust-embedded.org/embedonomicon/custom-target.html
+[embedonomicon-official-book]: https://docs.rust-embedded.org/embedonomicon/
+
