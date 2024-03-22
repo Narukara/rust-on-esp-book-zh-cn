@@ -13,7 +13,7 @@
    * [按钮示例][button]
    * [按钮+中断示例][button-interrupt]
 
-> ⚠️ **注意**：在 [`esp-hal`][esp-hal] 的 [`example`][esp-hal-example] 文件夹下有若干示例，涵盖了特定外设的使用方法。针对特定的某个示例和SOC的兼容性，你可以检查在示例开始的位置使用 `//% CHIPS:` 标识的元数据信息。如果元数据信息不存在，那么这个示例可以在任何支持 esp-hal 的设备上运行。
+> ⚠️ **注意**：在 [`esp-hal`][esp-hal] 的 [`examples`][esp-hal-example] 文件夹下有若干示例，涵盖了特定外设的使用方法。针对给定示例的运行方式和设备兼容性等信息，可以参考 [`examples` README][examples-readme] 。
 
 [no-std-book]: https://esp-rs.github.io/no_std-training/
 [no-std-repository]: https://github.com/esp-rs/no_std-training
@@ -25,3 +25,4 @@
 [button-interrupt]: https://github.com/esp-rs/no_std-training/tree/main/intro/button-interrupt
 [esp-hal]: https://github.com/esp-rs/esp-hal
 [esp-hal-example]: https://github.com/esp-rs/esp-hal/tree/main/examples
+[examples-readme]: https://github.com/esp-rs/esp-hal/blob/main/examples/README.md
