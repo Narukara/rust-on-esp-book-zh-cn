@@ -1,6 +1,6 @@
 这里是 https://github.com/esp-rs/book 的简体中文翻译。[直接在网页中阅读](https://narukara.github.io/rust-on-esp-book-zh-cn/)
 
-目前进度：已经翻译完成（部分更新的内容需要重新翻译），跟踪到 4df41a5
+目前进度：已经翻译完成（部分更新的内容需要重新翻译），跟踪到 b411988
 
 ---
 

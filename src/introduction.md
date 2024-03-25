@@ -6,11 +6,14 @@
 
 Rust 对这些设备的支持仍在不断改进中，并且进展迅速。因此，本文档的某些部分可能已经过时，或者在多次阅读之间发生了重大变化。
 
-对于与 Rust on ESP 相关的工具和库，请查看 GitHub 上的 [esp-rs 组织][esp-rs]。该组织由乐鑫的员工以及社区成员共同管理。
+与 Rust on ESP 相关的工具和库，请查看 GitHub 上的 [esp-rs 组织][esp-rs]。该组织由乐鑫的员工以及社区成员共同管理。
+
+欢迎加入 [Matrix 上的 `esp-rs` 社区][matrix]，来探讨任何技术问题！社区对所有人开放。
 
 [rust]: https://www.rust-lang.org/
 [espressif]: https://espressif.com/
 [esp-rs]: https://github.com/esp-rs/
+[matrix]: https://matrix.to/#/#esp-rs:matrix.org
 
 ## 这本书适合谁
 

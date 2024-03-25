@@ -65,72 +65,52 @@
 - `#![no_std]`
   - 用于告知 Rust 编译器这段代码不使用 `libstd`
 - `#![no_main]`
-  - `no_main` 属性表示该程序不使用标准的 main 接口，该接口是为会接收参数的命令行应用设计的。我们将使用 `riscv-rt` crate 中的入口（entry）属性来创建一个自定义入口点（entry point），而不是使用标准的 main。在此程序中，我们将入口点命名为 `main`，但也可以使用任何其他名称。入口点函数必须是[发散函数][diverging-function]，即具有签名 `fn foo() -> !`，这种类型表明该函数永远不会返回——这意味着程序永远不会终止。
+  - `no_main` 属性表示该程序不使用标准的 main 接口，这通常用在有完整的操作系统的情况下。我们将使用 `esp-riscv-rt` crate 中的入口（entry）属性来创建一个自定义入口点（entry point），而不是使用标准的 main。在此程序中，我们将入口点命名为 `main`，但也可以使用任何其他名称。入口点函数必须是[发散函数][diverging-function]，即具有签名 `fn foo() -> !`，这种类型表明该函数永远不会返回——这意味着程序永远不会终止。
 
 ```rust,ignore
  4 use esp_backtrace as _;
  5 use esp_println::println;
- 6 use hal::{clock::ClockControl, peripherals::Peripherals, prelude::*, timer::TimerGroup, Rtc};
+ 6 use esp_hal::{clock::ClockControl, peripherals::Peripherals, prelude::*, timer::TimerGroup, Rtc};
 ```
 - `use esp_backtrace as _;`
   - 由于我们处于裸机环境中，因此需要一个 panic 处理程序，该处理程序在代码发生 panic 时运行
-  - 有多种不同的 crate 可选（例如 `panic-halt`），但是 `esp-backtrace` 提供了一个打印回溯地址的实现——与 `espflash`/`espmonitor` 配合，这些地址可以被解析为源代码中的位置
+  - 有多种不同的 crate 可选（例如 `panic-halt`），但是 `esp-backtrace` 提供了一个打印回溯地址的实现——与 `espflash` 配合，这些地址可以被解析为源代码中的位置
 - `use esp_println::println;`
   - 提供了 `println!` 的实现
-- `use hal:{...}`
+- `use esp_hal:{...}`
   - 我们需要导入一些类型，以待后续使用
-  - 这些都是来自于 `esp-hal`
 
 ```rust,ignore
  8 #[entry]
  9 fn main() -> ! {
 10    let peripherals = Peripherals::take();
-11    let mut system = peripherals.SYSTEM.split();
-12    let clocks = ClockControl::boot_defaults(system.clock_control).freeze();
+11    let system = peripherals.SYSTEM.split();
+12    let clocks = ClockControl::max(system.clock_control).freeze();
 13
-14    // 禁用 RTC 和 TIMG 看门狗定时器
-15    let mut rtc = Rtc::new(peripherals.RTC_CNTL);
-16    let timer_group0 = TimerGroup::new(
-17        peripherals.TIMG0,
-18        &clocks,
-19        &mut system.peripheral_clock_control,
-20    );
-21    let mut wdt0 = timer_group0.wdt;
-22    let timer_group1 = TimerGroup::new(
-23        peripherals.TIMG1,
-24        &clocks,
-25        &mut system.peripheral_clock_control,
-26    );
-27    rtc.swd.disable();
-28    rtc.rwdt.disable();
-29    wdt0.disable();
-30    wdt1.disable();
-31
-32    println!("Hello world!");
-33
-34    loop {}
-35 }
+14    println!("Hello world!");
+15
+16    loop {}
+17 }
 ```
 `main` 函数中包含：
-- `let peripherals = Peripherals::take().unwrap();`
+- `let peripherals = Peripherals::take()`
   - HAL 驱动通常会通过 PAC（Peripheral Access Crate，外设访问 crate）获取到外设的所有权
   - 这里我们从 PAC 中取出所有外设，之后将他们传递给 HAL 驱动
 - `let mut system = peripherals.SYSTEM.split();`
   - 有时，外设（此处为 System 外设）是粗粒度的，并不完全适合 HAL 驱动——因此这里我们将 System 外设分割成更小的部分，然后传递给驱动程序
-- `let clocks = ClockControl::boot_defaults(system.clock_control).freeze();`
-  - 这里配置了系统时钟——本例中，使用默认值即可
+- `let clocks = ClockControl::max(system.clock_control).freeze();`
+  - 这里配置了系统时钟——本例中，提升到最大值
   - 然后我们冻结了时钟，之后就不能再次修改它了
   - 某些驱动需要一个时钟的引用，以便知道如何计算速率和时长
 - 下一块代码实例化了一些外设（即 RTC 和两个定时器组）以禁用看门狗，看门狗是在上电时启用的
   - 没有这段代码的话，SoC 会在一段时间后重启
-  - 还有一种防止重启的方法：[喂][wtd-feeding]看门狗
+  - 还有一种防止重启的方法：喂看门狗
 - `println!("Hello world!");`
   - 打印 “Hello world!”
 - `loop {}`
   - 因为这个函数不应该返回，我们在一个死循环中不执行任何操作
 
 [diverging-function]: https://doc.rust-lang.org/beta/rust-by-example/fn/diverging.html
-[wtd-feeding]: https://docs.rs/esp32c3-hal/0.10.0/esp32c3_hal/prelude/trait._embedded_hal_watchdog_Watchdog.html#tymethod.feed
 
 ## 运行代码
 
