@@ -10,9 +10,9 @@
   - 类似于 [IDF 的 `app_trace` 组件][app-trace-idf]。
 - 烧录算法
 
-Follow the [installation][prober-rs-installation] and [setup][prober-rs-setup] instructions at the [`probe-rs`][probe-rs] website.
+请按照 [`probe-rs`][probe-rs] 网站上的[安装][prober-rs-installation]和[设置][prober-rs-setup]说明进行操作。
 
-Espressif products containing the [`USB-JTAG-SERIAL` peripheral][usb-jtag-serial] can use `probe-rs` without any external hardware.
+包含 [`USB-JTAG-SERIAL` 外设][usb-jtag-serial]的乐鑫产品无需任何外部硬件即可使用 `probe-rs`。
 
 [probe-rs]: https://probe.rs/
 [openocd]: https://openocd.org/
@@ -24,27 +24,27 @@ Espressif products containing the [`USB-JTAG-SERIAL` peripheral][usb-jtag-serial
 [prober-rs-setup]: https://probe.rs/docs/getting-started/probe-setup/
 [usb-jtag-serial]: index.md#usb-jtag-serial-peripheral
 
-## Flashing with `probe-rs`
+## 用 `probe-rs` 烧写
 
-`probe-rs` can be used to flash applications to your target since it supports the [ESP-IDF image format][idf-image].
-  - Example command for flashing an ESP32-C3: `probe-rs run --chip esp32c3`
+`probe-rs` 可以用于烧写程序，因为它支持 [ESP-IDF image format][idf-image]。
+  - 烧写 ESP32-C3 的命令示例： `probe-rs run --chip esp32c3`
 
-The flashing command can be set as a custom Cargo runner by adding the following to your project's `.cargo/config.toml` file:
+添加以下内容到项目中的 `.cargo/config.toml` 文件，就可以把烧写命令用作自定义 Cargo runner：
 
 ```toml
 [target.'cfg(any(target_arch = "riscv32", target_arch = "xtensa"))']
 runner = "probe-rs run --chip esp32c3"
 ```
 
-With this configuration, you can flash and monitor your application using `cargo run`.
+通过此配置，就可以使用 `cargo run` 来烧写并监控你的应用程序。
 
 [idf-image]: https://docs.espressif.com/projects/esptool/en/latest/esp32c3/advanced-topics/firmware-image-format.html
 
-## VS Code Extension
+## VS Code 扩展
 
-There is a `probe-rs` extension in VS Code, see `probe-rs` [VS Code documentation][probe-rs-vscode] for details on how to install, configure and use it.
+VS Code 有 `probe-rs` 扩展。关于如何安装、配置和使用，请参考 `probe-rs` [VS Code 文档][probe-rs-vscode]。
 
-### Example `launch.json`
+### 示例 `launch.json`
 
 ```json
 {
@@ -88,26 +88,26 @@ There is a `probe-rs` extension in VS Code, see `probe-rs` [VS Code documentatio
 }
 ```
 
-The `Launch` configuration will flash the device and start debugging process while `Attach` will start the debugging in the already running application of the device. See VS Code documentation on [differences between launch and attach][vscode-configs] for more details.
+`Launch` 配置将烧写设备并开始调试，而 `Attach` 将在正在运行的应用程序上开始调试。有关更多详细信息，请参考 [launch 和 attach 之间差异][vscode-configs]的 VS Code 文档。
 
 
 [probe-rs-vscode]: https://probe.rs/docs/tools/debugger/
 [vscode-configs]: https://code.visualstudio.com/docs/editor/debugging#_launch-versus-attach-configurations
 
-## `cargo-flash` and `cargo-embed`
+## `cargo-flash` 和 `cargo-embed`
 
-`probe-rs` comes along with these two tools:
-- [`cargo-flash`][cargo-flash]: A flash tool that downloads your binary to the target and runs it.
-- [`cargo-embed`][cargo-embed]: Superset of `cargo-flash` that also allows opening an RTT terminal or a GDB server. A [configuration file][cargo-embed-config] can used to define the behavior.
+`probe-rs` 附带这两个工具：
+- [`cargo-flash`][cargo-flash]：一个烧写工具，可将二进制文件烧写到目标设备，并运行。
+- [`cargo-embed`][cargo-embed]：`cargo-flash` 的超集，允许打开 RTT 终端或 GDB 服务器。可以用[配置文件][cargo-embed-config]来定义其行为。
 
 [cargo-flash]: https://probe.rs/docs/tools/cargo-flash/
 [cargo-embed]: https://probe.rs/docs/tools/cargo-embed/
 [cargo-embed-config]: https://probe.rs/docs/tools/cargo-embed/#configuration
 
-## GDB Integration
+## GDB 集成
 
-`probe-rs` includes a GDB stub to integrate into your usual workflow with common tools. The `probe-rs gdb` command runs a GDB server, by default in port, `1337`.
+`probe-rs` 包含 GDB stub，可以使用常用工具集成到你的常用工作流程中。 `probe-rs gdb` 命令会启动 GDB server，默认在 `1337` 端口上运行。
 
-GDB with all the Espressif products supported can be obtained in [`espressif/binutils-gdb`][binutils-repo]
+[`espressif/binutils-gdb`][binutils-repo] 包含支持所有乐鑫设备的 GDB。
 
 [binutils-repo]: https://github.com/espressif/binutils-gdb

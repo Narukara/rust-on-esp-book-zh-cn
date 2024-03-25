@@ -14,18 +14,18 @@
 | **ESP32-S2** |      ✅       |      ✅      |
 | **ESP32-S3** |      ✅       |      ✅      |
 
-## `USB-JTAG-SERIAL` Peripheral
+## `USB-JTAG-SERIAL` 外设
 
-Some of our recent products contain the `USB-JTAG-SERIAL` peripheral that allows for debugging without any external hardware debugger. More info on configuring the interface can be found in the official documentation for the chips that support this peripheral:
+我们最近的一些产品包含 `USB-JTAG-SERIAL` 外设，允许在不借助任何外部硬件调试器的情况下进行调试。对于支持此外设的芯片，可以在官方文档里找到关于配置接口的更多信息：
 - [ESP32-C3][esp32c3-docs]
-    - The availability of built-in JTAG interface depends on the ESP32-C3 revision:
-      - Revisions older than 0.3 **don't** have a built-in JTAG interface.
-      - Revisions 0.3 (and newer) **do** have a built-in JTAG interface, and you don't have to connect an external device to be able to debug.
+    - 内置 JTAG 接口的可用性取决于 ESP32-C3 版本：
+      - 0.3 之前的版本**没有**内置 JTAG 接口。
+      - 0.3（及之后的版本）**具有**内置 JTAG 接口，无需连接外部设备即可进行调试。
 
-    To find your ESP32-C3 revision, run:
+    要查询 ESP32-C3 的版本，请运行以下命令：
     ```shell
     cargo espflash board-info
-    # or
+    # 或者
     espflash board-info
     ```
 - [ESP32-C6][esp32c6-docs]
