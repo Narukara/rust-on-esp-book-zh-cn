@@ -23,13 +23,13 @@ cargo espflash save-image --chip esp32 --merge <OUTFILE> --release
 
 ```shell
 cargo build --release
-espflash save-image --chip ESP32 --merge target/xtensa-esp32-espidf/release/<NAME> <OUTFILE>
+espflash save-image --chip esp32 --merge target/xtensa-esp32-espidf/release/<NAME> <OUTFILE>
 ```
 
 现在，在 QEMU 中运行镜像：
 
 ```shell
-/path/to/qemu-system-xtensa -nographic -machine esp32 -drive file=<OUTFILE>,if=mtd,format=raw
+/path/to/qemu-system-xtensa -nographic -machine esp32 -drive file=<OUTFILE>,if=mtd,format=raw -m 4M
 ```
 
 [cargo-espflash]: https://github.com/esp-rs/espflash/tree/main/cargo-espflash

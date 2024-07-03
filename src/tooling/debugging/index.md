@@ -21,6 +21,7 @@
     - 内置 JTAG 接口的可用性取决于 ESP32-C3 版本：
       - 0.3 之前的版本**没有**内置 JTAG 接口。
       - 0.3（及之后的版本）**具有**内置 JTAG 接口，无需连接外部设备即可进行调试。
+      - 默认情况下，ESP32-C3 Devkit C 不会通过 USB 提供 JTAG 接口，请参阅 [ESP32-C3 调试文档][esp32c3-docs] 配置开发板进行调试，或考虑使用 [esp32c3-rust-board]。
 
     要查询 ESP32-C3 的版本，请运行以下命令：
     ```shell
@@ -36,3 +37,4 @@
 [esp32c6-docs]: https://docs.espressif.com/projects/esp-idf/en/latest/esp32c6/api-guides/jtag-debugging/configure-builtin-jtag.html
 [esp32h2-docs]: https://docs.espressif.com/projects/esp-idf/en/latest/esp32h2/api-guides/jtag-debugging/configure-builtin-jtag.html
 [esp32s3-docs]: https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-guides/jtag-debugging/configure-builtin-jtag.html
+[esp32c3-rust-board]: https://github.com/esp-rs/esp-rust-board

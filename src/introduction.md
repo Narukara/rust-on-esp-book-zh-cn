@@ -56,8 +56,8 @@ Rust 对这些设备的支持仍在不断改进中，并且进展迅速。因此
 
 本书已由慷慨的志愿者参与翻译。如果你希望在此处列出你的译本，请（向英文原版仓库）提交 PR。
 
-- [English](https://esp-rs.github.io/book/)（[仓库](https://github.com/esp-rs/book)）
-
+- [English](https://esp-rs.github.io/book/)（[repository](https://github.com/esp-rs/book)）
+- [한국어](https://ing03201.github.io/rust-on-esp-book-ko-kr/) ([repository](https://github.com/ing03201/rust-on-esp-book-ko-kr))
 ## 如何使用这本书
 
 本书假设你按顺序从头到尾阅读。在没有前面章节的背景知识时，后面章节涵盖的内容可能会不太容易理解。
