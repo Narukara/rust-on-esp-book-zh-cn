@@ -56,18 +56,22 @@ VS Code 有 `probe-rs` 扩展。关于如何安装、配置和使用，请参考
             "name": "Launch",
             "cwd": "${workspaceFolder}",
             "chip": "esp32c3", //!MODIFY
+            // probe field only needed if multiple probes connected. <Serial> is the MAC address of your esp in case of usb-jtag       
+            "probe": "VID:PID:<Serial>", //!MODIFY (or remove) | optional field
             "flashingConfig": {
                 "flashingEnabled": true,
-                "resetAfterFlashing": true,
                 "haltAfterReset": true,
                 "formatOptions": {
-                    "format": "idf" //!MODIFY (or remove). Valid values are: 'elf'(default), 'idf'
+                    "binaryFormat": "idf"
                 }
             },
             "coreConfigs": [
                 {
                     "coreIndex": 0,
                     "programBinary": "target/riscv32imc-unknown-none-elf/debug/${workspaceFolderBasename}", //!MODIFY
+                    // svdFiles describe the hardware register names off the esp peripherals, such as the LEDC peripheral. 
+                    // They can be downloaded seperatly @ https://github.com/espressif/svd/tree/main/svd
+                    "svdFile": "${workspaceFolder}/esp32c3.svd" //!MODIFY (or remove) | optional field
                 }
             ]
         },
@@ -76,11 +80,13 @@ VS Code 有 `probe-rs` 扩展。关于如何安装、配置和使用，请参考
             "request": "attach",
             "name": "Attach",
             "cwd": "${workspaceFolder}",
-            "chip": "esp32c3", //!MODIFY
+            "chip": "esp32c3", //!MODIFY       
+            "probe": "VID:PID:<Serial>", //!MODIFY (or remove) | optional field
             "coreConfigs": [
                 {
                     "coreIndex": 0,
                     "programBinary": "target/riscv32imc-unknown-none-elf/debug/${workspaceFolderBasename}", //!MODIFY
+                    "svdFile": "${workspaceFolder}/esp32c3.svd" //!MODIFY (or remove) | optional field
                 }
             ]
         }
