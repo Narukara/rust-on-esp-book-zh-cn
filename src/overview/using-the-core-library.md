@@ -28,11 +28,11 @@
 > - Wi-Fi/BLE/ESP-NOW 一列中的 ✅ 表示此目标支持其中至少一种功能。详细情况参见 esp-wifi 仓库中的 [Current support][esp-wifi-current-support] 表格。
 > - [ESP8266 HAL][esp8266-hal] 处于维护状态，后续不会对此芯片做进一步开发。
 
-[esp-hal]: https://github.com/esp-rs/esp-hal "Hardware abstraction layer"
-[esp-wifi]: https://github.com/esp-rs/esp-wifi "Wi-Fi, BLE and ESP-NOW support"
-[esp-backtrace]: https://github.com/esp-rs/esp-backtrace "Exception and panic handlers"
-[esp-storage]: https://github.com/esp-rs/esp-storage "Embedded-storage traits to access unencrypted flash memory"
-[esp-wifi-current-support]: https://github.com/esp-rs/esp-wifi#current-support
+[esp-hal]: https://github.com/esp-rs/esp-hal/tree/main/esp-hal "Hardware abstraction layer"
+[esp-wifi]: https://github.com/esp-rs/esp-hal/tree/main/esp-wifi "Wi-Fi, BLE and ESP-NOW support"
+[esp-backtrace]: https://github.com/esp-rs/esp-hal/tree/main/esp-backtrace "Exception and panic handlers"
+[esp-storage]: https://github.com/esp-rs/esp-hal/tree/main/esp-storage "Embedded-storage traits to access unencrypted flash memory"
+[esp-wifi-current-support]: https://github.com/esp-rs/esp-hal/tree/main/esp-wifi#current-support
 [esp8266-hal]: https://github.com/esp-rs/esp8266-hal "ESP8266 Hardware abstraction layer"
 
 ### `esp-rs` 相关的 Crate
@@ -55,5 +55,5 @@
 - 自定义需求：裸机开发允许对应用程序的行为进行更多自定义和细粒度的控制，这在专用或非标准环境中非常有用。
 
 [esp-pacs]: https://github.com/esp-rs/esp-pacs "Peripheral access crates"
-[esp-alloc]: https://github.com/esp-rs/esp-alloc "Simple heap allocator"
-[esp-println]: https://github.com/esp-rs/esp-println "print!, println!"
+[esp-alloc]: https://github.com/esp-rs/esp-hal/tree/main/esp-alloc "Simple heap allocator"
+[esp-println]: https://github.com/esp-rs/esp-hal/tree/main/esp-println "print!, println!"

@@ -15,7 +15,7 @@ additional-js      = ["assets/mermaid.min.js", "assets/mermaid-init.js"]
 "/overview/bare-metal.html"                                                         = "https://narukara.github.io/rust-on-esp-book-zh-cn/overview/using-the-core-library.html"
 "/tooling/text-editors-and-ides.html"                                               = "https://narukara.github.io/rust-on-esp-book-zh-cn/tooling/visual-studio-code.html"
 "/debugging/vscode-debugging.html"                                                  = "https://narukara.github.io/rust-on-esp-book-zh-cn/debugging/vscode.html"
-"/writing-your-own-application/no-std-applications/understanding-esp-template.html" = "https://narukara.github.io/rust-on-esp-book-zh-cn/writing-your-own-application/generate-project/esp-template.html"
+"/writing-your-own-application/no-std-applications/understanding-esp-template.html" = "https://narukara.github.io/rust-on-esp-book-zh-cn/writing-your-own-application/generate-project/esp-generate.html"
 "installation/installation.html"                                                    = "https://narukara.github.io/rust-on-esp-book-zh-cn/installation/index.html"
 "troubleshooting/espflash.html"                                                     = "https://narukara.github.io/rust-on-esp-book-zh-cn/troubleshooting/index.html"
 

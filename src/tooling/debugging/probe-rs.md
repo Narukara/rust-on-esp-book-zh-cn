@@ -1,6 +1,6 @@
 # `probe-rs`
 
-[`probe-rs`][probe-rs] 项目是一组工具，用于使用各种调试探针与嵌入式 MCU 进行交互。它类似于 [OpenOCD][openocd]、[pyOCD][pyocd]、[Segger 工具][segger-tools]等。支持 `ARM` 和 `RISC-V` 架构以及一系列工具，包括但不限于：
+[`probe-rs`][probe-rs] 项目是一组工具，用于使用各种调试探针与嵌入式 MCU 进行交互。它类似于 [OpenOCD][openocd]、[pyOCD][pyocd]、[Segger 工具][segger-tools]等。支持 `Xtensa` 和 `RISC-V` 架构以及一系列工具，包括但不限于：
 
 - 调试器
   - GDB 支持。

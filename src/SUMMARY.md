@@ -12,7 +12,7 @@
   - [使用容器](./installation/using-containers.md)
 - [编写自己的应用](./writing-your-own-application/index.md)
   - [从模板生成项目](./writing-your-own-application/generate-project/index.md)
-    - [`esp-template` 简介](./writing-your-own-application/generate-project/esp-template.md)
+    - [`esp-generate` 简介](./writing-your-own-application/generate-project/esp-generate.md)
     - [`esp-idf-template` 简介](./writing-your-own-application/generate-project/esp-idf-template.md)
   - [编写 `no_std` 应用](./writing-your-own-application/nostd.md)
   - [编写 `std` 应用](./writing-your-own-application/std.md)

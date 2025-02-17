@@ -6,13 +6,17 @@
 
 |              | **probe-rs** | **OpenOCD** |
 | :----------: | :----------: | :---------: |
-|  **ESP32**   |      ⏳       |      ✅      |
+|  **ESP32**   |      ✅       |      ✅      |
 | **ESP32-C2** |      ✅       |      ✅      |
 | **ESP32-C3** |      ✅       |      ✅      |
 | **ESP32-C6** |      ✅       |      ✅      |
 | **ESP32-H2** |      ✅       |      ✅      |
 | **ESP32-S2** |      ✅       |      ✅      |
 | **ESP32-S3** |      ✅       |      ✅      |
+
+> ⚠️ **注意**：Xtensa 支持仍在进行中，请参阅 [probe-rs#2001][probe-rs-issue-2001] 以获取更多信息。
+
+[probe-rs-issue-2001]: https://github.com/probe-rs/probe-rs/issues/2001
 
 ## `USB-JTAG-SERIAL` 外设
 

@@ -26,7 +26,7 @@ Visual Studio Code 可以通过大多数流行的软件包管理器安装，也�
 
 ```json
 {
-  "rust-analyzer.checkOnSave.allTargets": false
+  "rust-analyzer.check.allTargets": false
 }
 ```
 

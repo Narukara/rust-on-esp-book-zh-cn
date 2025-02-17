@@ -2,8 +2,16 @@
 
 要为基于 `RISC-V` 架构的乐鑫芯片构建 Rust 应用程序，请执行以下步骤：
 
-1. 安装 [`nightly`][rustup-book-channel-nightly] 工具链以及 `rust-src` [组件][rustup-book-components]：
-
+1. 安装适当的工具链以及 `rust-src` [组件][rustup-book-components]：
+    - 对于 `no_std`（裸机）应用，既可以使用 `stable`，也可以使用 [`nightly`][rustup-book-channel-nightly]：
+    ```shell
+    rustup toolchain install stable --component rust-src
+    ```
+    或
+    ```shell
+    rustup toolchain install nightly --component rust-src
+    ```
+    - 对于 `std` 应用，只能使用 `nightly`：
     ```shell
     rustup toolchain install nightly --component rust-src
     ```
