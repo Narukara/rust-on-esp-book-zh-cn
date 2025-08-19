@@ -6,7 +6,7 @@
 
 要安装 `espup`，执行：
 ```shell
-cargo install espup
+cargo install espup --locked
 ```
 
 也可以直接下载预编译好的[发行二进制文件][release-binaries]或使用[`cargo-binstall`][cargo-binstall]。
