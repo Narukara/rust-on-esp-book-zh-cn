@@ -7,40 +7,40 @@
 
 ## `esp-generate`
 
-`esp-generate` is project generation tool that can be used to generate an application with all the required configurations and dependencies
+`esp-generate` 是一个项目生成工具，可用于生成包含所有必需配置和依赖项的应用程序
 
-1. Install `esp-generate`:
+1. 安装 `esp-generate`：
     ```shell
     cargo install esp-generate
     ```
-2. Generate a project based on the template, selecting the chip and the name of the project:
+2. 基于模板生成项目，选择芯片和项目名称：
     ```shell
     esp-generate --chip=esp32c6 your-project
     ```
-    See [Understanding `esp-generate`][understanding-esp-generate] for more details on the template project.
+    参见[理解 `esp-generate`][understanding-esp-generate]了解模板项目的更多详细信息。
 
-    When the `esp-generate` subcommand is invoked, you will be prompted with a TUI where you can select the configuration of your application. Upon completion of this process, you will have a buildable project with all the correct configurations.
+    调用 `esp-generate` 子命令时，它会提示一个 TUI，你可以在其中选择应用程序的配置。完成此过程后，你将获得一个配置正确且可构建的项目。
 
-3. Build/Run the generated project:
-   - Use `cargo build` to compile the project using the appropriate toolchain and target.
-   - Use `cargo run` to compile the project, flash it, and open a serial monitor with our target device.
+3. 构建/运行生成的项目：
+   - 用 `cargo build` 编译项目（使用合适的工具链和目标）。
+   - 用 `cargo run` 编译项目、向目标设备烧写程序、并开启一个串口监视器。
 
 [esp-generate]: https://github.com/esp-rs/esp-generate
 [understanding-esp-generate]: ./esp-generate.md
 
 ## `esp-idf-template`
 
-`esp-idf-template` is based on [`cargo-generate`][cargo-generate], a tool that allows you to create a new project based on some existing template. In our case, [`esp-idf-template`][esp-idf-template] can be used to generate an application with all the required configurations and dependencies.
+`esp-idf-template` 基于 [`cargo-generate`][cargo-generate]，这是一个允许你基于现有模板创建新项目的工具。在我们的场景中，[`esp-idf-template`][esp-idf-template] 可用于生成包含所有必需配置和依赖项的应用程序。
 
 1. 安装 `cargo generate`：
     ```shell
     cargo install cargo-generate
     ```
-2. Generate a project based on the template:
+2. 基于模板生成项目：
     ```shell
     cargo generate esp-rs/esp-idf-template cargo
     ```
-    See [Understanding `esp-idf-template`][understanding-esp-idf-template] for more details on the template project.
+    参见[理解 `esp-idf-template`][understanding-esp-idf-template]了解模板项目的更多详细信息。
 
     调用 `cargo generate` 子命令时，它会询问几个关于应用程序目标的问题。完成这些问题后，就会生成一个配置好的项目，可以直接构建。
 
@@ -54,7 +54,7 @@
 
 ## 在模板中使用开发容器（Dev Container）
 
-两个模板仓库都带有开发容器支持。
+两个模板仓库都支持开发容器（Dev Container）。
 
 开发容器使用 [`idf-rust`][idf-rust] 镜像，[配置开发环境][setting-env]中的[使用容器][using-container]一节对此进行了解释。这个镜像提供了一个无需安装即可为乐鑫芯片开发 Rust 应用程序的环境。开发容器还可以与 [Wokwi 模拟器][wokwi]协作，以模拟项目，并允许使用 [`web-flash`][web-flash] 从容器中进行烧写。
 
