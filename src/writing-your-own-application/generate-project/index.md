@@ -17,7 +17,7 @@
     ```shell
     esp-generate --chip=esp32c6 your-project
     ```
-    参见[理解 `esp-generate`][understanding-esp-generate]了解模板项目的更多详细信息。
+    参见[`esp-generate` 简介][understanding-esp-generate]了解模板项目的更多详细信息。
 
     调用 `esp-generate` 子命令时，它会提示一个 TUI，你可以在其中选择应用程序的配置。完成此过程后，你将获得一个配置正确且可构建的项目。
 
@@ -40,7 +40,7 @@
     ```shell
     cargo generate esp-rs/esp-idf-template cargo
     ```
-    参见[理解 `esp-idf-template`][understanding-esp-idf-template]了解模板项目的更多详细信息。
+    参见[`esp-idf-template` 简介][understanding-esp-idf-template]了解模板项目的更多详细信息。
 
     调用 `cargo generate` 子命令时，它会询问几个关于应用程序目标的问题。完成这些问题后，就会生成一个配置好的项目，可以直接构建。
 
@@ -54,7 +54,7 @@
 
 ## 在模板中使用开发容器（Dev Container）
 
-两个模板仓库都支持开发容器（Dev Container）。
+两个模板仓库都支持开发容器。
 
 开发容器使用 [`idf-rust`][idf-rust] 镜像，[配置开发环境][setting-env]中的[使用容器][using-container]一节对此进行了解释。这个镜像提供了一个无需安装即可为乐鑫芯片开发 Rust 应用程序的环境。开发容器还可以与 [Wokwi 模拟器][wokwi]协作，以模拟项目，并允许使用 [`web-flash`][web-flash] 从容器中进行烧写。
 
