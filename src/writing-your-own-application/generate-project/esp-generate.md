@@ -7,7 +7,7 @@
 
 ## 检查生成的项目
 
-When creating a project from [`esp-generate`][esp-generate] with no extra options:
+使用 [`esp-generate`][esp-generate] 创建项目时，如果不指定额外选项：
 ```
 esp-generate --chip esp32c3 your-project
 ```
@@ -31,11 +31,11 @@ esp-generate --chip esp32c3 your-project
 
 在进一步讨论之前，让我们看看这些文件的用途。
 - [`build.rs`][build.rs]
-    - Sets the linker script arguments based on the template options.
+    - 根据模板选项设置链接脚本参数
 - [`.cargo/config.toml`][config-toml]
     - Cargo 的配置
     - 定义了一些用于正确构建项目的选项
-    - Contains the custom runner command for `espflash` or `probe-rs`. For example, `runner = "espflash flash --monitor"` - this means you can just use `cargo run` to flash and monitor your code
+    - 包含 `espflash` 或 `probe-rs` 的自定义 runner 命令。例如，`runner = "espflash flash --monitor"` - 这意味着你可以直接使用 `cargo run` 来烧写和监控你的代码
 - [`Cargo.toml`][cargo-toml]
     - Cargo 清单（manifest），通常声明了一些元数据和项目的依赖项
 - [`.gitignore`][gitignore]
@@ -47,9 +47,9 @@ esp-generate --chip esp32c3 your-project
     - 项目的主要源文件
     - 关于它的详细信息，请参阅下面的 [`main.rs` 简介][main-rs]一节
 - `src/lib.rs`
-    - This tells the Rust compiler that this code doesn't use `libstd`
+    - 用于告知 Rust 编译器这段代码不使用 `libstd`
 - `.vscode/settings.json`
-    - Defines a set of settings for Visual Studio Code to make Rust Analyzer work.
+    - 为 Visual Studio Code 定义一系列设置，使 Rust Analyzer 能够正常工作。
 
 [esp-generate]: https://github.com/esp-rs/esp-generate
 [build.rs]: https://doc.rust-lang.org/cargo/reference/build-scripts.html
@@ -81,9 +81,9 @@ esp-generate --chip esp32c3 your-project
   - 由于我们处于裸机环境中，因此需要一个 panic 处理程序，该处理程序在代码发生 panic 时运行
   - 有多种不同的 crate 可选（例如 `panic-halt`），但是 `esp-backtrace` 提供了一个打印回溯地址的实现——与 `espflash` 配合，这些地址可以被解析为源代码中的位置
 - `use esp_hal::delay::Delay;`
-  - Provides `Delay` driver implementation.
+  - 提供 `Delay` 驱动实现。
 - `use esp_hal::prelude::*;`
-  - Imports the `esp-hal` [prelude][prelude].
+  - 导入 `esp-hal` [prelude][prelude]。
 
 ```rust,ignore
  8 #[entry]
@@ -100,15 +100,15 @@ esp-generate --chip esp32c3 your-project
 
 `main` 函数中包含：
 - `esp_println::logger::init_logger_from_env();`
-  - Initializes the logger, if `ESP_LOG` environment variable is defined, it will use that log level.
+  - 初始化日志记录器，如果定义了 `ESP_LOG` 环境变量，将使用该日志级别。
 - `let delay = Delay::new();`
-  - Creates a delay instance.
+  - 创建一个延迟实例。
 - `loop {}`
-  - Since our function is supposed to never return, we use a loop
+  - 由于我们的函数应该永远不会返回，所以我们使用循环
 - `info!("Hello world!");`
-  - Creates a log message with `info` level that prints "Hello world!".
+  - 创建一个 `info` 级别的日志消息，打印 "Hello world!"。
 - `delay.delay(500.millis());`
-  - Waits for 500 milliseconds.
+  - 等待 500 毫秒。
 
 [diverging-function]: https://doc.rust-lang.org/beta/rust-by-example/fn/diverging.html
 
