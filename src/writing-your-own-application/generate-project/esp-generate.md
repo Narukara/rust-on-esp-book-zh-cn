@@ -31,11 +31,11 @@ esp-generate --chip esp32c3 your-project
 
 在进一步讨论之前，让我们看看这些文件的用途。
 - [`build.rs`][build.rs]
-    - 根据模板选项设置链接器脚本参数
+    - 根据模板选项设置链接脚本参数
 - [`.cargo/config.toml`][config-toml]
     - Cargo 的配置
     - 定义了一些用于正确构建项目的选项
-    - 包含 `espflash` 或 `probe-rs` 的自定义运行器命令。例如，`runner = "espflash flash --monitor"` - 这意味着你可以直接使用 `cargo run` 来烧写和监控你的代码
+    - 包含 `espflash` 或 `probe-rs` 的自定义 runner 命令。例如，`runner = "espflash flash --monitor"` - 这意味着你可以直接使用 `cargo run` 来烧写和监控你的代码
 - [`Cargo.toml`][cargo-toml]
     - Cargo 清单（manifest），通常声明了一些元数据和项目的依赖项
 - [`.gitignore`][gitignore]
@@ -83,7 +83,7 @@ esp-generate --chip esp32c3 your-project
 - `use esp_hal::delay::Delay;`
   - 提供 `Delay` 驱动实现。
 - `use esp_hal::prelude::*;`
-  - 导入 `esp-hal` [预导入][prelude]。
+  - 导入 `esp-hal` [prelude][prelude]。
 
 ```rust,ignore
  8 #[entry]
