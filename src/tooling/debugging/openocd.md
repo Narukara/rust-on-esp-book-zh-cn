@@ -5,7 +5,7 @@
 
 有关如何在你的平台上安装 `openocd-esp32` 的说明可以在[乐鑫文档][espressif-documentation]中找到。
 
-GDB with all the Espressif products supported can be obtained in [`espressif/binutils-gdb`][binutils-repo].
+支持所有乐鑫产品的 GDB 可以在 [`espressif/binutils-gdb`][binutils-repo] 中获得。
 
 安装完成后，只需使用正确的参数运行 `openocd` 即可。对于具有内置 [`USB-JTAG-SERIAL` 外设][usb-jtag-serial] 的芯片，通常有一个可以直接使用的配置文件，例如在 ESP32-C3 上：
 
@@ -25,21 +25,21 @@ openocd -f interface/jlink.cfg -f target/esp32.cfg
 [binutils-repo]: https://github.com/espressif/binutils-gdb
 [usb-jtag-serial]: index.md#usb-jtag-serial-peripheral
 
-## VS Code Extension
+## VS Code 扩展
 
-OpenOCD can be used in VS Code via the [`cortex-debug`][cortex-debug] extension to debug Espressif products.
+OpenOCD 可以通过 [`cortex-debug`][cortex-debug] 扩展在 VS Code 中使用，以调试乐鑫产品。
 
 [cortex-debug]: https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug
 
-### Configuration
+### 配置
 
-1. If required, connect the external JTAG adapter.
-   1. See Configure Other JTAG Interfaces section of ESP-IDF Programming Guide. Eg: [Section for ESP32][jtag-interfaces-esp32]
-> ⚠️ **Note**: On Windows, `USB Serial Converter A 0403 6010 00` driver should be WinUSB.
-2. Set up VSCode
-   1. Install [Cortex-Debug][cortex-debug] extension for VS Code.
-   2. Create the `.vscode/launch.json` file in the project tree you want to debug.
-   3. Update `executable`, `svdFile`, `serverpath` paths, and `toolchainPrefix` fields.
+1. 如果需要，连接外部 JTAG 适配器。
+   1. 请参阅 ESP-IDF 编程指南的"配置其他 JTAG 接口"部分。例如：[ESP32 部分][jtag-interfaces-esp32]
+> ⚠️ **注意**：在 Windows 上，`USB Serial Converter A 0403 6010 00` 驱动程序应该是 WinUSB。
+2. 设置 VSCode
+   1. 为 VS Code 安装 [Cortex-Debug][cortex-debug] 扩展。
+   2. 在要调试的项目树中创建 `.vscode/launch.json` 文件。
+   3. 更新 `executable`、`svdFile`、`serverpath` 路径和 `toolchainPrefix` 字段。
 
 ```json
 {
@@ -75,6 +75,6 @@ OpenOCD can be used in VS Code via the [`cortex-debug`][cortex-debug] extension 
 
 [jtag-interfaces-esp32]: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html
 
-# Debugging with Multiple Cores
+# 多核调试
 
-Sometimes you may need to debug each core individually in GDB or with VSCode. In this case, change `set ESP_RTOS none` to `set ESP_RTOS hwthread`. This will make each core appear as a hardware thread in GDB. This is not currently documented in Espressif official documentation but in OpenOCD docs: https://openocd.org/doc/html/GDB-and-OpenOCD.html
+有时你可能需要在 GDB 或 VSCode 中单独调试每个核心。在这种情况下，将 `set ESP_RTOS none` 更改为 `set ESP_RTOS hwthread`。这将使每个核心在 GDB 中显示为硬件线程。这在乐鑫官方文档中目前没有记录，但在 OpenOCD 文档中有说明：https://openocd.org/doc/html/GDB-and-OpenOCD.html
