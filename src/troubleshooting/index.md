@@ -1,10 +1,10 @@
 # Troubleshooting
 
-This chapter lists certain questions and common problems we have encountered over time, along with their solutions. This page collects common issues independent of the chosen ESP ecosystem. If you can't find your issue listed here, feel free to open an issue in the appropriate repository or ask on our [Matrix room][matrix].
+本章列出了我们在长期使用过程中遇到的某些问题和常见故障，以及相应的解决方案。本页面收集了与所选 ESP 生态系统无关的常见问题。如果你在此处找不到你遇到的问题，请随时在相应的代码仓库中提出 issue，或在我们的 [Matrix 聊天室][matrix]中提问。
 
 [matrix]: https://matrix.to/#/#esp-rs:matrix.org
 
-## Using the Wrong Rust Toolchain
+## 使用了错误的 Rust 工具链
 
 ```text
 $ cargo build
@@ -16,18 +16,18 @@ Caused by:
   error: Error loading target specification: Could not find specification for target "xtensa-esp32-espidf". Run `rustc --print target-list` for a list of built-in targets
 ```
 
-If you are encountering the previous error or a similar one, you are probably not using the proper Rust toolchain. Remember that for `Xtensa` targets, you need to use Espressif Rust fork toolchain, there are several ways to do it:
-- A [toolchain override][toolchain-override] shorthand used on the command-line: `cargo +esp`.
-- Set `RUSTUP_TOOLCHAIN` environment variable to `esp`.
-- Set a [directory override][directory-override]: `rustup override set esp`
-- Add a [`rust-toolchain.toml`][rust-toolchain-toml] file to you project:
+如果你遇到了上述错误或类似错误，那么你可能没有使用正确的 Rust 工具链。请记住，对于 `Xtensa` 目标，你需要使用 Espressif Rust 分支工具链，有以下几种方法：
+- 在命令行中使用[工具链 override][toolchain-override]，即：`cargo +esp`。
+- 将 `RUSTUP_TOOLCHAIN` 环境变量设置为 `esp`。
+- 设置[目录 override][directory-override]：`rustup override set esp`
+- 在你的项目中添加 [`rust-toolchain.toml`][rust-toolchain-toml] 文件：
   ```toml
   [toolchain]
   channel = "esp"
   ```
-- Set `esp` as [default toolchain][default-toolchain].
+- 将 `esp` 设置为[默认工具链][default-toolchain]。
 
-For more information on toolchain overriding, see the [Overrides chapter][overrides-rust-book] of The rustup book.
+有关工具链 override 的更多信息，请参阅 The rustup book 的 [Overrides 章节][overrides-rust-book]。
 
 [toolchain-override]: https://rust-lang.github.io/rustup/overrides.html#toolchain-override-shorthand
 [directory-override]: https://rust-lang.github.io/rustup/overrides.html#directory-overrides
@@ -37,21 +37,19 @@ For more information on toolchain overriding, see the [Overrides chapter][overri
 
 ## Windows
 
-### Long Path Names
+### 长路径名
 
-When using Windows, you may encounter issues building a new project if using long path names.
-Moreover - and if you are trying to build a `std` application - the build will fail with a hard error if your project path
-is longer than ~ 10 characters.
+在使用 Windows 时，如果路径名过长，你可能会在构建新项目时遇到问题。
+此外，构建 `std` 应用程序时，如果你的项目路径长度超过约 10 个字符，构建将失败并出现错误。
 
-To workaround the problem, you need to shorten your project name, and move it to the drive root, as in e.g. `C:\myproj`.
-Note also that while using the Windows `subst` utility (as in e.g. `subst r: <pathToYourProject>`) might look like an easy
-solution for using short paths during build while still keeping your project location intact,
-it simply *does not work*, as the short, substituted paths are expanded to their actual (long) locations by the Windows APIs.
+要解决此问题，你需要缩短你的项目名称，并将其移动到驱动器根目录，例如 `C:\myproj`。
+还要注意，虽然使用 Windows `subst` 命令（例如 `subst r: <pathToYourProject>`）可能看起来像是在构建期间使用短路径的简单解决方案，同时仍保持项目位置不变，
+但它*根本不起作用*，因为短的、替代的路径会被 Windows API 扩展为它们的实际（长）位置。
 
-Another alternative is to install Windows Subsystem for Linux (WSL), move your project(s) inside the native Linux file partition,
-build inside WSL and only flash the compiled MCU ELF file from outside of WSL.
+另一种替代方案是安装 Windows Subsystem for Linux (WSL)，将你的项目移动到本机 Linux 文件分区内，
+在 WSL 内构建，并且只从 WSL 外部烧录编译的 MCU ELF 文件。
 
-### Missing ABI
+### 缺少 ABI
 
 ```powershell
   Compiling cc v1.0.69
@@ -68,8 +66,8 @@ warning: build failed, waiting for other jobs to finish...
 error: build failed
 ```
 
-The reason for this error is that we are missing the MSVC C++, hence we aren't meeting the [Compile-time Requirements]. Please,  install [Visual Studio 2013 (or later) or the Visual C++ Build Tools 2019]. For Visual Studio, make sure to check the "C++ tools" and "Windows 10 SDK" options.
-If using GNU ABI, install [MinGW/MSYS2 toolchain].
+此错误的原因是我们缺少 MSVC C++，因此我们没有满足[编译时要求][Compile-time Requirements]。请安装 [Visual Studio 2013（或更高版本）或 Visual C++ Build Tools 2019][Visual Studio 2013 (or later) or the Visual C++ Build Tools 2019]。对于 Visual Studio，请确保选中"C++ 工具"和"Windows 10 SDK"选项。
+如果使用 GNU ABI，请安装 [MinGW/MSYS2 工具链][MinGW/MSYS2 toolchain]。
 
 [Compile-time Requirements]: https://github.com/rust-lang/cc-rs#compile-time-requirements
 [Visual Studio 2013 (or later) or the Visual C++ Build Tools 2019]: https://rust-lang.github.io/rustup/installation/windows.html
