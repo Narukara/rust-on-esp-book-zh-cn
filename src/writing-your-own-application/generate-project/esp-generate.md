@@ -9,7 +9,7 @@
 
 使用 [`esp-generate`][esp-generate] 创建项目时，如果不指定额外选项：
 ```
-esp-generate --chip esp32c3 your-project
+esp-generate -o esp32c3 your-project
 ```
 
 应该会生成类似这样的文件结构：
