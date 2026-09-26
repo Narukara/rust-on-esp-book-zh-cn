@@ -15,7 +15,7 @@
     ```
 2. 基于模板生成项目，选择芯片和项目名称：
     ```shell
-    esp-generate --chip=esp32c6 your-project
+    esp-generate -o esp32c6 your-project
     ```
     参见[`esp-generate` 简介][understanding-esp-generate]了解模板项目的更多详细信息。
 
