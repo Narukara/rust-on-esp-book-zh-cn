@@ -1,23 +1,10 @@
 [book]
 title        = "The Rust on ESP Book 简体中文版"
 description  = "A comprehensive guide on using the Rust programming language with Espressif SoCs and modules"
-multilingual = false
 language     = "zh-CN"
 
 [rust]
-edition = "2018"
+edition = "2024"
 
 [output.html]
 git-repository-url = "https://github.com/Narukara/rust-on-esp-book-zh-cn"
-additional-js      = ["assets/mermaid.min.js", "assets/mermaid-init.js"]
-
-[output.html.redirect]
-"/overview/bare-metal.html"                                                         = "https://narukara.github.io/rust-on-esp-book-zh-cn/overview/using-the-core-library.html"
-"/tooling/text-editors-and-ides.html"                                               = "https://narukara.github.io/rust-on-esp-book-zh-cn/tooling/visual-studio-code.html"
-"/debugging/vscode-debugging.html"                                                  = "https://narukara.github.io/rust-on-esp-book-zh-cn/debugging/vscode.html"
-"/writing-your-own-application/no-std-applications/understanding-esp-template.html" = "https://narukara.github.io/rust-on-esp-book-zh-cn/writing-your-own-application/generate-project/esp-generate.html"
-"installation/installation.html"                                                    = "https://narukara.github.io/rust-on-esp-book-zh-cn/installation/index.html"
-"troubleshooting/espflash.html"                                                     = "https://narukara.github.io/rust-on-esp-book-zh-cn/troubleshooting/index.html"
-
-[preprocessor.mermaid]
-command = "mdbook-mermaid"

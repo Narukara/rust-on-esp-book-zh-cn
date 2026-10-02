@@ -1,6 +1,6 @@
 这里是 https://github.com/esp-rs/book 的简体中文翻译。[直接在网页中阅读](https://narukara.github.io/rust-on-esp-book-zh-cn/)
 
-目前进度：已经翻译完成（部分更新的内容需要重新翻译），跟踪到 8011021
+目前进度：已经翻译完成，跟踪到 ec89aee
 
 ---
 
@@ -10,13 +10,13 @@
 
 ## 快速上手
 
-本书是使用 [`mdbook`] 生成的，另外使用了 [`mdbook-mermaid`] 预处理器来添加对图表的支持。要安装这些工具，运行：
+本书使用 [`mdbook`] 生成，可以通过 Cargo 安装：
 
 ```shell
-cargo install mdbook mdbook-mermaid
+cargo install mdbook
 ```
 
-安装了 `mdbook` 和 `mdbook-mermaid` 后，就可以运行以下命令，克隆此仓库并启动一个服务器：
+安装了 `mdbook` 后，就可以运行以下命令，克隆此仓库并启动一个服务器：
 
 ```shell
 git clone https://github.com/esp-rs/book
@@ -25,7 +25,6 @@ mdbook serve
 ```
 
 [`mdbook`]: https://github.com/rust-lang/mdBook
-[`mdbook-mermaid`]: https://github.com/badboy/mdbook-mermaid
 
 ## License
 
