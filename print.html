@@ -1,0 +1,759 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The Rust on ESP Book 简体中文版</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A comprehensive guide on using the Rust programming language with Espressif SoCs and modules">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-28e39021.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-ee80644b.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust on ESP Book 简体中文版</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Narukara/rust-on-esp-book-zh-cn" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <p style="text-align:center;"><img src="assets/esp-rs.svg" width="25%"></p>
+
+<h1 id="前言"><a class="header" href="#前言">前言</a></h1>
+<p>欢迎阅读这份在乐鑫产品上使用 Rust 进行嵌入式开发的指南。本书旨在帮助你入门，并熟悉我们的工具和生态系统。我们将介绍软件栈的结构，并带你了解项目生成和工具使用的基本流程。读完本书后，你就可以通过参考文档和外部培训资源，进一步探索更深入的内容。</p>
+<h2 id="这本书适合谁"><a class="header" href="#这本书适合谁">这本书适合谁</a></h2>
+<p>本书面向对嵌入式开发感兴趣的 Rust 开发者，即使你没有嵌入式系统的开发经验，也可以阅读。熟悉一些底层编程概念会有所帮助，但我们会在涉及这些概念时介绍其中的关键思想。如果你想补充基础知识，可以学习<a href="#补充资源">补充资源</a>中的内容。</p>
+<h2 id="稳定性与可用性"><a class="header" href="#稳定性与可用性">稳定性与可用性</a></h2>
+<p>我们努力保持稳定性，但随着 API 改进、性能优化和新功能的引入，你仍应预期会有定期的修改。已经稳定的<a href="https://docs.espressif.com/projects/rust/esp-hal/1.0.0/esp32c6/esp_hal/index.html#modules">模块</a>会遵循语义化版本规范（<code>SemVer</code>），不会引入破坏性变更。不过，<code>esp-hal</code> 的部分组件和某些驱动等 <code>unstable</code> 功能仍在积极开发中，不受 <code>SemVer</code> 保证的约束。这意味着，使用这些 <code>unstable</code> 组件时，简单的一次 <code>cargo update</code> 就可能导致项目无法正常工作，类似于使用 Rust 的 <code>nightly</code> 编译器。这种不稳定性在整个仍在快速发展的 Rust 嵌入式生态中很常见。请留意变更，并密切跟踪依赖项。对于所有主要 crate，我们都提供版本间的迁移指南，帮助你保持更新。</p>
+<h2 id="补充资源"><a class="header" href="#补充资源">补充资源</a></h2>
+<p>如果你不熟悉本书涉及的某些概念，或想深入了解特定主题，以下资源可能会有所帮助：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>资源</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a></td><td>如果你不熟悉 Rust，可以阅读这本书。</td></tr>
+<tr><td><a href="https://docs.rust-embedded.org/book/index.html">The Embedded Rust Book</a></td><td>Rust 嵌入式工作组提供的资源。</td></tr>
+<tr><td><a href="https://esp-rs.github.io/no_std-training/">Embedded Rust (<code>no_std</code>) on Espressif</a></td><td>在乐鑫 SoC 上使用 <code>no_std</code> 的指南。</td></tr>
+<tr><td><a href="https://github.com/esp-rs/awesome-esp-rust.git">Awesome ESP Rust</a></td><td>在乐鑫产品上使用 Rust 开发的相关资源列表。</td></tr>
+<tr><td><a href="https://github.com/rust-embedded/awesome-embedded-rust">Awesome Embedded Rust</a></td><td>与嵌入式 Rust 和底层编程相关的资源列表，包括一些实用的 crate。</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="为本书做出贡献"><a class="header" href="#为本书做出贡献">为本书做出贡献</a></h2>
+<p>本书的工作在<a href="https://github.com/esp-rs/book">这个仓库</a>中进行协调。</p>
+<p>如果你在按照说明操作时遇到困难，或发现某些章节不够清晰，请在 <a href="https://github.com/esp-rs/book/issues/">issue 追踪器</a>中反馈。欢迎通过 Pull Request 修正拼写错误或改进表述！</p>
+<h2 id="支持与社区"><a class="header" href="#支持与社区">支持与社区</a></h2>
+<p>如果你需要帮助、有问题，或想讨论与 <code>esp-rs</code> 相关的话题，欢迎加入 <a href="https://matrix.to/#/#esp-rs:matrix.org">Matrix 上的社区聊天室</a>。</p>
+<p>我们希望本书能帮助你积累知识和信心，在乐鑫产品上使用 Rust 构建健壮、高效且安全的嵌入式应用。开始吧！</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="介绍"><a class="header" href="#介绍">介绍</a></h1>
+<p>在这一部分中，我们将介绍两个重要主题，为你在乐鑫设备上使用 Rust 打下基础：</p>
+<ol>
+<li>
+<p><strong><a href="#硬件概览">硬件概览</a></strong>：了解乐鑫生态系统，包括不同的 SoC 系列、架构和开发板。这些知识有助于你为项目选择合适的芯片，并了解即将编程控制的底层硬件。</p>
+</li>
+<li>
+<p><strong><a href="#辅助-crate-概览">辅助 crate 概览</a></strong>：探索 crate 生态系统。这些 crate 提供了从内存分配到无线通信的各种基础组件。</p>
+</li>
+</ol>
+<p>了解硬件能力和软件生态系统后，你就可以继续学习<a href="#入门">入门</a>章节中的实践内容，配置开发环境，并创建你的第一个应用程序。</p>
+<p>让我们先了解将要使用的硬件。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="硬件概览"><a class="header" href="#硬件概览">硬件概览</a></h1>
+<p><code>esp-rs</code> 组织下的 crate 支持 <a href="https://www.espressif.com/en/products/socs">ESP32、ESP32-S、ESP32-C 和 ESP32-H 系列 SoC</a>。</p>
+<p>各款 SoC 既有独特的功能，也有一些共同的特性。请使用<a href="https://products.espressif.com/#/">乐鑫产品选型工具</a>，为你的项目选择合适的芯片。</p>
+<p>乐鑫的产品采用两种不同的系统架构：</p>
+<ul>
+<li><a href="https://www.cadence.com/content/dam/cadence-www/global/en_US/documents/tools/silicon-solutions/compute-ip/isa-summary.pdf">Xtensa</a>：ESP32 和 ESP32-S 系列采用 Xtensa 架构。</li>
+<li><a href="https://en.wikipedia.org/wiki/RISC-V">RISC-V</a>：ESP32-C 和 ESP32-H 系列采用 RISC-V 架构。</li>
+</ul>
+<p>这里不展开介绍这两种架构的细节或差异。Rust 官方对两者的支持情况不同。Rust 尚未正式支持 Xtensa，原因是 Rust 使用 LLVM 作为编译器基础设施的一部分，而 LLVM 尚不支持 Xtensa。因此，我们维护了 LLVM 和 Rust 编译器的定制分支，加入了对 Xtensa 的支持，并积极推动这些修改合并到上游，以在未来获得官方支持。</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>我们正在积极推动分支中的修改合并到上游。目前的进展如下：</p>
+<ol>
+<li>LLVM 分支：最近取得了显著进展。详情请参阅<a href="https://github.com/espressif/llvm-project/issues/4">跟踪 issue</a>。</li>
+<li>Rust 编译器分支：我们已提交所有可行的 Xtensa 补丁。后续进展取决于这些修改合并到 LLVM 上游的情况。</li>
+</ol>
+</blockquote>
+<p>你可以参阅<a href="https://www.espressif.com/en/support/documents/technical-documents">技术文档</a>，了解不同 SoC 的更多信息。</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><code>esp-hal</code> 不支持 ESP8266。</p>
+<p>不过，它支持 ESP32-C2（ESP8684）和 ESP32-C3（ESP8685）。其中，ESP32-C3 与 ESP8266 引脚兼容，可以作为合适的直接替代品。</p>
+</blockquote>
+<h2 id="了解乐鑫开发板"><a class="header" href="#了解乐鑫开发板">了解乐鑫开发板</a></h2>
+<p>以 <a href="https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32c6/esp32-c6-devkitc-1/index.html">ESP32-C6-DevKitC-1</a> 为例。这是一款基于 ESP32-C6 的开发板，包含以下组件：</p>
+<p><img src="assets/esp32-c6-devkitc-1-v1.2.png" alt="ESP32-C6-DevKitC-1"></p>
+<ul>
+<li>ESP32-C6-WROOM-1 模块：
+<ul>
+<li>支持 Wi-Fi、BLE 和 IEEE 802.15.4。</li>
+<li>8 MB SPI flash。</li>
+</ul>
+</li>
+<li>可供使用的 GPIO 引脚。</li>
+<li>2 个按钮：Boot 和 Reset。
+<ul>
+<li>Boot 按钮：下载按钮。按住 Boot，再按下 Reset，即可进入固件下载模式，通过串口下载固件。
+<ul>
+<li>详情请参阅<a href="https://docs.espressif.com/projects/esptool/en/latest/esp32c6/advanced-topics/boot-mode-selection.html?highlight=boot%20mode">启动模式选择</a>。</li>
+</ul>
+</li>
+<li>Reset 按钮：复位设备。</li>
+</ul>
+</li>
+<li>2 个 USB-C 接口：
+<ul>
+<li>USB-C 转 UART 接口：用于给开发板供电、向芯片烧录应用程序，以及通过板载 USB 转 UART 桥接器与 ESP32-C6 芯片通信。</li>
+<li>USB-C 接口：用于给开发板供电、向芯片烧录应用程序、通过 USB 协议与芯片通信，以及进行 JTAG 调试。</li>
+</ul>
+</li>
+<li>RGB LED：由 GPIO8 驱动的可寻址 RGB LED。
+<ul>
+<li>注意，这不是普通的 RGB LED，而是 <a href="https://github.com/esp-rs/esp-hal-community/tree/main/esp-hal-smartled">WS2812B LED</a>。</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="辅助-crate-概览"><a class="header" href="#辅助-crate-概览">辅助 crate 概览</a></h1>
+<p>在详细介绍编写应用程序所需的各种包和概念之前，先大致了解整个生态系统会有所帮助。这既包括 <code>esp-hal</code> 生态，也包括更广泛的嵌入式 Rust 生态。</p>
+<h2 id="esp-hal-生态系统"><a class="header" href="#esp-hal-生态系统"><code>esp-hal</code> 生态系统</a></h2>
+<p>开展项目的第一步是创建项目，主要方式是使用 <code>esp-generate</code>。你可以在介绍此工具的<a href="#esp-generate">章节</a>中了解更多信息。</p>
+<p><code>esp-hal</code> 是使用 Rust 开发乐鑫芯片的核心 crate。通过它，你可以完成芯片的基本初始化，并访问芯片上的外设驱动。针对所选芯片的完整 <a href="https://docs.espressif.com/projects/rust/esp-hal/latest/"><code>esp-hal</code> 文档</a>会明确说明可用的外设，以及各外设驱动的稳定性。</p>
+<p>你可能还需要使用芯片的高级功能，例如网络和连接能力。这部分由生态系统中的 <code>esp-radio</code> 负责，它整合了各种乐鑫产品上可用的通信协议驱动：<code>Wi-Fi</code>、<code>BLE</code>、<code>esp-now</code>，以及用于底层通信的 <code>IEEE 802.15.4</code>。各芯片的详细信息可在 <a href="https://github.com/esp-rs/esp-hal/tree/main/esp-radio"><code>esp-radio</code> 子仓库</a>中找到。需要注意，无线功能要求协议栈在后台持续运行，涉及定时器、中断和状态机等。<code>esp-radio</code> 依赖 <a href="https://github.com/esp-rs/esp-hal/tree/main/esp-radio-rtos-driver"><code>esp-radio-rtos-driver</code></a> 的实现，该驱动定义了协议栈可靠运行所需的调度和运行时接口。<code>esp-rtos</code> 是我们提供并支持的默认后端；原则上，你也可以将它替换为其他驱动实现。在启用相应的模板选项时，<code>esp-generate</code> 会自动加入 <code>esp-rtos</code>。</p>
+<p>如果需要更深入地管理芯片内存，或在 <code>no_std</code> 中使用 <code>alloc</code> crate 提供的、需要堆分配的集合类型，可以使用 <code>esp-alloc</code>。本书有专门的<a href="#内存分配">章节</a>介绍它。</p>
+<p>下表简要介绍了 <code>esp-hal</code> 生态系统中的所有 crate 及其用途：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Crate</th><th>描述</th><th>稳定性</th></tr>
+</thead>
+<tbody>
+<tr><td><code>esp-alloc</code></td><td>内存分配工具。</td><td>不稳定</td></tr>
+<tr><td><code>esp-backtrace</code></td><td>提供回溯支持。</td><td>不稳定</td></tr>
+<tr><td><code>esp-bootloader-esp-idf</code></td><td>为 ESP-IDF 二级 bootloader 提供额外支持，包括 OTA。</td><td>不稳定</td></tr>
+<tr><td><code>esp-build</code></td><td>用于 esp-hal 和其他相关包的构建工具，供构建脚本使用。</td><td>不稳定</td></tr>
+<tr><td><code>esp-config</code></td><td>配置系统。</td><td>不稳定</td></tr>
+<tr><td><code>esp-hal</code></td><td>适用于所有乐鑫 ESP32 设备的裸机（<code>no_std</code>）HAL。</td><td>稳定<sup>*</sup></td></tr>
+<tr><td><code>esp-hal-proc-macros</code></td><td>用于 esp-hal 系列 HAL 包的过程宏。</td><td>不稳定</td></tr>
+<tr><td><code>esp-lp-hal</code></td><td>适用于部分乐鑫设备上的低功耗和超低功耗核心的裸机（<code>no_std</code>）HAL。</td><td>不稳定</td></tr>
+<tr><td><code>esp-metadata</code></td><td>乐鑫设备的元数据，主要供构建脚本使用。</td><td>不稳定</td></tr>
+<tr><td><code>esp-preempt</code></td><td>线程与支持线程的同步原语，主要用于 <code>esp-radio</code>。</td><td>不稳定</td></tr>
+<tr><td><code>esp-println</code></td><td>乐鑫设备的打印和日志功能。</td><td>不稳定</td></tr>
+<tr><td><code>esp-riscv-rt</code></td><td>乐鑫 RISC-V CPU 的最小启动代码和运行时。</td><td>不稳定</td></tr>
+<tr><td><code>esp-rom-sys</code></td><td>ROM 代码支持。</td><td>不稳定</td></tr>
+<tr><td><code>esp-rtos</code></td><td>esp-radio 的调度器实现，以及 <code>esp-hal</code> 的 embassy 支持。</td><td>不稳定</td></tr>
+<tr><td><code>esp-sync</code></td><td>乐鑫设备的同步原语。</td><td>不稳定</td></tr>
+<tr><td><code>esp-storage</code></td><td>乐鑫设备的存储工具。</td><td>不稳定</td></tr>
+<tr><td><code>esp-radio</code></td><td>乐鑫设备的 Wi-Fi、BLE、IEEE 802.15.4 和 ESP-NOW 功能。</td><td>不稳定</td></tr>
+<tr><td><code>xtensa-lx</code></td><td>对 Xtensa LX 处理器和外设的底层访问。</td><td>不稳定</td></tr>
+<tr><td><code>xtensa-lx-rt</code></td><td>Xtensa LX CPU 的最小启动代码和运行时。</td><td>不稳定</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><code>esp-hal</code> 内部各外设驱动的稳定性有所不同。请参阅<a href="https://github.com/esp-rs/esp-hal/tree/main/esp-hal#peripheral-support">外设支持部分</a>，了解各外设的稳定性详情。</p>
+</blockquote>
+<p>你可以在 <a href="https://docs.espressif.com/projects/rust/index.html">esp-rs 文档</a>中找到这些包的详细信息。</p>
+<h2 id="与嵌入式-rust-生态系统集成"><a class="header" href="#与嵌入式-rust-生态系统集成">与嵌入式 Rust 生态系统集成</a></h2>
+<p>嵌入式 Rust 领域最常用的硬件抽象层是 <a href="https://docs.rs/embedded-hal/latest/embedded_hal/index.html"><code>embedded-hal</code></a>。它为多种外设提供了 trait，使你可以编写不依赖特定 HAL 的设备驱动。<code>esp-hal</code> 在其驱动中实现了这些 trait。此外，我们也实现了嵌入式 Rust 领域中其他 crate 提供的各种 trait，例如为随机数生成器（RNG）外设实现的 <a href="https://crates.io/crates/rand_core"><code>rand_core</code></a> trait，以及 <a href="https://crates.io/crates/embedded-io"><code>embedded-io</code></a> trait。后者是面向 <code>no_std</code> 应用程序、与 <code>std::io</code> trait 对应的接口。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="入门"><a class="header" href="#入门">入门</a></h1>
+<p>本章将带你配置开发环境，以便在乐鑫设备上使用 Rust 构建应用程序。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="工具链安装-1"><a href="#工具链安装-1" class="header">工具链安装</a></h1>
+<h2 id="工具链安装"><a class="header" href="#工具链安装">工具链安装</a></h2>
+<h3 id="rust-安装"><a class="header" href="#rust-安装">Rust 安装</a></h3>
+<p>确保你已经安装了 <a href="https://www.rust-lang.org/">Rust</a>。如果没有，请参阅 <a href="https://rustup.rs/">rustup</a> 网站上的说明。</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>使用基于 Unix 的系统时，通过系统的包管理器（例如 <code>brew</code>、<code>apt</code>、<code>dnf</code> 等）安装 Rust 可能导致各种<a href="https://rust-lang.github.io/rustup/installation/other.html#using-a-package-manager">问题和兼容性冲突</a>，因此最好使用 <a href="https://rustup.rs/">rustup</a>。</p>
+</blockquote>
+<p>使用 Windows 时，请确保你已安装下面列出的 ABI 之一。有关更多详细信息，请参阅 The rustup book 中的 <a href="https://rust-lang.github.io/rustup/installation/windows.html">Windows</a> 章节。</p>
+<ul>
+<li>
+<p><strong>MSVC</strong>：推荐的 ABI，包含在 <code>rustup</code> 的默认依赖项列表中。使用此 ABI 可以与 Visual Studio 生成的软件实现互操作。</p>
+<p>如果不确定该选哪个，就使用它。</p>
+</li>
+<li>
+<p><strong>GNU</strong>：GCC 工具链使用的 ABI。你可以自行安装它，以便与使用 MinGW/MSYS2 工具链构建的软件实现互操作。</p>
+</li>
+</ul>
+<p>另请参阅<a href="https://rust-lang.github.io/rustup/installation/other.html">其他安装方案</a>。</p>
+<h3 id="risc-v-设备"><a class="header" href="#risc-v-设备">RISC-V 设备</a></h3>
+<p>要为基于 RISC-V 架构的乐鑫芯片构建 Rust 应用程序（如果不确定设备采用哪种架构，请参阅<a href="#硬件概览">硬件概览</a>），请执行以下步骤：</p>
+<ol>
+<li>
+<p>安装适当的工具链以及 <code>rust-src</code> <a href="https://rust-lang.github.io/rustup/concepts/components.html">组件</a>：</p>
+<ul>
+<li>既可以使用 <code>stable</code>，也可以使用 <a href="https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust"><code>nightly</code></a>：
+<pre><code class="language-shell">rustup toolchain install stable --component rust-src
+</code></pre>
+或
+<pre><code class="language-shell">rustup toolchain install nightly --component rust-src
+</code></pre>
+</li>
+</ul>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><code>rustfmt</code>、<code>clippy</code> 和 <code>rust-analyzer</code> 等其他组件并非必需，但强烈推荐安装。</p>
+</blockquote>
+</li>
+<li>
+<p>安装目标：</p>
+<pre><code class="language-shell">rustup target add riscv32imc-unknown-none-elf # For ESP32-C2 and ESP32-C3
+rustup target add riscv32imac-unknown-none-elf # For ESP32-C6 and ESP32-H2
+</code></pre>
+<p>这些目标目前属于 <a href="https://doc.rust-lang.org/nightly/rustc/platform-support.html#tier-2">Tier 2</a>。注意 Rust 中不同的 <code>riscv32</code> 目标包含了不同的 <a href="https://en.wikichip.org/wiki/risc-v/standard_extensions">RISC-V 扩展</a>。</p>
+</li>
+</ol>
+<p>如果你_不打算_使用 ESP32、ESP32-S2 或 ESP32-S3，工具链安装就已经完成，可以跳到<a href="#工具安装">工具安装</a>章节。</p>
+<h3 id="xtensa-设备"><a class="header" href="#xtensa-设备">Xtensa 设备</a></h3>
+<p>如<a href="#硬件概览">硬件概览</a>所述，ESP32、ESP32-S2 和 ESP32-S3 采用 Xtensa 架构。如果要为这些芯片开发，目前需要使用 Rust 编译器的分支版本。</p>
+<p><a href="https://github.com/esp-rs/espup"><code>espup</code></a> 是一款工具，用于简化为这些目标开发 Rust 应用程序所需的工具链安装和维护过程。</p>
+<ol>
+<li>安装 <code>espup</code>：
+<pre><code class="language-shell">cargo install espup --locked
+</code></pre>
+也可以直接下载预编译好的<a href="https://github.com/esp-rs/espup/releases">发行二进制文件</a>，或使用 <a href="https://github.com/cargo-bins/cargo-binstall"><code>cargo-binstall</code></a>。</li>
+<li>运行以下命令，为所有受支持的乐鑫目标安装全部必需的工具链：
+<pre><code class="language-shell">espup install
+</code></pre>
+</li>
+<li>在 Unix 系统上配置环境变量：请参阅 <a href="https://github.com/esp-rs/espup?tab=readme-ov-file#environment-variables-setup"><code>espup</code> README</a> 中介绍的不同方法。Windows 用户无需进行其他操作。</li>
+</ol>
+<h4 id="espup-安装了什么"><a class="header" href="#espup-安装了什么"><code>espup</code> 安装了什么</a></h4>
+<p>为了启用对乐鑫目标的支持，<code>espup</code> 安装了以下工具：</p>
+<ul>
+<li><a href="https://github.com/esp-rs/rust">乐鑫 Rust 分支</a>，支持乐鑫目标。</li>
+<li><code>stable</code> 工具链，支持 RISC-V 目标。</li>
+<li>LLVM <a href="https://github.com/espressif/llvm-project">分支</a>，支持 Xtensa 目标。</li>
+<li><a href="https://github.com/espressif/crosstool-NG/">GCC 工具链</a>，用于链接最终的二进制文件。</li>
+</ul>
+<p>分支编译器能与标准 Rust 编译器共存，允许在一个系统上同时安装两者。可以使用任意一种 <a href="https://rust-lang.github.io/rustup/overrides.html">override 方法</a>来调用分支编译器。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="工具安装"><a class="header" href="#工具安装">工具安装</a></h1>
+<p>工具链就绪后，就可以安装一些额外的工具，以简化和改善乐鑫芯片上的 Rust 应用程序开发过程。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="esp-generate"><a class="header" href="#esp-generate"><code>esp-generate</code></a></h1>
+<p><a href="https://github.com/esp-rs/esp-generate"><code>esp-generate</code></a> 是一个项目生成工具，可以帮助你创建能够正常工作的项目，并预先应用大部分所需配置。</p>
+<h2 id="安装"><a class="header" href="#安装">安装</a></h2>
+<p>要安装 <code>esp-generate</code>，执行：</p>
+<pre><code class="language-shell">cargo install esp-generate --locked
+</code></pre>
+<p>你也可以直接下载预编译好的<a href="https://github.com/esp-rs/esp-generate/releases">发行二进制文件</a>，或使用 <a href="https://github.com/cargo-bins/cargo-binstall"><code>cargo-binstall</code></a>。</p>
+<h2 id="esp-generate-配置了什么"><a class="header" href="#esp-generate-配置了什么"><code>esp-generate</code> 配置了什么</a></h2>
+<p><code>esp-generate</code> 不仅负责选择依赖项，还会根据所选的模板选项，应用一组已知的 crate 和 feature 组合，从而减少创建可用项目时所需的手动配置。</p>
+<p>选择模板选项后，<code>esp-generate</code> 会更新生成的 <code>Cargo.toml</code>，加入这些选项所需的 crate 和 Cargo feature。模板会在确保生成的应用程序骨架能够按照所选配置构建和运行的前提下，尽量精简依赖项列表，使你无需手动配置依赖项就能成功完成首次构建。</p>
+<p>如果需要进一步了解相关细节，<a href="#辅助-crate-概览">辅助 crate</a>章节介绍了无线、异步和网络选项与各个 crate 之间的对应关系。</p>
+<p>一些选项的配置相互关联。例如，日志可以通过 <code>defmt</code> 或 <code>log</code> 配合相应的前端进行配置。某些 crate 也会作为标准基础配置的一部分加入项目，因为它们支持常见的嵌入式开发流程。例如，<code>esp-bootloader-esp-idf</code> 提供对二级 bootloader 的额外支持；<code>critical-section</code> 也会被加入，因为许多嵌入式 crate 依赖它来实现中断临界区。</p>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p>每个版本的 <code>esp-generate</code> 都对应特定版本的生态系统 crate。如果希望使用最新发布的版本，请记得更新 <code>esp-generate</code>。</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="espflash"><a class="header" href="#espflash"><code>espflash</code></a></h1>
+<p><a href="https://github.com/esp-rs/espflash/tree/main/espflash/"><code>espflash</code></a> 是为乐鑫 SoC 和模块设计的串口烧录工具，原生支持所有与 <code>esp-hal</code> 兼容的芯片。</p>
+<h2 id="安装-1"><a class="header" href="#安装-1">安装</a></h2>
+<p>要安装 <a href="https://github.com/esp-rs/espflash/tree/main/espflash/"><code>espflash</code></a>，执行以下命令：</p>
+<pre><code class="language-shell">cargo install espflash --locked
+</code></pre>
+<p>也可以使用 <a href="https://github.com/cargo-bins/cargo-binstall"><code>cargo-binstall</code></a> 从<a href="https://github.com/esp-rs/espflash/releases">发行版本</a>下载预编译的程序并使用：</p>
+<pre><code class="language-bash">cargo binstall espflash
+</code></pre>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><a href="https://github.com/esp-rs/espflash/tree/main/espflash/"><code>espflash</code></a> 默认使用的波特率是 115200，你可以提高波特率来加快烧录速度。
+最简单的方法是设置 <code>ESPFLASH_BAUD</code> 环境变量。</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="probe-rs"><a class="header" href="#probe-rs"><code>probe-rs</code></a></h1>
+<p><a href="https://probe.rs/"><code>probe-rs</code></a> 项目提供了一套工具，可以通过各种调试探针与嵌入式微控制器交互，并对<a href="https://probe.rs/targets/?q=espressif&amp;p=0">乐鑫芯片</a>提供了完善的支持。</p>
+<p>除了烧录和监控，它还提供完善的调试功能。</p>
+<p>如果不确定现在是否需要它，可以暂时跳过安装，以后再回来安装。</p>
+<p>带有 <code>USB-JTAG-SERIAL</code> 外设的乐鑫设备无需额外的硬件，就可以使用 <code>probe-rs</code>。没有这个外设的设备则需要 <a href="https://docs.espressif.com/projects/esp-iot-solution/en/latest/hw-reference/ESP-Prog_guide.html">ESP-Prog</a> 等外部编程器。</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>ESP32-C6、ESP32-H2、ESP32-S3 和 ESP32-C3（修订版 0.3 或更新版本）提供 <code>USB-JTAG-SERIAL</code> 外设。</p>
+</blockquote>
+<!--- probe-rs 网站上的搜索功能目前不可用 --->
+<h2 id="安装-2"><a class="header" href="#安装-2">安装</a></h2>
+<p>请参阅 probe-rs 网站上的<a href="https://probe.rs/docs/getting-started/installation/">安装</a>和<a href="https://probe.rs/docs/getting-started/probe-setup/">配置</a>指南。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="esp-config可选"><a class="header" href="#esp-config可选"><code>esp-config</code>（可选）</a></h1>
+<p><a href="https://github.com/esp-rs/esp-hal/tree/main/esp-config"><code>esp-config</code></a> 是一个通过终端用户界面（TUI）编辑配置选项的工具。使用它完全是可选的；有关配置文件的组织方式，以及如何不借助 TUI 手动编辑配置文件，请参阅<a href="#配置">配置章节</a>。</p>
+<h2 id="安装-3"><a class="header" href="#安装-3">安装</a></h2>
+<p>要安装 <code>esp-config</code>，执行：</p>
+<pre><code class="language-shell">cargo install esp-config --features=tui --locked
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="使用-esp-generate"><a class="header" href="#使用-esp-generate">使用 <code>esp-generate</code></a></h1>
+<p>安装好所有必需的工具后，你就可以创建第一个在乐鑫芯片上运行的 Rust 项目了。</p>
+<h2 id="生成项目"><a class="header" href="#生成项目">生成项目</a></h2>
+<p>首先，运行以下命令，启动交互式配置工具：</p>
+<pre><code class="language-shell">esp-generate
+</code></pre>
+<p><code>esp-generate</code> 会提示你选择芯片并输入项目名称，然后进入 TUI，通过选项配置项目生成过程。</p>
+<p><img src="assets/esp-generate.png" alt="截图"></p>
+<p>根据项目需要调整选项。请参阅 README 中的<a href="https://github.com/esp-rs/esp-generate?tab=readme-ov-file#available-options">可用选项</a>部分。TUI 底部会显示各选项的简短说明。</p>
+<h2 id="烧录选项"><a class="header" href="#烧录选项">烧录选项</a></h2>
+<p>有两种工具可以将代码烧录到目标设备：</p>
+<ul>
+<li><code>espflash</code>：默认的烧录工具。</li>
+<li><code>probe-rs</code>：启用基于实时传输（RTT）的选项，并支持片上调试。
+<ul>
+<li>生成项目时，请确保启用 <code>Use probe-rs to flash and monitor instead of espflash.</code>（<code>probe-rs</code> 选项）。</li>
+</ul>
+</li>
+</ul>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p>使用 <code>espflash</code> 时，可以在 <code>Flashing, logging and debugging (espflash)</code> 下启用 <code>Use the log crate to print messages.</code> 和 <code>Use esp-backtrace as the panic handler.</code>。</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p>使用 <code>probe-rs</code> 而不是 <code>espflash</code> 时，可以在 <code>Flashing, logging and debugging (probe-rs)</code> 下启用 <code>Use defmt to print messages.</code> 和 <code>Use panic-rtt-target as the panic handler.</code>。</p>
+</blockquote>
+<h2 id="执行项目生成"><a class="header" href="#执行项目生成">执行项目生成</a></h2>
+<p>准备好后，在 TUI 的根界面按下 <code>s</code> 即可生成项目。保存项目时，工具会检查必需工具和可选工具是否已安装，并显示结果。根据生成选项，它可能会提示你安装之前遗漏的工具，或现在需要的新工具。</p>
+<h2 id="运行代码"><a class="header" href="#运行代码">运行代码</a></h2>
+<p>只需执行以下命令，就能让代码运行起来：</p>
+<pre><code class="language-shell">cargo run --release
+</code></pre>
+<p>此命令会编译应用程序，将它烧录到目标设备，并开始监控日志输出。</p>
+<p>🎉 恭喜，你已经成功将第一个 Rust 程序烧录到 ESP32 上！</p>
+<p>现在，你可以继续深入探索 ESP32 平台上的 Rust 开发。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="使用-esp-config-的-tui可选"><a class="header" href="#使用-esp-config-的-tui可选">使用 <code>esp-config</code> 的 TUI（可选）</a></h1>
+<p>如果已经安装此工具，可以在项目目录中运行 <code>esp-config</code>，启动后的界面如下：</p>
+<p><img src="assets/esp-config.png" alt="截图"></p>
+<p>如果工具无法自动识别，你也可以指定目标芯片和要使用的配置文件。</p>
+<p>对于通过 <code>esp-generate</code> 生成的项目，通常不需要这样做。</p>
+<p>有关配置文件的组织方式，以及如何手动编辑它们，请参阅<a href="#配置">配置章节</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="应用开发"><a class="header" href="#应用开发">应用开发</a></h1>
+<p>现在你已经成功运行了第一个程序，让我们补充一些知识，并介绍常见嵌入式开发实践中的一些可选方案。</p>
+<ul>
+<li><a href="#应用启动与-bootloader">应用启动与 bootloader</a></li>
+<li><a href="#配置">配置</a></li>
+<li><a href="#日志">日志</a></li>
+<li><a href="#内存分配">内存分配</a></li>
+<li><a href="#异步方案">异步方案</a></li>
+<li><a href="#测试">测试</a></li>
+<li><a href="#空中升级ota">空中升级（OTA）</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="应用启动与-bootloader"><a class="header" href="#应用启动与-bootloader">应用启动与 bootloader</a></h1>
+<p>许多嵌入式设备上电后，会直接从 flash 中的某个地址开始执行代码。乐鑫芯片的启动过程稍微复杂一些，需要先设置 flash、缓存，并完成其他一些操作。为此，我们需要一个 bootloader：它是一个简单的应用程序，负责完成上述设置，然后跳转到其他代码开始执行。</p>
+<p>乐鑫设备使用两级 bootloader 来启动应用程序：</p>
+<ul>
+<li>一级 bootloader（ROM bootloader）：设置与架构相关的寄存器，检查<a href="https://docs.espressif.com/projects/esptool/en/latest/esp32c6/advanced-topics/boot-mode-selection.html?highlight=boot%20mode">启动模式</a>和复位原因，并加载二级 bootloader。这个 bootloader 已固化在 ROM 中，是 SoC 的一部分，因此无需烧录，也无法修改。</li>
+<li>二级 bootloader：加载你的应用程序，并设置内存（RAM、PSRAM 或 flash）。</li>
+</ul>
+<p>虽然从_技术上_讲二级 bootloader 并非必需，但仍建议使用。它支持 OTA（一级 bootloader 只能从 flash 中的固定偏移处加载应用程序），并且可以启用 flash 加密和安全启动。详情请参阅 <a href="#空中升级ota">OTA 章节</a>。</p>
+<p>有关启动过程的更多信息，请参阅 <a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c6/api-guides/startup.html">ESP-IDF 文档</a>。不过，其中某些内容可能仅适用于 ESP-IDF。</p>
+<h2 id="二级-bootloader"><a class="header" href="#二级-bootloader">二级 bootloader</a></h2>
+<p>目前仅支持将 ESP-IDF bootloader 用作二级 bootloader。未来这一情况会有所改变，因为我们计划加入对 <a href="https://docs.mcuboot.com/">MCUBOOT</a> 等其他 bootloader 的支持。</p>
+<h3 id="esp-idf-bootloader"><a class="header" href="#esp-idf-bootloader">ESP-IDF bootloader</a></h3>
+<p>它使用 <a href="https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/firmware-image-format.html">ESP 镜像格式</a>，详情请参阅 <a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c6/api-guides/startup.html#second-stage-bootloader">ESP-IDF 文档</a>。ESP-IDF bootloader 配合分区表，确定二进制文件的位置。</p>
+<h4 id="分区表"><a class="header" href="#分区表">分区表</a></h4>
+<p>乐鑫设备的 flash 可以存储多个应用程序，以及校准数据、文件系统和参数存储等各种数据。为了管理这些内容，需要将分区表烧录到设备上的默认偏移处。</p>
+<p>ESP-IDF 二级 bootloader 通过查看分区表，确定二进制文件的位置。分区表中的每个条目都有名称（标签）、类型（<code>app</code>、<code>data</code> 或其他类型）、子类型，以及分区在 flash 中的偏移。</p>
+<p>使用 <a href="#espflash"><code>espflash</code></a> 时，如果没有提供二级 bootloader 或分区表，<code>espflash</code> 会使用默认的 bootloader 和分区表；你也可以创建<a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c6/api-guides/partition-tables.html#creating-custom-tables">自定义分区表</a>。</p>
+<h4 id="构建自定义-esp-idf-bootloader"><a class="header" href="#构建自定义-esp-idf-bootloader">构建自定义 ESP-IDF bootloader</a></h4>
+<p><code>espflash</code> 和 <code>cargo-espflash</code> 包含使用默认设置编译的预构建 ESP-IDF <a href="https://github.com/esp-rs/espflash/tree/main/espflash/resources/bootloaders">bootloader</a>，无需额外配置即可开始使用。不过，如果需要更高级的功能或自定义设置，就需要自行构建 bootloader，以满足具体需求。</p>
+<p>要构建自定义 ESP-IDF bootloader：</p>
+<ol>
+<li><a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html#manual-installation">安装 ESP-IDF</a>。</li>
+<li>创建一个新项目，或进入已有项目。
+<ul>
+<li>最简单的方式是使用 <code>esp-idf/examples</code> 目录中的任意示例。</li>
+</ul>
+</li>
+<li>使用 <code>idf.py menuconfig</code> 或编辑 <code>sdkconfig</code> 文件，对 bootloader 进行所需的修改。
+<ul>
+<li>详情请参阅<a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig-reference.html#configuration-options-reference">配置选项参考</a>。</li>
+</ul>
+</li>
+<li>使用 <code>idf.py set-target &lt;CHIP_TARGET&gt; build bootloader</code> 构建 bootloader。
+<ul>
+<li>生成的 bootloader 二进制文件位于 <code>build/bootloader/bootloader.bin</code>。</li>
+</ul>
+</li>
+<li>通过 <code>--bootloader</code> 参数或<a href="https://github.com/esp-rs/espflash/tree/main/espflash#configuration-file">配置文件</a>，在 <code>espflash/cargo-espflash</code> 中使用构建好的 bootloader 二进制文件。</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="配置"><a class="header" href="#配置">配置</a></h1>
+<p><a href="https://crates.io/crates/esp-config"><code>esp-config</code></a> crate 为 <code>esp-*</code> crate 提供了一种管理额外配置的方式，这些配置不适合通过 Cargo feature 表达。</p>
+<h2 id="查找可用的配置"><a class="header" href="#查找可用的配置">查找可用的配置</a></h2>
+<p>完整的可用选项列表位于相应 crate 的<a href="https://docs.espressif.com/projects/rust/">文档</a>中。例如，这里列出了 ESP32-C6 的 <a href="https://docs.espressif.com/projects/rust/esp-hal/1.0.0/esp32c6/esp_hal/index.html#additional-configuration"><code>esp-hal</code> 配置选项</a>。</p>
+<h2 id="使用方法"><a class="header" href="#使用方法">使用方法</a></h2>
+<p>创建项目时，你可能需要配置一些额外的高级参数，例如将外设放在 RAM 中以提高性能，或更改某个 crate 的 RX/TX 队列大小。为此，你需要调整 <code>esp-config</code> 提供的配置项。</p>
+<p>你可以使用以下两种方式：</p>
+<ul>
+<li>
+<p>设置环境变量。例如，在 <code>esp-hal</code> 中，如果想将匿名符号放在 RAM 中，需要创建名为 <code>ESP_HAL_CONFIG_PLACE_ANON_IN_RAM</code> 的环境变量，并修改其值。该配置项的默认值为 <code>false</code>。</p>
+</li>
+<li>
+<p>在 <code>.cargo/config.toml</code> 中设置所需参数（这种方式同样会设置环境变量）：</p>
+<pre><code class="language-toml"># .cargo/config.toml
+
+[env]
+ESP_HAL_CONFIG_PLACE_ANON_IN_RAM="true"
+</code></pre>
+<p>修改 <code>.cargo/config.toml</code> 的 <code>[env]</code> 部分后，建议<strong>清理构建产物后重新构建</strong>。</p>
+</li>
+</ul>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>在命令行中设置的环境变量优先于 <code>[env]</code> 部分。</p>
+</blockquote>
+<h2 id="多套配置"><a class="header" href="#多套配置">多套配置</a></h2>
+<p>根据应用程序的需求，你可能希望在同一个项目中支持不同的开发板、芯片或目标。这时，各目标可能需要设置不同的选项。我们建议采用以下配置方式：</p>
+<ul>
+<li>一个基础的 <code>.cargo/config.toml</code>，包含常用的构建参数（无论是否传入其他 <code>--config</code> 参数，Cargo _始终_会读取并遵循这个文件）。</li>
+<li>在 <code>.cargo/</code> 下为每套配置准备一个配置文件。</li>
+<li>（<strong>推荐</strong>）设置一个 Cargo <a href="https://doc.rust-lang.org/cargo/reference/config.html#alias">别名</a>，用于按指定配置构建，例如 <code>run-config-a = "run --config=./.cargo/config_a.toml --release"</code>。简单情况下，也可以直接在命令行中传入 <code>--config</code>。</li>
+</ul>
+<p>请参阅<a href="https://github.com/bjoernQ/esp-hal-multiconfig-example/tree/main">这个示例仓库</a>，进一步了解使用多套配置的项目。</p>
+<h2 id="定义自己的配置选项"><a class="header" href="#定义自己的配置选项">定义自己的配置选项</a></h2>
+<p>你可能也想在项目中定义一些配置选项。为此，需要在 <code>esp_config.yml</code> 文件中以声明的方式定义这些选项、默认值，以及其他参数和检查。详情请参阅项目仓库中的<a href="https://github.com/esp-rs/esp-hal/tree/main/esp-config#defining-configuration-options">定义配置选项</a>部分。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="日志"><a class="header" href="#日志">日志</a></h1>
+<p>日志是嵌入式系统开发的重要组成部分，它使系统行为可观察，并帮助调试和监控。在 Rust 生态系统中，常用的两种主要日志框架是 <a href="https://crates.io/crates/defmt"><code>defmt</code></a> 和 <a href="https://crates.io/crates/log"><code>log</code></a>。</p>
+<p>生成项目时，无论你选择下面的哪一种工具，<a href="#esp-generate"><code>esp-generate</code></a> 都会确保配置正确，你只需根据自己的需求调整所使用的日志工具。</p>
+<h2 id="defmt"><a class="header" href="#defmt"><code>defmt</code></a></h2>
+<p><a href="https://crates.io/crates/defmt"><code>defmt</code></a> 是一个高效的日志框架，专为嵌入式系统等资源受限的环境设计。它使用紧凑的二进制编码日志消息，减少了传统字符串日志带来的开销。更多信息请参阅 <a href="https://defmt.ferrous-systems.com/introduction"><code>defmt</code> 文档</a>。在乐鑫芯片上，我们推荐将 <code>defmt</code> 与 <code>probe-rs</code> 配合使用，以取得最佳效果。</p>
+<h2 id="log"><a class="header" href="#log"><code>log</code></a></h2>
+<p><a href="https://crates.io/crates/log"><code>log</code></a> crate 是 Rust 社区广泛采用的日志门面。它定义了一组宏（<code>info!</code>、<code>warn!</code>、<code>error!</code> 等），用于记录不同级别的日志消息。我们在 <a href="https://github.com/esp-rs/esp-hal/tree/main/esp-println"><code>esp-println</code></a> 中提供了一个 <a href="https://docs.rs/log/latest/log/#implementing-a-logger">logger</a> 实现；如果需要，你也可以自行实现 logger。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="内存分配"><a class="header" href="#内存分配">内存分配</a></h1>
+<p>在 <code>no_std</code> 环境中，可以选择使用 <a href="https://doc.rust-lang.org/alloc/"><code>alloc</code></a> crate 进行堆分配，从而使用 <code>Vec</code>、<code>Box</code> 等常用 Rust 类型，以及其他需要堆分配的集合。有时，你希望使用的某个依赖项也可能要求使用 <code>alloc</code>。</p>
+<p>我们提供了自己的 <code>no_std</code> 堆分配器 <a href="https://crates.io/crates/esp-alloc"><code>esp-alloc</code></a>。不过，在启用它之前，你应该先了解<strong>为什么</strong>需要堆分配，以及其中的取舍。</p>
+<h2 id="为什么不使用堆"><a class="header" href="#为什么不使用堆">为什么不使用堆？</a></h2>
+<p>虽然堆分配更加灵活，但它也有一些代价：</p>
+<ul>
+<li><strong>碎片化</strong>：随着时间推移，动态分配可能导致_碎片化_。即使剩余内存总量足够，零散的小块内存也可能使大块内存无法分配。这可能导致难以察觉的运行时故障。</li>
+<li><strong>运行时开销</strong>：分配和释放内存需要计算成本，所选分配器本身也可能带来额外开销。</li>
+</ul>
+<h2 id="可配置的内存布局与回收的-ram"><a class="header" href="#可配置的内存布局与回收的-ram">可配置的内存布局与回收的 RAM</a></h2>
+<p>一些乐鑫芯片的内存映射并不连续，并非所有物理 RAM 都可以作为一个连续的堆使用。例如，某些区域保留给 ROM 代码使用，不能被覆盖。下面以 ESP32 的内存布局为例。</p>
+<p align="center">
+<img src="assets/esp32-mm.webp" alt="ESP32 内存映射" />
+</p>
+
+<p>此外，二级 bootloader 在启动过程中会使用一部分内存。这部分内存不能用作栈，但在进入主应用程序后可以用作堆。你可以在堆分配器声明中使用 <code>#[ram(reclaimed)]</code> 宏，利用这部分原本未被使用的内存。</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Use 64kB in dram2_seg for the heap, which is otherwise unused.
+heap_allocator!(#[ram(reclaimed)] size: 64000);
+<span class="boring">}</span></code></pre>
+<h2 id="psram"><a class="header" href="#psram">PSRAM</a></h2>
+<p>我们的芯片有几百千字节的内部 RAM，对某些应用来说可能不够。一些乐鑫芯片可以通过虚拟地址访问外部 PSRAM（伪静态 RAM）。在满足某些限制的情况下，外部内存可以像内部数据 RAM 一样使用。</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>在 Xtensa 芯片上，PSRAM 中的原子操作无法正确工作，可能引发数据竞争，从而失去原子操作应有的作用。因此，不能使用该分配器直接或间接地为 <code>Atomic*</code> 类型分配内存。ESP32 的相关限制可以在<a href="https://docs.espressif.com/projects/esp-idf/en/v5.4.1/esp32/api-guides/external-ram.html#restrictions">这里</a>找到。此问题<strong>不影响</strong>我们的 RISC-V 芯片，它们的 PSRAM 能够正确支持原子操作。</p>
+</blockquote>
+<h3 id="分配器注意事项"><a class="header" href="#分配器注意事项">分配器注意事项</a></h3>
+<p>你只能有<strong>一个全局分配器</strong>，但这个分配器可以使用多个内存区域（例如 PSRAM、内部 RAM，或它们的多个内存块）。通过 nightly 的 <code>allocator_api</code> 功能和 <a href="https://crates.io/crates/allocator-api2"><code>allocator_api2</code></a>，可以使用多个分配器；<a href="https://crates.io/crates/esp-alloc"><code>esp-alloc</code></a> 实现了后者的接口。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="异步方案"><a class="header" href="#异步方案">异步方案</a></h1>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>本节不是异步编程教程或教学材料。如果需要学习异步编程，请阅读<a href="https://rust-lang.github.io/async-book/">官方 async-book</a>。</p>
+</blockquote>
+<p><code>esp-hal</code> 为大多数受支持的驱动提供阻塞和异步 API。驱动默认以 <a href="https://docs.espressif.com/projects/rust/esp-hal/1.0.0/esp32c6/esp_hal/struct.Blocking.html"><code>Blocking</code></a> 模式创建。要使用异步驱动，需要通过 <code>into_async</code> 方法将它转换为 <a href="https://docs.espressif.com/projects/rust/esp-hal/1.0.0/esp32c6/esp_hal/struct.Async.html"><code>Async</code></a> 模式。更多信息和入门示例，请参阅 <a href="https://github.com/esp-rs/esp-hal">esp-hal 包</a>中的 <code>examples</code>。</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>我们的 <code>Async</code> 驱动不实现 <code>Send</code>，因为它们会在当前核心上注册中断。将它们移动到另一个核心可能导致问题。如果需要将驱动发送（移动）到另一个核心，应先发送 <code>Blocking</code> 版本，再在正确的核心上调用 <code>into_async</code>，使驱动正确绑定到该核心。</p>
+</blockquote>
+<h2 id="embassy"><a class="header" href="#embassy">Embassy</a></h2>
+<p><a href="https://embassy.dev">Embassy</a> 是专为嵌入式 Rust 开发设计的异步框架。它的 <a href="https://crates.io/crates/embassy-executor">embassy-executor</a> crate 提供一个 <code>async/await</code> 执行器，用于执行在启动时静态分配的固定数量的任务，也可以在之后启动更多任务。为了在之后启动任务，你可以保留 <code>Spawner</code> 的副本，例如将它作为参数传给初始任务。有关 <code>embassy</code> 的更多信息，请参阅 <a href="https://embassy.dev/book/">Embassy book</a>。</p>
+<p><a href="https://crates.io/crates/esp-rtos"><code>esp-rtos</code></a> crate 提供了 <a href="https://crates.io/crates/esp-hal"><code>esp-hal</code></a> 与 <a href="https://embassy.dev">Embassy</a> 异步框架之间的集成，支持以下功能：</p>
+<ol>
+<li>中断模式执行器。</li>
+<li>支持多核的线程模式 embassy 执行器。</li>
+<li>Embassy 时间驱动。</li>
+<li>定时器等待队列。</li>
+</ol>
+<h2 id="arielos"><a class="header" href="#arielos">ArielOS</a></h2>
+<p><a href="https://github.com/ariel-os/ariel-os">ArielOS</a> 是一个面向安全、内存安全、低功耗物联网的操作系统。它基于包括 <code>esp-hal</code> 在内的多个嵌入式 Rust 生态项目构建。ArielOS 注重紧密集成，补充了多核调度器、安全网络、可移植驱动和统一构建系统等操作系统功能。由此，它成为基于 C 的实时操作系统（RTOS）方案的强大替代方案，并且完全使用 Rust 实现。它与 embassy 集成良好，可以通过多种方式配合 embassy 使用。</p>
+<h2 id="rtic"><a class="header" href="#rtic">RTIC</a></h2>
+<p><a href="https://crates.io/crates/rtic">实时中断驱动并发（RTIC）</a> 是一个由社区支持的并发框架，用于构建实时系统。实时任务不是异步的，而“软件”任务是异步的。目前仅支持 ESP32-C3 和 ESP32-C6。</p>
+<!-- TODO: 准备就绪后，将 ArielOS 链接改为 crates.io 链接 -->
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="测试"><a class="header" href="#测试">测试</a></h1>
+<p>测试是应用开发不可或缺的一部分。参考 <code>esp-hal</code> 的做法，你可以为应用程序编写和运行直接在硬件上执行的测试。</p>
+<h2 id="主机测试"><a class="header" href="#主机测试">主机测试</a></h2>
+<p>在可行且合理的情况下，应尽量在主机上进行测试，而不是在目标设备上测试。主机测试更容易在 CI 中运行、速度更快，也不会消耗设备的 flash 擦写寿命。对于_必须_在真实硬件上执行的测试，则应采用硬件在环测试环境。</p>
+<h2 id="硬件在环测试"><a class="header" href="#硬件在环测试">硬件在环测试</a></h2>
+<p>硬件在环（HIL）测试是指在测试环境中使用真实设备。我们使用 <a href="https://github.com/probe-rs/embedded-test"><code>embedded-test</code></a> 框架编写单元测试和集成测试，因此整个流程与普通的非嵌入式项目只有少许差异。我们使用 <a href="https://probe.rs"><code>probe-rs</code></a> 将测试烧录到目标设备并运行（请在 <a href="https://github.com/esp-rs/esp-hal/tree/main/hil-test"><code>hil-test</code> 子仓库</a>中查看正确的版本）。为此，你<strong>必须只使用</strong>开发板上的 <strong><code>USB-Serial-JTAG</code> 接口</strong>（参阅<a href="#硬件概览">硬件概览</a>）。如果设备没有这种接口，就需要使用 <a href="https://docs.espressif.com/projects/esp-dev-kits/en/latest/other/esp-prog/user_guide.html">esp-prog</a> 或其他合适的编程器，并按照<a href="https://docs.espressif.com/projects/esp-idf/en/v5.2.3/esp32s2/api-guides/jtag-debugging/configure-other-jtag.html">连接说明</a>接线（在页面中选择所需芯片）。</p>
+<p>使用 <code>esp-generate</code> 时，在 <code>probe-rs</code> 下选择 <code>embedded-test</code>，即可为项目配置测试。设备正确连接后，你只需在本地运行 <code>cargo test</code>。</p>
+<h3 id="embedded-test"><a class="header" href="#embedded-test"><code>embedded-test</code></a></h3>
+<p><a href="https://github.com/probe-rs/embedded-test"><code>embedded-test</code></a> 的测试以带有 <code>#[test]</code> 宏的函数形式编写，类似于 <code>std</code> 测试框架。通常，测试结果由该函数的执行结果决定：如果代码发生 panic，则认为测试失败，并继续运行下一个测试。不过，你可以通过多种方式自定义这个过程，例如使用 <code>#[should_panic]</code> 属性宏，将 panic 视为测试成功的条件，或为测试设置超时等。详情请参阅 <a href="https://docs.rs/embedded-test/0.6.2/embedded_test/"><code>embedded-test</code> 文档</a>。由于它模拟了默认的 Rust 测试工具，也支持与 IDE 集成。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="空中升级ota"><a class="header" href="#空中升级ota">空中升级（OTA）</a></h1>
+<p>空中升级（OTA）是指_无需_生产烧录工具即可更新应用程序的能力。OTA 高度依赖 bootloader，由它处理 OTA 镜像（固件更新）的切换、替换和回滚。对于每种受支持的 bootloader，我们都提供相应的支持 crate。目前只支持 ESP-IDF bootloader，因此只有 <a href="https://github.com/esp-rs/esp-hal/blob/main/esp-bootloader-esp-idf"><code>esp-bootloader-esp-idf</code></a> crate。</p>
+<p><code>esp-hal</code> 仓库中有一个<a href="https://github.com/esp-rs/esp-hal/tree/main/examples/ota">简单的 OTA 示例</a>。这个示例虽然基础，但展示了实现 OTA 功能所需的基本组件。请务必查看相关文档，其中也提供了使用 <code>espflash</code> 创建 OTA 二进制文件的说明。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="继续探索"><a class="header" href="#继续探索">继续探索</a></h1>
+<p>我们希望本书已帮助你做好准备，使用乐鑫芯片和 Rust 构建实际应用。这里介绍的只是入门内容，本书之外还有许多值得探索的主题。如果还没有阅读<a href="#补充资源">补充资源</a>，请务必看一看。</p>
+<p>我们期待看到你的作品。欢迎将它加入 <a href="https://github.com/esp-rs/awesome-esp-rust.git">awesome-esp-rust</a> 列表，也可以从这个列表中寻找灵感。</p>
+<p>如果你希望直接为 <code>esp-hal</code> 或辅助 crate 做贡献，请参阅<a href="https://github.com/esp-rs/esp-hal/tree/main/documentation">开发者贡献文档</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="常见问题"><a class="header" href="#常见问题">常见问题</a></h1>
+<p>本章介绍在 ESP 芯片上使用 Rust 时，开发者可能遇到的常见问题和挑战。无论你是在配置开发环境、优化代码，还是希望仿真项目，都可以在这里找到实用的解决方案和最佳实践。</p>
+<h2 id="编辑器与-ide"><a class="header" href="#编辑器与-ide">编辑器与 IDE</a></h2>
+<p>使用 <a href="#esp-generate"><code>esp-generate</code></a> 时，可以在生成项目的过程中，自动为 VS Code、Helix、Neovim 和 Zed 编辑器配置推荐的设置和扩展。</p>
+<h2 id="程序大小与内存优化"><a class="header" href="#程序大小与内存优化">程序大小与内存优化</a></h2>
+<h3 id="优化二进制文件大小"><a class="header" href="#优化二进制文件大小">优化二进制文件大小</a></h3>
+<ul>
+<li>Cargo 提供了一些默认 profile；我们推荐使用 <a href="https://doc.rust-lang.org/cargo/reference/profiles.html#release"><code>release</code> profile</a>，因为它会进行优化并移除调试符号。</li>
+<li>Cargo 支持不同的 <a href="https://doc.rust-lang.org/cargo/reference/profiles.html#profile-settings">profile 设置</a>，这些设置会影响最终构建产物的大小。
+<ul>
+<li>请参阅 The Embedded Rust Book 中的<a href="https://docs.rust-embedded.org/book/unsorted/speed-vs-size.html">优化：速度与大小的权衡</a>。</li>
+</ul>
+</li>
+<li>使用外部依赖项时要谨慎，因为它们可能增大最终构建产物的大小。</li>
+<li>如果某些日志消息没有用处或不会被查看，请将它们过滤掉。</li>
+<li>更多建议可以在 <a href="https://github.com/johnthagen/min-sized-rust">min-sized-rust</a> 仓库中找到。</li>
+</ul>
+<p>此外，<a href="https://embassy.dev/book">Embassy 文档</a>中的<a href="https://embassy.dev/book/#_frequently_asked_questions">常见问题</a>部分也提供了一些关于二进制文件大小的建议。</p>
+<h3 id="优化内存使用"><a class="header" href="#优化内存使用">优化内存使用</a></h3>
+<p>这里同样推荐参阅 <a href="https://embassy.dev/book">Embassy 文档</a>，尤其是<a href="https://embassy.dev/book/#_how_can_i_measure_resource_usage_cpu_ram_etc">如何测量资源使用情况（CPU、RAM 等）</a>部分。</p>
+<h2 id="使用-git-仓库中的-crate"><a class="header" href="#使用-git-仓库中的-crate">使用 Git 仓库中的 crate</a></h2>
+<p><a href="https://doc.rust-lang.org/cargo/">Cargo Book</a> 和 <a href="https://embassy.dev/book">Embassy 文档</a>都介绍了如何指定来自 Git 仓库的依赖项：</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies-from-git-repositories">指定来自 <code>git</code> 仓库的依赖项</a></li>
+<li><a href="https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html#the-patch-section"><code>[patch]</code> 部分</a></li>
+<li><a href="https://embassy.dev/book/#_how_do_i_switch_to_the_main_branch">如何切换到 <code>main</code> 分支</a></li>
+</ul>
+<h2 id="可以对驱动使用-memforget-吗"><a class="header" href="#可以对驱动使用-memforget-吗">可以对驱动使用 <code>mem::forget</code> 吗？</a></h2>
+<p>应避免使用 <code>mem::forget</code>，因为遗忘驱动可能产生意料之外的后果。外设驱动实现了 <code>Drop</code>，会将外设恢复到默认的未配置状态，并在必要时取消正在进行的直接内存访问（DMA）传输。遗忘驱动可能导致外设配置错误，或使 DMA 传输无限运行、永远无法完成。</p>
+<h2 id="进入与退出下载模式"><a class="header" href="#进入与退出下载模式">进入与退出下载模式</a></h2>
+<p>下载模式是一种用于固件烧录和调试的启动模式。在此模式下，芯片不会从 flash 启动应用程序，而是等待通过 UART 或 USB 等接口接收新固件数据，并将其写入 flash。</p>
+<h3 id="选择启动模式"><a class="header" href="#选择启动模式">选择启动模式</a></h3>
+<p>复位时，ROM bootloader 会读取特定 strapping 引脚的状态，并根据此时的电平选择启动模式：</p>
+<ul>
+<li>如果启动 strapping 引脚为高电平 → 芯片进入 SPI 启动模式（运行 flash 中的应用程序）。</li>
+<li>如果启动 strapping 引脚为低电平 → 芯片进入下载模式（等待接收固件）。
+有关启动模式选择的更多信息，请参阅 <a href="https://docs.espressif.com/projects/esptool/en/latest/esp32c6/advanced-topics/boot-mode-selection.html">ESP-IDF 文档</a>。</li>
+</ul>
+<p>设备处于下载模式时，串口会输出“waiting for download”。请参阅 <a href="https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-troubleshooting.html#download-mode">ESP-IDF 下载模式文档</a>。</p>
+<p>烧录完成后，芯片需要回到 SPI 启动模式才能运行新固件。可以通过复位目标设备，让芯片重新采样 strapping 引脚，从而正常启动；也可以在 USB-Serial/JTAG 模式下，使用 <code>espflash</code> 和 <code>esptool</code> 的 <code>--after watchdog-reset</code> 选项。请参阅 <a href="https://docs.espressif.com/projects/esptool/en/latest/esp32c6/troubleshooting.html#leaving-download-mode-in-usb-serial-jtag-mode">ESP-IDF 故障排查</a>。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>
